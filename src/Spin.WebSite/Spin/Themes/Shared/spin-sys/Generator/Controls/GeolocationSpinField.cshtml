@@ -1,0 +1,95 @@
+﻿@model GeolocationSpinFieldDetail
+@using Spin.Modules.Entity.Backend.Generator.Detail
+@using Spin.Modules.API
+@{
+    var Language = LanguageBL.AllowLanguage.Where(a => a != "en");
+
+    string Required = (Model.Requered) ? "required" : "";
+}
+<input type="hidden" id="modelName" value="@(Model.Name)" />
+<div id="content@(Model.Name)" class="">
+    <div class="content-geolocation">
+        <div id="addGeolocation@(Model.Name)" class="add-geolocation-control">
+            <div class="row no-gutters">
+                <div class="col-1">
+                    <a class="btn-add-geolocation" >
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <div class="content-autocomplete geolocation-content-autocomplete">
+                        <angucomplete-alt id="@Model.Name"
+                                          name="@Model.Name"
+                                          ng-model="dataBaaaa"
+                                          placeholder="Search Location"
+                                          pause="300"
+                                          ata-selected-object-data="row"
+                                          minlength="3"
+                                          selected-object="addGeolocation"
+                                          selected-object-data="addGeolocation"
+                                          remote-url="/Api/Place/PlaceApi/Search?Search="
+                                          remote-url-data-field="result"
+                                          title-field="value"
+                                          input-class=""
+                                          text-searching="Searching..."
+                                          description-field="description" />
+                    </div>
+                </div>
+                <div class="col-1">
+                    <a class="btn-add-geolocation" ng-click="showListGeolocation(@(Model.VariableParentName),'@(Model.Name)')">
+                        <i class="fas fa-plus-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="btnTranslate@(Model.Name)" class="btn-translate content-geolocation">
+
+            <div id="contentListGeolocation@(Model.Name)" class="row no-gutters content-list-geolocation">
+                <div id="listGeolocation@(Model.Name)" class="col-11 list-geolocation-control">
+                    <div class="item-geolocation-additional">
+                        <button class="geolocation-data item-default select-geolocation" ng-click="showGeolocation(null,'@(Model.Name)')">
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    Base
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="item-geolocation-additional" ng-repeat="itemData in @(Model.VariableParentName).spinGeolocation">
+                        <button title="{{itemData.place.name}}" class="geolocation-data item-{{itemData.place.code}}" ng-click="showGeolocation(itemData,'@(Model.Name)')">
+                            <div class="row no-gutters">
+                                <div class="col-12">
+                                    {{itemData.place.code}}
+
+                                </div>
+                            </div>
+
+                        </button>
+                        <div ng-click="removeGeolocation(@(Model.VariableParentName),itemData,@(Model.Name))" class="remove-geolocation">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <button class="btn-add-location-geolocation" ng-click="showAddGeolocation()">
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="base-geolocation txt-language item-geolocation">
+        @Model.RenderControlBase(this.Context)
+    </div>
+
+
+    <div class="item-geolocation-{{inputGeolocation.place.code}} geolocation-txt-sub-item item-geolocation" ng-repeat="inputGeolocation in @(Model.VariableParentName).spinGeolocation">
+            @Model.RenderControlLocation(this.Context)
+    </div>
+
+</div>

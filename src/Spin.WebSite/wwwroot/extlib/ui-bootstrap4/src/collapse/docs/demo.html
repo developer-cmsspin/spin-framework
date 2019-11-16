@@ -1,0 +1,48 @@
+<style>
+  .horizontal-collapse {
+    height: 70px;
+  }
+  .navbar-collapse.in {
+    overflow-y: hidden;
+  }
+</style>
+<div ng-controller="CollapseDemoCtrl">
+	<p>Resize window to less than 768 pixels to display mobile menu toggle button.</p>
+	<nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
+		<a class="navbar-brand" href="#">A menu</a>
+		<button class="navbar-toggler" type="button" ng-click="isNavCollapsed = !isNavCollapsed" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link 1</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link 2</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<hr>
+	<button type="button" class="btn btn-secondary" ng-click="isCollapsed = !isCollapsed">Toggle collapse Vertically</button>
+	<hr>
+	<div uib-collapse="isCollapsed" class="mb-3">
+		<div class="card">
+			<div class="card-body">
+				Some content
+			</div>
+		</div>
+	</div>
+
+	<button type="button" class="btn btn-secondary" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal">Toggle collapse Horizontally</button>
+	<hr>
+	<div class="horizontal-collapse" uib-collapse="isCollapsedHorizontal" horizontal>
+		<div class="card">
+			<div class="card-body">
+				Some content
+			</div>
+		</div>
+	</div>
+</div>

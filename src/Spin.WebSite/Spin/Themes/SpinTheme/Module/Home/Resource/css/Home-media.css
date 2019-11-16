@@ -1,0 +1,23 @@
+﻿@media (max-width: 1300px) {}
+
+@media (max-width: 992px) {}
+
+@media (max-width: 768px) {
+    .banner {
+        background-position: 60% 0;
+        background-size: 300%;
+        background-repeat: no-repeat;
+        height: 25em;
+    }
+    h1 {
+        padding-top: 0em;
+        font-size: 2em;
+    }
+    .content-info-site {
+        margin: 1em 1em;
+        text-align: justify;
+    }
+    .let-get-stated h2 {
+        font-size: 2em;
+    }
+}

@@ -1,0 +1,68 @@
+﻿.content-permission{
+    margin-top: 1em;
+}
+
+.content-title > div {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 0.7em;
+}
+
+
+.content-title-module {
+    font-size: 1.5em;
+    margin-bottom: 0.4em;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 0.3em;
+    color: #016084;
+    margin-top: 1em;
+}
+.title-check-page{ 
+    font-size: 0.8em;
+    margin-top: 0.5em;
+    text-align: center;
+}
+
+.check-page{ 
+    padding-left: 1.7em;
+    text-align: center;
+}
+
+.check-page input{ 
+    margin-top: 0.7em;
+    cursor: pointer;
+
+}
+
+.content-title-page{
+    cursor: pointer;
+}
+
+.content-title-page:hover{
+    background: #e5e5e5;
+}
+
+.title-page {
+    padding-left: 3em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+}
+
+.title-page i{
+    margin-right: 1em;
+}
+
+.logo-module-item{
+    width: 1.5em;
+    background-color: #016084;
+    padding: 0.2em;
+    margin-right: 0.5em;
+}
+
+.btn-all-selected{
+    background-color: #016084;
+    color: white;
+    width: 60%;
+    padding: 4px 10px;
+    cursor: pointer;
+}

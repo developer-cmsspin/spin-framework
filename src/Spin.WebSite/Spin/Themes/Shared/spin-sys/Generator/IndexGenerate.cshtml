@@ -1,0 +1,36 @@
+﻿@using Spin.Modules.API
+@{ 
+    this.SpinViewPage.AddTryStyle("/css/Generator/GeneratorExtend.css");
+    this.SpinViewPage.AddTryStyle("/css/Generator/GeneratorExtend-media.css");
+    this.SpinViewPage.AddTryJavaScript($"/Spin/Module/{SpinViewPage.ModuleName}/Resource/js/{SpinViewPage.ControllerName}/ExtendController.js", false, false, 0);  
+    this.SpinViewPage.AddTryStyle($"/Spin/Module/{SpinViewPage.ModuleName}/Resource/css/{SpinViewPage.ControllerName}/ExternalStyle.css", false);
+    
+    //Language
+    var Language = LanguageBL.AllowLanguage;
+}
+<div ng-app="SpinApp" class="content-controller">
+
+    <!--Add by use Angular-->
+    <input type="hidden" name="module" id="module" value="@SpinViewPage.ModuleName" />
+    <input type="hidden" name="controller" id="controller" value="@SpinViewPage.ControllerName" />
+    <input type="hidden" name="action" id="action" value="@SpinViewPage.ActionName" />
+    <input type="hidden" name="segment" id="segment" value="@SpinViewPage.SegmentName" />
+    <input type="hidden" name="TotalCountRows" id="TotalCountRows" value="@ViewBag.TotalCountRows" />
+    <input type="hidden" id="isAdmin" name="isAdmin" value="@(ViewBag.Security.User.IdGroup != 1 && ViewBag.Security.User.IdGroup != 5?"false":"true")" />
+
+    <!--Select Script Template-->
+
+    @await Html.SpinRenderActionAsync("SelectGenerate")
+
+
+    <!--Detail Script Template-->
+    @await Html.SpinRenderActionAsync("DetailGenerate")
+
+
+
+    <div id="viewContent" class="content-view" ng-view>
+    </div>
+
+
+</div>
+

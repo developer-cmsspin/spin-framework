@@ -1,0 +1,120 @@
+﻿@model MasterDetailSpinField
+@using Spin.Modules.Entity.Backend.Generator.Detail
+@using Spin.Modules.Entity.Order
+@{
+
+    var ChildWebType = Model.GetChildControl();
+    string NameControl = Model.Name.FirstCharacterToLower();
+    bool isOrderable = false;
+
+    Type itemType = ChildWebType.FirstOrDefault().StructureParent.GetGenericArguments().Single();
+
+    if (itemType.GetInterface("IOrder") != null)
+    {
+        isOrderable = true;
+    }
+}
+
+
+<div class="content-sub-item-master-detail">
+    <div id="subTableSelect@(NameControl)" class="select-master-detail">
+        <div class="header-detail-master-detail header-select-master-detail text-right">
+            @if (isOrderable)
+            {
+                <div class="btn-back-header-detail" title="Delete @(String.IsNullOrEmpty(Model.Title)?Model.Name:Model.Title)" ng-click="deleteMultipleSubTable('@(NameControl)','@(Model.ListName)')">
+                    <i class="fas fa-minus"></i>
+
+                </div>
+            }
+
+            <div class="btn-back-header-detail btn-add" title="Add @(String.IsNullOrEmpty(Model.Title)?Model.Name:Model.Title)" ng-click="showDetailSubTable('@(NameControl)','@(Model.ListName)', null)">
+                <i class="fas fa-plus"></i>
+
+            </div>
+
+        </div>
+        <div class="row select-row-title content-title-sub-item-master-detail">
+            @if (isOrderable)
+            {
+            <div class="col-1">
+                <input type="checkbox" name="all" ng-model="chk@(Model.ListName)" />
+            </div>
+            }
+
+            @foreach (var ItemWebType in ChildWebType.Where(a => a.SelectField != null).OrderBy(a => a.SelectField.Order))
+            {
+            <div class="col-@(ItemWebType.SelectField.SizeColumn) text-item-title title-sub-item-master-detail">
+                @(string.IsNullOrEmpty(ItemWebType.SelectField.Title) ? ItemWebType.Name.SplitCamelCase() : ItemWebType.SelectField.Title)
+            </div>
+            }
+            <div class="col-1"></div>
+        </div>
+        <div class="row select-item-row content-item text-item-master-select" ng-repeat="@(Model.ItemEach) in @(Model.ListName) | orderBy:'orderNumber'">
+
+            @if (isOrderable)
+            {
+            <div class=col-1>
+                <div class="inline"><input type="checkbox" value="{{$index}}" ng-checked="chk@(Model.ListName)" /></div>
+                <div class="inline">
+                    <div ng-show="!$first" class="button-order" ng-click="changeOrder($index, -1,@(Model.ListName))">
+                        <i class="fas fa-caret-up"></i>
+                    </div>
+                    <input type="hidden" ng-init="item@(Model.Name).orderNumber=$index+1" ng-model="item@(Model.Name).orderNumber" />
+                    <div ng-show="!$last" class="button-order" ng-click="changeOrder($index, +1,@(Model.ListName))">
+                        <i class="fas fa-caret-down"></i>
+                    </div>
+                </div>
+                <div class="inline"> &nbsp; {{$index+1}}</div>
+            </div>
+            }
+
+            @foreach (var ItemWebType in ChildWebType.Where(a => a.SelectField != null).OrderBy(a => a.SelectField.Order))
+            {
+                <div class="col-@(ItemWebType.SelectField.SizeColumn) text-item">
+                    <a class="link-content-item-column" ng-click="showDetailSubTable('@(NameControl)','@(Model.ListName)', @(Model.ItemEach))">
+                        @ItemWebType.SelectField.Render(this.Context)
+                    </a>
+                </div>
+            }
+            <div class="col-1 text-item text-right">
+                <i class="far fa-trash-alt" ng-click="deleteSubTable('@(Model.ListName)',$index)"></i>
+            </div>
+        </div>
+    </div>
+    <div id="subTableDetail@(NameControl)" class="detail-master-detail" spin-name-content="@(NameControl)">
+        <div id="errorSubTableDetail@(NameControl)" class="alert-Channel alert-danger content-error-detail content-error-master-detail">
+            <div>
+                You have error for add information
+            </div>
+        </div>
+        <div class="header-detail-master-detail">
+            <div class="row">
+                <div class="col-2 text-left">
+                    <span class="btn-back-header-detail back-list inline" ng-click="showSelectSubTable('@(NameControl)','@(Model.ListName)')">
+                        <i class="fas fa-angle-left"></i> List @(String.IsNullOrEmpty(Model.Title) ? Model.Name : Model.Title)
+                    </span> 
+                </div>
+            </div>
+
+        </div>
+        <div class="row detail-item-row ">
+            @foreach (var ItemWebType in ChildWebType.Where(a => a.Name != "Id" && a.DetailField != null && a.DetailField.Show).OrderBy(a => a.DetailField.Order))
+            {
+
+                <div class="col-@(ItemWebType.DetailField.SizeColumn) text-item text-item-master-detail @(ItemWebType.DetailField.Style)" @(String.Join(" ", ItemWebType.DetailField.Attributes.ToArray()))>
+                    <label>
+                        @ItemWebType.DetailField.RenderLabel(this.Context)
+                    </label>
+                    <div class="item-detail-master-detail-field">
+                        @ItemWebType.DetailField.Render(this.Context)
+                    </div>
+
+                </div>
+            }
+            <div class="col-1 text-item-next">
+                <i class="fas fa-angle-right"></i>
+            </div>
+        </div>
+    </div>
+
+</div>

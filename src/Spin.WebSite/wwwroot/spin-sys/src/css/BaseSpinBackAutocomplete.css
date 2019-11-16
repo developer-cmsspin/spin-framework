@@ -1,0 +1,26 @@
+﻿.img-loaging-autocomplete {
+    width: 40%;
+    margin-top: -1em;
+    display:none;
+}
+
+.angucomplete-holder {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.angucomplete-dropdown {
+    top: 42px;
+    left: 0;
+    width: 98%;
+    height: auto;
+    max-height: 250px;
+    overflow: auto;
+}
+
+.angucomplete-selected-row {
+    background: #ebf4f8;
+    color: #000;
+}

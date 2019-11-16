@@ -1,0 +1,19 @@
+﻿@model GeolocationSpinFieldDetail
+@using Spin.Modules.Entity.Backend.Generator.Detail
+@{
+
+}
+<div id="label@(Model.Name)">
+    <div class="row">
+        <div class="col">
+            <div class="title-ckeck-language">
+                <label>
+                    @Model.Name.SplitCamelCase()
+                </label>
+                 <div class="show-location open-geolocation">
+                    <i class="fas fa-globe"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

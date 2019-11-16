@@ -1,0 +1,28 @@
+﻿@{ 
+    this.SpinViewPage.IsLayout = true;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Meta tags-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" async />
+    <link href="~/css/ExtendBootstrap.css" rel="stylesheet" async />
+    <link href="~/lib/animate.css/animate.css" rel="stylesheet" async />
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" async />
+    @SpinViewPage.Styles.Render()
+</head>
+<body>
+    <div id="wrapper">
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+    
+    <!--Scripts-->
+    <script src="~/lib/jquery/dist/jquery.min.js" ></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    @SpinViewPage.JavaScripts.Render()
+</body>
+</html>

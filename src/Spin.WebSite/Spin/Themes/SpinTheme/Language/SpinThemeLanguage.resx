@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="IntroText" xml:space="preserve">
+        <value>
+            Tool free for create websites, it have the  functionalities needed by develop easy  and structured. The main new topic is new form create modules and themes in a short time by powered .NET Core. This a tool multiplamform can used different data base such as Mysql or SQL Server and different operative system such as Centos, Ubuntu and Windows.
+        </value>
+    </data>
+    <data name="WelcomeTo" xml:space="preserve">
+        <value>WELCOME TO</value>
+    </data>
+    <data name="HowToStar" xml:space="preserve">
+        <value>HOW TO START?</value>
+    </data>
+     <data name="CreateSite" xml:space="preserve">
+        <value>HOW TO CREATE A SITE</value>
+    </data>
+    <data name="Samples" xml:space="preserve">
+        <value>SAMPLES</value>
+    </data>
+    <data name="Tutorials" xml:space="preserve">
+        <value>TUTORIALS</value>
+    </data>
+</root>

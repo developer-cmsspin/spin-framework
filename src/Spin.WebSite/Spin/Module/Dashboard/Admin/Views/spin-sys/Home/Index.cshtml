@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Module>
+@using Spin.Modules.Entity
+@{
+    SpinViewPage.AddStyle("/Spin/Module/Dashboard/Resource/spin-sys/css/Dashboard-home.css");
+    SpinViewPage.AddStyle("/Spin/Module/Dashboard/Resource/spin-sys/css/Dashboard-home-media.css");
+
+}
+<div class="row align-items-center content-module module-dashboard" style='background-image:url(@(SpinViewPage.RelativePath("backend/background-backend.jpg")))'>
+    <div class="col-12 content-dashboard">
+        @foreach (var ModuleData in Model)
+    {
+        string Path = (String.IsNullOrEmpty(ModuleData.InitPath)) ? $"/Admin/{ModuleData.Name}/Home/IndexGenerate" : ModuleData.InitPath;
+
+        <div class="item-module">
+
+            <a href="@Path">
+                <div class="content-img-item-module">
+                    <img class="img-item-module" src="/Spin/Module/@(ModuleData.Name)/Icon.png" alt="@ModuleData.Name" />
+                </div>
+                <div class="text-item-module">
+                    @((String.IsNullOrEmpty(ModuleData.Alias)) ? ModuleData.Name : ModuleData.Alias)
+                </div>
+                <div class="select-item-menu">
+                    <img src='@SpinViewPage.RelativePath("select-menu.png")' />
+                </div>
+            </a>
+        </div>
+        <div class="division-dashboard">
+            <img src='@SpinViewPage.RelativePath("division-dashboard.png")' />
+        </div>
+}
+    </div>
+</div>
+<div class="footer-login">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-12">
+            <img src='@SpinViewPage.RelativePath("/backend/logo-footer-information.png")' class="icon-logo-information" />
+            @CompanyFactory.Information.Name VS @CompanyFactory.Information.Version (@(CompanyFactory.Information.TypeVersion)) | © @DateTime.Now.Year @CompanyFactory.Information.Copyright
+        </div>
+        <div class="col"></div>
+    </div>
+</div>

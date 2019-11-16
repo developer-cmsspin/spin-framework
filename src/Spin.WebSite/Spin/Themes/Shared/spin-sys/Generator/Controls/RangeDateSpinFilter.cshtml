@@ -1,0 +1,7 @@
+﻿@model RangeDateSpinField
+@using Spin.Modules.Entity.Backend.Generator.Select
+@{
+
+}
+
+<input id='@(Model.Name)' date-range-picker="dateRangeOptions" search-value ng-model='itemListFilter.@(Model.Name.FirstCharacterToLower())'  placeholder="@(!string.IsNullOrEmpty(Model.RemarkFilter)?Model.RemarkFilter:"Enter Keyword..." )" readonly>

@@ -1,0 +1,41 @@
+﻿@model TranslateSpinFieldDetail
+@using Spin.Modules.Entity.Backend.Generator.Detail
+@using Spin.Modules.API
+@{
+    var Language = LanguageBL.AllowLanguage.Where(a => a != "en");
+
+    string Required = (Model.Requered) ? "required" : "";
+}
+<div class="content-language">
+
+    @if (Model.Type == "textarea")
+    {
+        <textarea class="txt-language" id='txt@(Model.Name)' name='txt@(Model.Name)' spin-name='@(Model.Name.SplitCamelCase())' type='@(Model.Type)' ng-model='@(Model.ModelName)' @Required></textarea>
+    }
+    else
+    {
+        <input class="txt-language" id='txt@(Model.Name)' name='txt@(Model.Name)' spin-name='@(Model.Name.SplitCamelCase())' type='@(Model.Type)' ng-model='@(Model.ModelName)' @Required />
+    }
+
+    <div id="contentTranslate@(Model.Name)" class="content-language-detail">
+        @{ int IndexLanguage = 0; }
+        @foreach (string ItemLanguage in Language)
+        {
+            <div class="item-language-detail">
+                <label class="lbl-language-detail"> @ItemLanguage.ToUpper()</label>
+                @if (Model.Type == "textarea")
+                {
+                    <textarea class="txt-language-detail" ng-model="@(Model.VariableParentName).spinTranslates[@(IndexLanguage)].@(Model.Name.FirstCharacterToLower())"></textarea>
+                }
+                else
+                {
+                    <input class="txt-language-detail" ng-model="@(Model.VariableParentName).spinTranslates[@(IndexLanguage)].@(Model.Name.FirstCharacterToLower())" />
+                }
+
+                {{@(Model.VariableParentName).spinTranslates[@(IndexLanguage)].language = "@(ItemLanguage)"; ""}}
+
+            </div>
+            IndexLanguage++;
+        }
+    </div>
+</div>

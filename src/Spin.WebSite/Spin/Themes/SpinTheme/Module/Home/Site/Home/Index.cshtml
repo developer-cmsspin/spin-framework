@@ -1,0 +1,65 @@
+﻿@using Spin.WebSite.Spin.Themes.SpinTheme.Language
+@{
+    SpinViewPage.AddStyle("/Spin/Themes/SpinTheme/Module/Home/Resource/css/Home.css");
+    SpinViewPage.AddStyle("/Spin/Themes/SpinTheme/Module/Home/Resource/css/Home-media.css");
+}
+
+<div class="content-site">
+    <div class="banner">
+        <h1>
+                 @SpinThemeLanguage.WelcomeTo SPIN FRAMEWORK
+        </h1>
+        <div class="version-header">
+                Version @CompanyFactory.Information.Version (@(CompanyFactory.Information.TypeVersion)) 
+            </div>
+
+    </div>
+    <div class="content-info-site">
+        <div class="description">
+            @SpinThemeLanguage.IntroText
+        </div>
+    </div>
+    <div class="let-get-stated">
+        <h2>
+            @SpinThemeLanguage.HowToStar
+        </h2>
+        <div class="row justify-content-center">
+             <div class="col-12 col-md-3">
+                <div class="item-let-stared">
+                    <a href="http://dev.cmsspin.com/Sample" target="_blank">
+                        <i class="fas fa-hat-wizard"></i>
+                        @SpinThemeLanguage.CreateSite
+                    </a>
+
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="item-let-stared">
+                    <a href="http://dev.cmsspin.com/Sample" target="_blank">
+                        <i class="fas fa-box"></i>
+                        @SpinThemeLanguage.Samples
+                    </a>
+
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="item-let-stared">
+                    <a href="http://dev.cmsspin.com/Tutorial" target="_blank">
+                        <i class="fas fa-video"></i>
+                        @SpinThemeLanguage.Tutorials
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="let-get-stated-version">
+        <h2>
+            
+        </h2>      
+    </div>
+</div>
+
+
+
+
+

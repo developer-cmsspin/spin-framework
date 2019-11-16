@@ -1,0 +1,50 @@
+﻿@media (max-width: 1200px) {
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 768px) {
+
+    .logo-top {
+        width: 100%;
+    }
+
+    .content-main {
+        background-size: 400%;
+    }
+
+    .content-module {
+        padding: 1em;
+    }
+
+    .item-module {
+        width: 10%;
+        margin: 1.5em;
+    }
+
+    .text-item-module {
+        margin-top: 7px;
+        font-size: 1em;
+        font-weight: normal;
+    }
+
+    .logo-header-small {
+        width: 50%;
+    }
+
+    .division-dashboard {
+        display: none;
+    }
+}
+
+@media (max-width: 520px) {
+    .logo-header-small {
+        width: 80%;
+    }
+
+    .item-module {
+        width: 20%;
+    }
+
+}

@@ -1,0 +1,137 @@
+﻿@model SpinWebGeneral
+@using Spin.Modules.Entity.Backend.Generator
+@using Spin.Modules.Entity.Backend.Generator.Select
+
+@{
+    var SelectTop = ViewBag.SelectTemplatesTop as List<string>;
+    var SelectBottom = ViewBag.SelectTemplatesBottom as List<string>;
+}
+
+
+
+<script type="text/ng-template" id="select.htm">
+
+    <div class="row no-gutters content-header">
+        <div class="d-block d-md-none col-12">
+            @await Html.SpinRenderActionAsync("MenuMobileGenerate", new { NameController = SpinViewPage.ControllerName })
+        </div>
+    </div>
+
+    <!--Content Filter-->
+    <div class="content-select-general">
+        <div class="row no-gutters justify-content-center content-select">
+            <div class="col-12 ">
+
+                <div class="row content-header content-select-filters">
+                    <div class="col-12 filter-container">
+                        @await Html.SpinRenderActionAsync("FilterGenerate")
+                    </div>
+                </div>
+
+                <div class="template-top-select">
+                    @foreach (string Template in SelectTop)
+                    {
+                        @await Html.SpinRenderActionAsync(Template)
+                    }
+                </div>
+
+                <div class="row content-header content-select-buttons">
+                    <div class="col-2"></div>
+                    <div class="col-8 float-right">
+                        <div class="row no-gutters content-pagination">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-12">
+                                <!--if use all rows in client-->
+                                <dir-pagination-controls ng-if="useSelectAll" ng boundary-links="false" on-page-change="pageChangeHandler(newPageNumber)" template-url="/template/pagination/dirPagination.tpl.htm"></dir-pagination-controls>
+                                <!--else use all rows in client-->
+                                <div class="item-pagination-number" ng-if="!useSelectAll">
+                                    @await Html.SpinRenderActionAsync("PaginationServer")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 content-button float-right">
+                        @foreach (var ItemButton in Model.GeneralAttribute.Where(a => a is SpinButtonSelect && a.TypeAttribute == "Button" && a.Enabled).Select(a => (SpinButton)a).OrderBy(a => a.Order))
+                        {
+
+                            <div class="content-select-btn-top content-right-select-btn-top">
+                                @ItemButton.Render(this.Context)
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div id="loadingTop" class="loader"></div>
+                <div class="row no-gutters row-height select-row-title">
+
+                    <div class="col-md-12 col-lg-12 col-12 col-sm-12 col-height text-item-title">
+                        <div class="row">
+                            @foreach (var ItemColumns in Model.WebTypes.Where(a => a.SelectField != null && a.SelectField.Show).OrderBy(a => a.SelectField.Order))
+                            {
+                                <div class="col-xl-@(ItemColumns.SelectField.SizeColumn) col-md-@(ItemColumns.SelectField.SizeColumn) col-lg-@(ItemColumns.SelectField.SizeColumn) col-12 title-select-generate">
+                                    @((String.IsNullOrEmpty(ItemColumns.SelectField.Title) ? ItemColumns.Name.SplitCamelCase() : ItemColumns.SelectField.Title))
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="col-md-1 col-lg-1 col-12 col-sm-12 col-height text-item icon-delete-item">
+
+                    </div>
+                </div>
+
+
+                <!--Detail -->
+
+                <input id="pageSizeInfo" type="hidden" ng-model="pageSize">
+                <div id="item{{itemList.id}}" class="row no-gutters row-height select-item-row content-item " dir-paginate=" itemList in entityList | filter:(useSelectAll)?itemListFilter:itemListFilterOther | itemsPerPage: pageSize" current-page="currentPage">
+
+                    <div class="col-md-12 col-lg-12 col-12 col-sm-12 col-height text-item">
+
+                        <div class="row no-gutters">
+                            @foreach (var ItemColumns in Model.WebTypes.Where(a => a.SelectField != null && a.SelectField.Show).OrderBy(a => a.SelectField.Order))
+                            {
+                                <div class="col-xl-@(ItemColumns.SelectField.SizeColumn) col-md-@(ItemColumns.SelectField.SizeColumn) col-lg-@(ItemColumns.SelectField.SizeColumn) col-10 col-sm-10 align-self-center">
+                                    <a class="link-content-item-column" ng-click="changeView('detail/' + itemList.id)">
+                                        @ItemColumns.SelectField.Render(this.Context)
+                                    </a>
+                                </div>
+                            }
+
+
+                            <div class="item-select-arrow" ng-click="changeView('detail/' + itemList.id)">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                            </div>
+
+
+                            <div class="col align-self-center col-height text-item-button icon-delete-item" ng-mouseover="hoverIn(itemList.id)" ng-mouseleave="hoverOut(itemList.id)">
+                                <div ng-click="delete(itemList)" class="d-none d-md-block">
+                                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+                                </div>
+
+                                <div ng-click="delete(itemList)" class="d-block d-md-none btn-delete">
+                                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+                                    DELETE
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row no-gutters content-pagination">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-12 content-pagination item-back-pagination-number">
+                        <!--if use all rows in client-->
+                        <dir-pagination-controls ng-if="useSelectAll" ng boundary-links="false" on-page-change="pageChangeHandler(newPageNumber)" template-url="/template/pagination/dirPagination.tpl.htm"></dir-pagination-controls>
+                        <!--else use all rows in client-->
+                        <div class="item-pagination-number" ng-if="!useSelectAll">
+                            @await Html.SpinRenderActionAsync("PaginationServer")
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</script>
+
+

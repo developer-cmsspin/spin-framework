@@ -1,0 +1,62 @@
+{
+  "author": "https://github.com/morgul/ui-bootstrap4/graphs/contributors",
+  "name": "ui-bootstrap4",
+  "version": "3.0.6",
+  "description": "Native AngularJS (Angular) directives for Bootstrap",
+  "homepage": "http://morgul.github.io/ui-bootstrap4/",
+  "keywords": [
+    "angularjs",
+    "angular",
+    "bootstrap",
+    "ui"
+  ],
+  "dependencies": {},
+  "directories": {
+    "lib": "src/"
+  },
+  "files": [
+    "index.js",
+    "dist/",
+    "src/",
+    "template/"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "serve": "static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
+    "demo": "grunt html2js after-test && static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morgul/ui-bootstrap4.git"
+  },
+  "devDependencies": {
+    "angular": "1.6.1",
+    "angular-mocks": "1.6.1",
+    "angular-sanitize": "1.6.1",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-conventional-changelog": "^6.1.0",
+    "grunt-ddescribe-iit": "0.0.6",
+    "grunt-eslint": "^17.3.1",
+    "grunt-html2js": "^0.3.0",
+    "grunt-karma": "^0.12.0",
+    "jasmine-core": "^2.2.0",
+    "karma": "0.13.22",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-coverage": "^0.5.0",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-jasmine": "^0.3.5",
+    "load-grunt-tasks": "^3.3.0",
+    "lodash": "^4.1.0",
+    "marked": "^0.3.5",
+    "node-static": "^0.7.8",
+    "semver": "^5.0.1",
+    "shelljs": "^0.6.0"
+  },
+  "license": "MIT"
+}

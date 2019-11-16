@@ -1,0 +1,91 @@
+﻿@using Spin.Modules.Entity
+@using Spin.Modules.API
+@using Spin.WebSite.Spin.Module.Util.Language
+@model IEnumerable<ModuleConfiguration>
+
+
+@{
+    string ModuleName = ViewBag.NameModule;
+
+    Module DataModule = (Module)ViewBag.Module;
+}
+
+
+<div class="content-configuration">
+    <div class="row content-title-configuration">
+        <div class="col-9 line-division-title">
+
+            <div class="configuration-name-module">
+                @((ModuleName == "") ? "General Configuration" : ModuleName)
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="item-button">
+
+                <div class="item-button-menu">
+                    <a id="btnSaveConfiguration" class="">
+                        <i class="far fa-save"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <from id="frmConfiguration">
+        <div class="content-memu">
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                @foreach (var MenuContent in Model.GroupBy(a => a.GroupConfiguration))
+                {
+                    string NameGroup = (String.IsNullOrEmpty(MenuContent.Key)) ? "General" : MenuContent.Key;
+
+                    <div class="card card-configuration">
+                        <div class="card-header" id="heading@(NameGroup.Replace(" ",""))">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#@(NameGroup.Replace(" ",""))" aria-expanded="true" aria-controls="@(NameGroup.Replace(" ",""))">
+                                    <i class="@(IconsConfiguration.ResourceManager.GetString(NameGroup))"></i>
+                                    @(NameGroup)
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="@(NameGroup.Replace(" ",""))" class="collapse" aria-labelledby="@(NameGroup.Replace(" ",""))" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="content-row">
+                                    @foreach (var NameMenu in MenuContent.Select(a => a.Name).Distinct())
+                                    {
+                                        ModuleConfiguration ItemConfiguration = ModuleConfigurationFactory.GetGeneralConfiguration(NameMenu, ModuleName, this.SpinViewPage.Customer.Id, MenuContent.Key);
+
+                                        <div class="spin-item-form">
+                                            <label>
+                                                @NameMenu.SplitCamelCase()
+                                            </label>
+                                            <div>
+                                                <input id="id@(NameMenu)" configuration-id="@(ItemConfiguration.Id)" name="id@(NameMenu)" type="text" value="@(ItemConfiguration.Value)" class="input-configuration" />
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+
+        </div>
+    </from>
+
+</div>
+
+<!--Content-->
+<div id="loadingConfiguration" class="content-loading-configuration">
+
+    <div class="content-logo-configuration">
+        <img class="img-configuration" src='@SpinViewPage.RelativePath("/backend/loading.gif")' alt="loading png" />
+        <div>Saving....</div>
+    </div>
+
+</div>

@@ -1,0 +1,124 @@
+﻿@media (max-width: 1200px) {
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 768px) {
+    .content-logo {
+        text-align: center;
+    }
+
+        .content-logo .logo {
+            width: 70%;
+            min-height: 35px;
+        }
+
+    .content-data-login {
+        background-size: 300% 100%;
+    }
+
+    .backgroud-opacity {
+        background-color: transparent;
+    }
+
+    .content-login {
+        padding: 1em;
+    }
+
+    .hello-header-content {
+        display: none;
+    }
+
+    .footer-login {
+        font-size: 0.6em;
+    }
+
+    .content-logo {
+        top: 40%;
+        left: 12%;
+    }
+
+    .menu-logo {
+        padding: 0.5em 0;
+    }
+
+
+    .content-menu-back li.color-select-menu {
+        background-color: #CFE1E6;
+    }
+
+    .content-select {
+        padding: 0 1em;
+    }
+
+    .content-menu-logo {
+        height: 3.5em;
+    }
+
+    .text-item-title-filter {
+        display: block;
+    }
+
+    .mdl-layout__drawer.content-filter-general {
+        width: 300px;
+        -webkit-transform: translateX(-300px);
+        transform: translateX(-300px);
+    }
+
+    .mdl-layout__drawer.is-visible {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    .select-item-row {
+        border: none;
+        border-radius: 0;
+        background-color: white;
+        margin-bottom: 0;
+        padding: 1em;
+        border-bottom: 1px solid #DDDDDD;
+    }
+
+    .item-select-arrow {
+        display: block;
+    }
+
+    .content-item-filter {
+        font-size: 0.7em;
+    }
+
+    .btn-filter {
+        text-align: left;
+    }
+
+    /*detail*/
+    .content-form {
+        padding: 1em;
+    }
+
+    .spin-item-form .item-image-content button {
+        width: 100%;
+    }
+
+    .content-form-menu {
+        padding: 0 1em;
+    }
+
+    .item-button-menu-detail {
+        font-size: 1.2em;
+        margin: 11px;
+    }
+
+    .end-row-field {
+        margin-right: 0;
+    }
+
+    .spin-item-form {
+        margin: 1em 0;
+    }
+
+    .filter-container .spin-item-form {
+        margin: 0;
+    }
+}

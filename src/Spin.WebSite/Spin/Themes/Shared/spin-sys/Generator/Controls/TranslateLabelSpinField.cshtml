@@ -1,0 +1,23 @@
+﻿@model TranslateSpinFieldDetail
+@using Spin.Modules.Entity.Backend.Generator.Detail
+@using Spin.Modules.API
+@{
+    var Language = LanguageBL.AllowLanguage.Where(a => a != "en");
+}
+
+<div class="title-ckeck-language">
+    @Model.Name.SplitCamelCase()
+</div>
+<div class="content-ckeck-language">
+    @{ int IndexLanguage = 0; }
+    @foreach (string ItemLanguage in Language)
+    {
+        <div class="item-ckeck-language" ng-click="showOrhideTranslate('@(Model.Name)')" ng-class="{'item-ckeck-language-created':@(Model.VariableParentName).spinTranslates[@(IndexLanguage)].@(Model.Name.FirstCharacterToLower())!='' && @(Model.VariableParentName).spinTranslates[@(IndexLanguage)].@(Model.Name.FirstCharacterToLower())!=undefined}">
+            @ItemLanguage
+        </div>
+        IndexLanguage++;
+    }
+</div>
+<div id="btnTranslate@(Model.Name)" class="btn-translate">
+    <i class="fas fa-language"></i>
+</div>

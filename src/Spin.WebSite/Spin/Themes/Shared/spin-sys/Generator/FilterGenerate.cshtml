@@ -1,0 +1,52 @@
+﻿@model SpinWebGeneral
+@using Spin.Modules.Entity.Backend.Generator
+@using Spin.Modules.Entity.Backend.Generator.Select
+@{
+    var FilterFields = SpinWebType.FieldContainsAttibute<SpinFieldSelect>(Model.WebTypes);
+}
+
+@if (FilterFields.Any(f => f.SelectField.ShowFilter && f.ContainsAttribute<SpinFieldSelect>() != null))
+{
+    <div class="row">
+        <div class="col-12 col-md-2">
+            <i class="fas fa-filter filter-icon-mobile"></i>
+            <select name="filterField" angular-ddslick-onselect="updateSearch();" id="slFilterField" class="dropdown" angular-ddslick=''>
+                @foreach (var ItemColumns in FilterFields)
+                {
+                    var Item = ItemColumns.ContainsAttribute<SpinFieldSelect>();
+
+                    if (Item != null && Item.ShowFilter)
+                    {
+                        <option value="@ItemColumns.Name"> @ItemColumns.Name.SplitCamelCase() </option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-12 col-md-3 spin-item-form">
+            <!--<input type="text" id="slFilterValue" search-value name="slFilterValue" placeholder="Enter Keyword.." class="search-filter" />-->
+            @foreach (var ItemColumns in FilterFields)
+            {
+                var Item = ItemColumns.ContainsAttribute<SpinFieldSelect>();
+
+                if (Item != null && Item.ShowFilter)
+                {
+                    @ItemColumns.SelectField.RenderFilter(this.Context)
+                }
+            }
+            <div class="content-btn-search-filter">
+                <button ng-click="changeFilter()" ng-if="!useSelectAll" class="btn-search-filter">
+                    <i id="iconSearch" class="fa fa-search" aria-hidden="true"></i>
+                    <img id="btnImgLoadingSearch" class="btn-img-loading" src="~/img/Loading-btn.gif" alt="loading">
+                </button>
+            </div>
+        </div>
+        <div id="filters" class="col-12 col-md-7 filters">
+            <span ng-repeat="(key,value) in itemTagFilter" ng-if="key!='reload'" class="filter-box">
+                {{formatFilterValue(key,value)}}
+                <i ng-click="clearFilter(key);" class="fas fa-times filter-delete"></i>
+            </span>
+        </div>
+    </div>
+}
+
+

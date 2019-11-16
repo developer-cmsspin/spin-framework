@@ -1,0 +1,4 @@
+.uib-time input {
+    /* Bootstrap 4 overrides this otherwise */
+    width: 50px !important;
+}

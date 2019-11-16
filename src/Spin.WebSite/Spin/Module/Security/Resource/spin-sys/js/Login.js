@@ -1,0 +1,1 @@
+﻿$("#LoginData").validate();

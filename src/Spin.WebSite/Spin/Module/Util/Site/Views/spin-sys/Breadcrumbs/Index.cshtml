@@ -1,0 +1,31 @@
+﻿@{ 
+
+}
+
+<div>
+    @if (this.SpinViewPage.Breadcrumbs != null)
+    {
+        <div class="content-breadcrumbs">
+            @foreach (var ItemBreadcrumbs in this.SpinViewPage.Breadcrumbs)
+            {
+                <div class="item-breadcrumbs">
+                    @if (ItemBreadcrumbs.URL == null)
+                    {
+                        @ItemBreadcrumbs.Name
+                    }
+                    else
+                    {
+                        <a href="@ItemBreadcrumbs.URL">
+                            @ItemBreadcrumbs.Name
+                        </a>
+                        <i class="fa fa-angle-right space-item-breadcrumbs" aria-hidden="true"></i>
+
+                    }
+
+                </div>
+            }
+
+        </div>
+    }
+</div>
+

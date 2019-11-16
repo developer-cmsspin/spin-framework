@@ -1,0 +1,30 @@
+﻿.content-page{
+    height:100%;
+}
+
+.img-state {
+    text-align:right;
+}
+
+.number-status {
+    font-size: 8em;
+    font-weight: bold;
+    line-height: 0.7em;
+    color: black;
+}
+
+.text-status {
+    width: 45%;
+    background-color: black;
+    color: white;
+    font-size: 3em;
+    padding-left: 15px;
+}
+.title-status {
+    width: 60%;
+    background-color: black;
+    color: white;
+    font-size: 2em;
+    padding-left: 15px;
+    margin-top: 8px;
+}

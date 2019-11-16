@@ -1,0 +1,7 @@
+﻿@model RangeDateSpinField
+@using Spin.Modules.Entity.Backend.Generator.Select
+@{
+
+}
+
+<input id='@(Model.Name)' date-range-picker="dateRangeOptions" ng-model='@(Model.Name.FirstCharacterToLower())'  placeholder="@(Model.RemarkFilter)" readonly>

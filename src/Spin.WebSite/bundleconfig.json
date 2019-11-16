@@ -1,0 +1,42 @@
+[
+  {
+    "outputFileName": "wwwroot/spin-sys/dist/css/BaseSpin.min.css",
+    "inputFiles": [
+      "wwwroot/spin-sys/src/css/BaseSpin.css",
+      "wwwroot/spin-sys/src/css/BaseSpin-media.css",
+      "wwwroot/spin-sys/src/css/StatusPage.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/spin-sys/dist/css/BaseSpin-back.min.css",
+    "inputFiles": [
+      "wwwroot/spin-sys/src/css/BaseSpinBack.css",
+      "wwwroot/spin-sys/src/css/BaseSpinBack-media.css",
+      "wwwroot/spin-sys/src/css/BaseSpinBackAutocomplete.css",
+      "wwwroot/spin-sys/src/css/Generator/Generator.css",
+      "wwwroot/spin-sys/src/css/Generator/Generator-media.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/spin-sys/dist/js/BaseSpin.min.js",
+    "inputFiles": [
+      "wwwroot/spin-sys/src/js/HelperSpin.js",
+      "wwwroot/spin-sys/src/js/BaseSpin.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/spin-sys/dist/js/BaseSpinBack.min.js",
+    "inputFiles": [
+      "wwwroot/spin-sys/src/js/BaseSpinBack.js",
+      "wwwroot/spin-sys/src/js/BaseSpinBackAutocomplete.js",
+      "wwwroot/spin-sys/src/js/MessageSpin.js",
+      "wwwroot/spin-sys/src/js/GeneralBackend.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/spin-sys/dist/css/PermissionDeny.min.css",
+    "inputFiles": [
+        "wwwroot/spin-sys/src/css/PermissionDeny.css"
+    ]
+  }
+]

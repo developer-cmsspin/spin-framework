@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+        <EnableDefaultContentItems>false</EnableDefaultContentItems>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="Spin/**/*.js" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.css" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.png" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.jpg" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.jpeg" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.gif" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.svg" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.ttf" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.woff" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.eot" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.cshtml" CopyToOutputDirectory="Always" />
+        <Content Include="Spin/**/*.htm" CopyToOutputDirectory="Always" />
+        <Content Include="wwwroot/extlib/**/*">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="Spin.Base">
+            <HintPath>..\Package\Spin\Spin.Base.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Deploy">
+            <HintPath>..\Package\Spin\Spin.Deploy.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Helper.WebSite">
+            <HintPath>..\Package\Spin\Spin.Helper.WebSite.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Alias">
+            <HintPath>..\Package\Spin\Spin.Alias.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Security">
+            <HintPath>..\Package\Spin\Spin.Security.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Diagnostics">
+            <HintPath>..\Package\Spin\Spin.Diagnostics.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Place">
+            <HintPath>..\Package\Spin\Spin.Place.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Themes">
+            <HintPath>..\Package\Spin\Spin.Themes.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Modules">
+            <HintPath>..\Package\Spin\Spin.Modules.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Connection">
+            <HintPath>..\Package\Spin\Spin.Connection.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.PushNotification">
+            <HintPath>..\Package\Spin\Spin.PushNotification.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Helper.HTML">
+            <HintPath>..\Package\Spin\Spin.Helper.HTML.dll</HintPath>
+        </Reference>
+        <Reference Include="Spin.Helper">
+            <HintPath>..\Package\Spin\Spin.Helper.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Spin" Version="0.1.25" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Spin\Update\" />
+    </ItemGroup>
+  
+</Project>

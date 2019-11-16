@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "/Spin/Themes/Shared/spin-sys/IndexLogin.cshtml";
+
+    this.SpinViewPage.Title = "Login";
+
+    this.SpinViewPage.AddStyle("/Spin/Module/Security/Resource/spin-sys/css/Login.css");
+    this.SpinViewPage.AddStyle("/Spin/Module/Security/Resource/spin-sys/css/Login-media.css");
+
+    this.SpinViewPage.AddJavaScript("/Spin/Module/Security/Resource/spin-sys/js/Login.js");
+}
+
+
+
+
+<form id="LoginData" name="LoginData" action="/Admin/Security/User/Login" method="post" class="frm-content-login">
+
+    <input type="hidden" id="UrlRedirect" name="UrlRedirect" value="@(ViewBag.UrlRedirect)" />
+
+    <div id="contentUser" class="animated content-user">
+        <fieldset>
+            <label><i class="far fa-envelope"></i>Email</label>
+            <input id="userLogin" name="userLogin" placeholder="Email" type="email" required />
+        </fieldset>
+
+        <fieldset>
+            <label><i class="fas fa-lock"></i>Password</label>
+            <input id="userPassword" name="userPassword" placeholder="Password" type="password" required />
+        </fieldset>
+
+        <fieldset class="content-remember">
+            <input type="checkbox" name="remenberLogin" id="remenberLogin" value="true" />
+            <label class="label-checkbox">
+                Remember user
+            </label>
+        </fieldset>
+
+        <button id="btnLogin" type="submit">
+            Login
+        </button>
+    </div>
+    <div class="content-forgot">
+        <div class="row no-gutters">
+            <div class="col">
+                <div class="line-forgot"></div>
+            </div>
+            <div class="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <a href="/Admin/Security/User/ForgotPassword">
+                    Forgot Your Password?
+                </a>
+            </div>
+            <div class="col">
+                <div class="line-forgot"></div>
+            </div>
+        </div>
+
+    </div>
+</form>

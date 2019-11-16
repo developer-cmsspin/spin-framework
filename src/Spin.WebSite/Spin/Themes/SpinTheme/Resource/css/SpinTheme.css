@@ -1,0 +1,34 @@
+﻿body{
+    font-family: 'Roboto-Thin', sans-serif;
+}
+
+header{
+    text-align: left;
+    border-bottom: 3px solid #1f76b4;
+}
+
+footer{
+    text-align: center;
+    border-top: 3px solid #1f76b4;
+}
+
+.img-logo{
+    width: 60%;
+    margin: 0.5em;
+}
+.language-top{
+    text-align: right;
+    padding-top: 2em;
+    padding-right: 2em;
+}
+
+/*overide*/
+#wrapper.wrapper header {
+    height: 10%;
+}
+#wrapper.wrapper main {
+    height: 90%;
+}
+#wrapper.wrapper footer{
+    position: relative;
+}

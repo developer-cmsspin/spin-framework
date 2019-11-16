@@ -1,0 +1,10 @@
+﻿@media (max-width: 1300px) {}
+
+@media (max-width: 992px) {}
+
+@media (max-width: 768px) {
+    #wrapper.wrapper footer{
+        font-size: 0.7em;
+    }
+
+}
