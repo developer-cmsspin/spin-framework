@@ -65,10 +65,13 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Spin" Version="0.1.25" />
-    </ItemGroup>
-    <ItemGroup>
       <Folder Include="Spin\Update\" />
     </ItemGroup>
   
+    <ItemGroup>
+      <PackageReference Include="Spin" Version="0.1.25" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="appsettings.json" />
+    </ItemGroup>
 </Project>

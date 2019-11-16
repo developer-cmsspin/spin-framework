@@ -672,19 +672,28 @@ input[type='file'] {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: white;
+    background-color: rgba(0,0,0,.9);
     z-index: 100;
     display: none;
 }
 
 .content-logo img {
-    position: absolute;
+    width: 50%;
+}
+
+.title-loading{
+    color: #fff;
+    font-size: 1.3em;
+    margin-top: 1em;
 }
 
 .content-logo {
     position: absolute;
     top: 40%;
     left: 40%;
+    text-align: center;
+    margin: 0 3em;
+
 }
 
 /*image loading file*/
@@ -759,7 +768,6 @@ input[type='file'] {
     cursor: pointer;
     margin-right: 1em;
     font-size: .9em;
-    height: 100%;
 }
 
 .content-menu-back li a, content-menu-back li a:hover, content-menu-back li a:visited {
@@ -980,6 +988,14 @@ input[type='file'] {
     right: -0.6em;
     padding-top: 0.2em;
     padding-left: 0em;
+}
+
+
+.content-right-select-btn-top .select-btn-top{
+    font-size: 1.2em;
+    margin-left: 1.5em;
+    margin-top: 0.5em;
+    position: initial;
 }
 
 .select-btn-top {
