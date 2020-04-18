@@ -5,7 +5,7 @@
             "name": ".NET Core Launch (Spin)",
             "type": "coreclr",
             "request": "launch",        
-            "program": "${workspaceFolder}/Spin.WebSite/bin/Debug/netcoreapp3.0/Spin.WebSite.dll",
+            "program": "${workspaceFolder}/Spin.WebSite/bin/Debug/netcoreapp3.1/Spin.WebSite.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Spin.WebSite",
             "stopAtEntry": false,
