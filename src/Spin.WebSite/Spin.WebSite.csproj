@@ -144,4 +144,7 @@
           <DependentUpon>LetGetStared.es.resx</DependentUpon>
         </Compile>
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Spin\Update\" />
+    </ItemGroup>
 </Project>
