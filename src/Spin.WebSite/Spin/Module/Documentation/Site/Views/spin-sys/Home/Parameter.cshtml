@@ -1,0 +1,27 @@
+﻿@model MemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+
+}
+
+@if (Model.Parameters != null && Model.Parameters.Count > 0)
+{
+    <div class="content-information">
+        <h2>@DocumentationLanguage.Parameters</h2>
+
+        @foreach (var ItemParameters in Model.Parameters)
+        {
+            <div class="row item-content-information">
+                <div class="col">
+                    @ItemParameters.Name - @ItemParameters.TypeName
+                </div>
+
+                <div class="col">
+                    @ItemParameters.GetTranslate(a => a.Summary)
+                </div>
+
+            </div>
+        }
+    </div>
+}

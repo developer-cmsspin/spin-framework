@@ -1,0 +1,15 @@
+﻿@model List<Comic>
+@using Spin.WebSite.Spin.Module.Comics.Core.Entity
+@{
+    Spin.Place.BL.PlaceBL BL = new Spin.Place.BL.PlaceBL();
+
+}
+
+@await Html.SpinRenderActionAsync("Index", "Breadcrumbs", "Util")
+
+@foreach (var ItemCom in Model)
+{
+    <div>
+        @ItemCom.GetGeolocation(a => a.Name, BL.Select(4).FirstOrDefault())
+    </div>
+}

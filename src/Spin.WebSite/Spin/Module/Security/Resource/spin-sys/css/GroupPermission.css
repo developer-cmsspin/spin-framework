@@ -1,4 +1,9 @@
-﻿.content-permission{
+﻿.history-no-check {
+    text-align: center;
+    padding-left: 1.7em;
+}
+
+.content-permission{
     margin-top: 1em;
 }
 

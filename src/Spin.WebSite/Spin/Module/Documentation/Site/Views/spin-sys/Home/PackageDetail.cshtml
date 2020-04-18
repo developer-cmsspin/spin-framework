@@ -1,0 +1,30 @@
+﻿@model PackageMenmberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+    //https://highlightjs.org/usage/
+    string Instance = "";
+
+
+}
+
+
+@if (Model != null)
+{
+    <div>
+        <div class="namespace">
+            @DocumentationLanguage.Namespace: @Model.Namespace
+        </div>
+        <div class="namespace">
+            @DocumentationLanguage.Assemblies: @Model.TypeClass.Assembly.ManifestModule
+        </div>
+        <h1 class="title">
+            @Model.FullName (Field)
+        </h1>
+        <div class="content-page">
+            @Model.GetTranslate(a => a.Summary)
+        </div>
+
+
+    </div>
+}

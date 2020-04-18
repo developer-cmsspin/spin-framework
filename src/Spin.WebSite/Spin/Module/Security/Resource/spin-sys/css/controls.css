@@ -3,8 +3,9 @@
 }
 
 .content-user-information-image {
-    width: 80%;
+    width: 4.2em;
     border-radius: 100%;
+    height: 4.2em;
 }
 
 .user-information-data {

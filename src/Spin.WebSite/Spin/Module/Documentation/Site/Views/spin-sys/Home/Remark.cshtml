@@ -1,0 +1,16 @@
+﻿@model MemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+
+}
+
+@if (!String.IsNullOrEmpty(Model.GetTranslate(a => a.Remark)))
+{
+    <div class="content-information">
+        <h2>@DocumentationLanguage.Remark</h2>
+        <div>
+            @Html.Raw(Model.GetTranslate(a => a.Remark))
+        </div>
+    </div>
+}

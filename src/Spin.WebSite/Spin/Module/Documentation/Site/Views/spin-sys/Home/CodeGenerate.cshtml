@@ -1,0 +1,31 @@
+﻿@model MemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+    //https://highlightjs.org/usage/
+}
+
+<div class="sample-section">
+    <div class="d-flex bd-highlight mb-3 title-sample">
+        <div class="p-2 bd-highlight">
+            C#
+        </div>
+        <div class="ml-auto bd-highlight content-copy">
+            <button id="copyInstance" class="btn-copy" type="button">
+                <div class="p-2 copy-code">
+                    <i class="far fa-copy"></i>
+                    @DocumentationLanguage.Copy
+                </div>
+                <div class="p-2 copied-code">
+                    <i class="fas fa-check"></i>
+                </div>
+            </button>
+        </div>
+    </div>
+    <div>
+        <div id="codeInstance" class="area-code">@Html.Raw(Model.CreateCode())</div>
+        <div>
+            <pre><code class="cs">@Html.Raw(Model.CreateCode())</code></pre>
+        </div>
+    </div>
+</div>

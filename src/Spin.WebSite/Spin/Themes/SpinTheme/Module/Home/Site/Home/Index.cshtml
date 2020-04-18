@@ -2,10 +2,12 @@
 @{
     SpinViewPage.AddStyle("/Spin/Themes/SpinTheme/Module/Home/Resource/css/Home.css");
     SpinViewPage.AddStyle("/Spin/Themes/SpinTheme/Module/Home/Resource/css/Home-media.css");
+
+    string Image = SpinViewPage.ValidateURL("/Spin/Themes/SpinTheme/Module/Home/Resource/img/banner.jpg");
 }
 
 <div class="content-site">
-    <div class="banner">
+    <div class="banner" style="background-image:url(@(Image))">
         <h1>
                  @SpinThemeLanguage.WelcomeTo SPIN FRAMEWORK
         </h1>

@@ -1,11 +1,12 @@
 ﻿@using Spin.Modules.API
+@using Spin.Base.Generator
 @{
     this.SpinViewPage.AddJavaScript("/Spin/Module/Security/Resource/spin-sys/js/ExtendGroup.js", false, false, 1);
     this.SpinViewPage.AddStyle("/Spin/Module/Security/Resource/spin-sys/css/GroupPermission.css");
 }
 <div id="contentPermission" class="content-permission">
     <div class="row">
-        <div class="col-12 col-md-2">
+        <div class="col-2">
             <button class="btn-all-selected" ng-click="selectAllPermission()">
                 <i class="fas fa-list-ul"></i>
                 Select All
@@ -21,18 +22,21 @@
         @if (ModuleItem.Value.BackendContent != null)
         {
             <div class="row content-title-module">
-                <div class="col-12 col-md-3">
+                <div class="col-2">
                     <img class="logo-module-item" src="/Spin/Module/@(ModuleItem.Key)/Icon.png" />
                     @ModuleItem.Key
                 </div>
-                <div class="d-none d-md-block col-1 title-check-page">
+                <div class="col-1 title-check-page">
                     Show
                 </div>
-                <div class="d-none d-md-block col-1 title-check-page">
+                <div class="col-1 title-check-page">
                     Edit
                 </div>
-                <div class="d-none d-md-block col-1 title-check-page">
+                <div class="col-1 title-check-page">
                     Show Conf
+                </div>
+                <div class="col-1 title-check-page">
+                    Show History
                 </div>
             </div>
 
@@ -40,29 +44,46 @@
             foreach (var Item in ModuleItem.Value.BackendContent.OrderBy(a => a.Value.Name))
             {
                 string NameContent = ModuleItem.Key + "Admin" + Item.Value.NameController;
-                <div id="@(NameContent)" class="row content-title-page">
-                    <div class="col-12 col-md-3 title-page">
-                        <input class="module" type="hidden" value="@(ModuleItem.Value.Name)" />
-                        <input class="controller" type="hidden" value="@(Item.Value.NameController)" />
-                        <input class="id" type="hidden" value="0" />
-                        <input class="segment" type="hidden" value="Admin" />
+                IBackGeneratorController BakendData = System.Activator.CreateInstance(Item.Value.GenerateType) as IBackGeneratorController;
 
-                        <i class="@(Item.Value.Logo)"></i>
-                        @Item.Key
+                @if (Item.Key.Length > 0)
+                {
+                    <div id="@(NameContent)" class="row content-title-page">
+                        <div class="col-2 title-page">
+                            <input class="module" type="hidden" value="@(ModuleItem.Value.Name)" />
+                            <input class="controller" type="hidden" value="@(Item.Value.NameController)" />
+                            <input class="id" type="hidden" value="0" />
+                            <input class="segment" type="hidden" value="Admin" />
+
+                            <i class="@(Item.Value.Logo.Equals("")?"nulo":Item.Value.Logo)"></i>
+                            @Item.Key
+                        </div>
+                        <div class="col-1 check-page">
+                            <input type="checkbox" class="show-check" ng-click="validateEdit('@(NameContent)')" />
+                        </div>
+                        <div class="col-1 check-page ">
+                            <input type="checkbox" class="edit-check" ng-click="validateShow('@(NameContent)')" />
+                        </div>
+                        <div class="col-1 check-page ">
+                            <input type="checkbox" class="configuration-check" ng-click="validateConfiguration('@(NameContent)')" />
+                        </div>
+
+                        @if (BakendData.EntityType.GetInterface("IEntityHistory", false) != null)
+                        {
+                            <div class="col-1 check-page text-center">
+                                <input type="checkbox" class="history-check" ng-click="validateHistory('@(NameContent)')" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-1 check-page text-center history-no-check">
+                                <div>X</div>
+                            </div>
+                        }
+
                     </div>
-                    <div class="col-12 col-md-1 check-page">
-                        <input type="checkbox" class="show-check" ng-click="validateEdit('@(NameContent)')" />
-                        <div class="title-group-item-mobile">Show</div>
-                    </div>
-                    <div class="col-12 col-md-1 check-page ">
-                        <input type="checkbox" class="edit-check" ng-click="validateShow('@(NameContent)')" />
-                        <div class="title-group-item-mobile">Edit</div>
-                    </div>
-                    <div class="col-12 col-md-1 check-page ">
-                        <input type="checkbox" class="configuration-check" ng-click="validateConfiguration('@(NameContent)')" />
-                        <div class="title-group-item-mobile">Show Conf</div>
-                    </div>
-                </div>
+                }
+
             }
         }
     }

@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
         <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
         <EnableDefaultContentItems>false</EnableDefaultContentItems>
     </PropertyGroup>
+    
     <ItemGroup>
         <Content Include="Spin/**/*.js" CopyToOutputDirectory="Always" />
         <Content Include="Spin/**/*.css" CopyToOutputDirectory="Always" />
@@ -24,54 +25,123 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-        <Reference Include="Spin.Base">
-            <HintPath>..\Package\Spin\Spin.Base.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Deploy">
-            <HintPath>..\Package\Spin\Spin.Deploy.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Helper.WebSite">
-            <HintPath>..\Package\Spin\Spin.Helper.WebSite.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Alias">
-            <HintPath>..\Package\Spin\Spin.Alias.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Security">
-            <HintPath>..\Package\Spin\Spin.Security.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Diagnostics">
-            <HintPath>..\Package\Spin\Spin.Diagnostics.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Place">
-            <HintPath>..\Package\Spin\Spin.Place.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Themes">
-            <HintPath>..\Package\Spin\Spin.Themes.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Modules">
-            <HintPath>..\Package\Spin\Spin.Modules.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Connection">
-            <HintPath>..\Package\Spin\Spin.Connection.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.PushNotification">
-            <HintPath>..\Package\Spin\Spin.PushNotification.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Helper.HTML">
-            <HintPath>..\Package\Spin\Spin.Helper.HTML.dll</HintPath>
-        </Reference>
-        <Reference Include="Spin.Helper">
-            <HintPath>..\Package\Spin\Spin.Helper.dll</HintPath>
-        </Reference>
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Spin\Update\" />
-    </ItemGroup>
-  
-    <ItemGroup>
-      <PackageReference Include="Spin" Version="0.1.25" />
+      <PackageReference Include="Spin" Version="0.1.26.10-alpha" />
     </ItemGroup>
     <ItemGroup>
       <None Include="appsettings.json" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <EmbeddedResource Update="Spin\Module\Home\Language\HomeLanguage.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>HomeLanguage.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Module\Home\Language\HomeLanguage.es.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>HomeLanguage.es.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Module\Sample\Language\SampleLanguage.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>SampleLanguage.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Module\Sample\Language\SampleLanguage.es.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>SampleLanguage.es.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Module\Tutorial\Language\TutorialLanguage.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>TutorialLanguage.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Module\Tutorial\Language\TutorialLanguage.es.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>TutorialLanguage.es.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Themes\SpinWeb\Language\SpinWebLanguage.es.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>SpinWebLanguage.es.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Themes\SpinWeb\Language\SpinWebLanguage.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>SpinWebLanguage.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Module\SpinDeploy\Language\DeployLanguage.resx">
+          <Generator>PublicResXFileCodeGenerator</Generator>
+          <LastGenOutput>DeployLanguage.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Module\SpinDeploy\Language\DeployLanguage.es.resx">
+          <Generator>PublicResXFileCodeGenerator</Generator>
+          <LastGenOutput>DeployLanguage.es.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Module\Home\Language\LetGetStared.resx">
+          <Generator>PublicResXFileCodeGenerator</Generator>
+          <LastGenOutput>LetGetStared.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Spin\Module\Home\Language\LetGetStared.es.resx">
+          <Generator>PublicResXFileCodeGenerator</Generator>
+          <LastGenOutput>LetGetStared.es.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Spin\Module\Home\Language\HomeLanguage.Designer.cs">
+            <DependentUpon>HomeLanguage.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Spin\Module\Home\Language\HomeLanguage.es.Designer.cs">
+            <DependentUpon>HomeLanguage.es.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Spin\Module\Sample\Language\SampleLanguage.Designer.cs">
+            <DependentUpon>SampleLanguage.resx</DependentUpon>
+                  <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+        </Compile>
+        <Compile Update="Spin\Module\Sample\Language\SampleLanguage.es.Designer.cs">
+            <DependentUpon>SampleLanguage.es.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Spin\Module\Tutorial\Language\TutorialLanguage.Designer.cs">
+            <DependentUpon>TutorialLanguage.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Spin\Module\Tutorial\Language\TutorialLanguage.es.Designer.cs">
+            <DependentUpon>TutorialLanguage.es.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Spin\Module\Tutorial\Language\TutorialLanguage.Designer.cs">
+            <DependentUpon>TutorialLanguage.resx</DependentUpon>
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
+        <Compile Update="Spin\Module\Sample\Language\SampleLanguage.Designer.cs">
+            <DependentUpon>SampleLanguage.resx</DependentUpon>
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
+        <Compile Update="Spin\Themes\SpinWeb\Language\SpinWebLanguage.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>SpinWebLanguage.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Spin\Themes\SpinWeb\Language\SpinWebLanguage.es.Designer.cs">
+          <DependentUpon>SpinWebLanguage.es.resx</DependentUpon>
+             <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
+        <Compile Update="Spin\Module\Home\Language\HomeLanguage.Designer.cs">
+          <DependentUpon>HomeLanguage.resx</DependentUpon>
+             <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
+        <Compile Update="Spin\Module\SpinDeploy\Language\DeployLanguage.Designer.cs">
+          <DependentUpon>DeployLanguage.resx</DependentUpon>
+             <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
+        <Compile Update="Spin\Module\SpinDeploy\Language\DeployLanguage.es.Designer.cs">
+          <DependentUpon>DeployLanguage.es.resx</DependentUpon>
+             <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
+        <Compile Update="Spin\Module\Home\Language\LetGetStared.Designer.cs">
+          <DependentUpon>LetGetStared.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Spin\Module\Home\Language\LetGetStared.es.Designer.cs">
+          <DependentUpon>LetGetStared.es.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 </Project>

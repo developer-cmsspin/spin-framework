@@ -1,0 +1,49 @@
+﻿@model EnumMemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+
+@{
+    //https://highlightjs.org/usage/
+    string Instance = "";
+
+
+}
+
+
+@if (Model != null)
+{
+    <div>
+        <partial name="GeneralInformation" model="Model" />
+
+        <partial name="CodeGenerate" model="Model" />
+
+        @if (Model.Members != null && Model.Members.Count > 0)
+        {
+            <div class="content-information">
+                <h2>@DocumentationLanguage.Values</h2>
+
+                @foreach (var ItemMembers in Model.Members)
+                {
+                    <div class="row item-content-information">
+                        <div class="col">
+                            @ItemMembers.Name
+                        </div>
+
+                        <div class="col">
+                            @ItemMembers.GetTranslate(a => a.Summary)
+                        </div>
+
+                    </div>
+                }
+            </div>
+        }
+
+        <partial name="Example" model="Model" />
+
+
+        <partial name="Remark" model="Model" />
+
+    </div>
+}
+
+

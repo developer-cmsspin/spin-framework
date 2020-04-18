@@ -1,0 +1,28 @@
+﻿@model ClassBaseDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+
+}
+
+@if (Model.Members.Any(a => a.TypeMember == TypeMember.Property && !a.IsPrivate))
+{
+    <div class="content-information">
+        <h2>@DocumentationLanguage.Properties</h2>
+
+        @foreach (var ItemProperty in Model.Members.Where(a => a.TypeMember == TypeMember.Property))
+        {
+            <div class="row item-content-information">
+                <div class="col">
+                    <a href="/Documentation/Home/Index/@(ItemProperty.FullName)">
+                        @ItemProperty.Name - @(ItemProperty.TypeName)
+                    </a>
+                </div>
+
+                <div class="col">
+                    @ItemProperty.GetTranslate(a => a.Summary)
+                </div>
+            </div>
+        }
+    </div>
+}

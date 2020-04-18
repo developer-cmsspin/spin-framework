@@ -1,0 +1,80 @@
+﻿@model ClassBaseDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+
+}
+
+@if (Model.TreeInheritance != null && Model.TreeInheritance.Count > 0)
+{
+    <div>
+        @DocumentationLanguage.Inheritance:
+
+        @for (int IndexTree = 1; IndexTree < Model.TreeInheritance.Count; IndexTree++)
+        {
+            if (IndexTree > 1)
+            {
+                <i class="fas fa-arrow-right"></i>
+            }
+
+            var Member = Spin.Base.Documentation.API.DocumentationAPI.FindReference(Model.TreeInheritance[IndexTree]);
+            if (Member != null)
+            {
+                <a href="/Documentation/Home/Index/@(Member.FullName)">
+                    @Member.Name
+                </a>
+            }
+            else
+            {
+                <a href="/Documentation/Home/Index/@(Model.TreeInheritance[IndexTree])">
+                    @Model.TreeInheritance[IndexTree].Split(".").Last()
+                </a>
+            }
+        }
+
+    </div>
+}
+
+@if (Model.Attributes != null && Model.Attributes.Count > 0)
+{
+    <div>
+        @DocumentationLanguage.Attributes:
+        @{ int IndexAttribute = 0;}
+        @foreach (var ItemAttribute in Model.Attributes)
+        {
+            @if (IndexAttribute > 0)
+            {
+                <span>,</span>
+            }
+
+            <a href="/Documentation/Home/Index/@(ItemAttribute)">
+                @ItemAttribute.ToString().Split(".").Last()
+            </a>
+
+
+            IndexAttribute++;
+        }
+    </div>
+}
+
+@if (Model.Implements != null && Model.Implements.Count > 0)
+{
+    <div>
+        @DocumentationLanguage.Implements:
+        @{ int IndexImplement = 0;}
+        @foreach (var ItemAttribute in Model.Implements)
+        {
+            @if (IndexImplement > 0)
+            {
+                <span>,</span>
+            }
+
+            <a href="/Documentation/Home/Index/@(ItemAttribute)">
+                @ItemAttribute.ToString().Split(".").Last()
+            </a>
+
+
+            IndexImplement++;
+        }
+    </div>
+}

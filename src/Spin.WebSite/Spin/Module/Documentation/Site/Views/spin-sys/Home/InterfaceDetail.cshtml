@@ -1,0 +1,32 @@
+﻿@model InterfaceMemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+    //https://highlightjs.org/usage/
+}
+
+
+@if (Model != null)
+{
+    <div>
+        <partial name="GeneralInformation" model="Model" />
+
+        <partial name="CodeGenerate" model="Model" />
+
+        <partial name="InheritanceInformation" model="Model" />
+
+        <partial name="Field" model="Model" />
+
+        <partial name="Property" model="Model" />
+
+        <partial name="Method" model="Model" />
+
+        <partial name="Example" model="Model" />
+
+
+        <partial name="Remark" model="Model" />
+
+    </div>
+}
+
+

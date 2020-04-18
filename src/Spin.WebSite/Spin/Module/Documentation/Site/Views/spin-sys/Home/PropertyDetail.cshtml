@@ -1,0 +1,26 @@
+﻿@model PropertyMemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+    //https://highlightjs.org/usage/
+}
+
+
+@if (Model != null)
+{
+    <div>
+        <partial name="GeneralInformation" model="Model" />
+
+        <partial name="CodeGenerate" model="Model" />
+
+        <div class="content-information">
+            <h2>@DocumentationLanguage.FileldType</h2>
+            @Model.TypeName
+
+        </div>
+
+        <partial name="Example" model="Model" />
+
+        <partial name="Remark" model="Model" />
+    </div>
+}

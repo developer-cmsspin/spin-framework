@@ -1,1 +1,1 @@
-{"version":"0.1.25","token":"58f177ad-7476-460a-8760-409aac73ba74","lastUpdate":"2019-11-16T12:51:48.36-05:00"}
+{"version":"0.1.26.10-beta","token":"42dbcec0-c66c-4b40-b5f6-fb820b12bb4e","lastUpdate":"2019-11-11T21:55:37.546862-05:00"}

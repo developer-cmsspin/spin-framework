@@ -1,0 +1,94 @@
+﻿@model MemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Modules.Entity.Base
+@using Spin.Base.Documentation.Language
+@{
+    this.SpinViewPage.AddStyle("/lib/bootstrap-treeview/dist/bootstrap-treeview.min.css", false);
+    this.SpinViewPage.AddJavaScript("/lib/bootstrap-treeview/dist/bootstrap-treeview.min.js", false);
+
+    this.SpinViewPage.AddStyle("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/vs2015.min.css", false);
+    this.SpinViewPage.AddJavaScript("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js", false);
+
+    this.SpinViewPage.AddStyle("/Spin/Module/Documentation/Resource/spin-sys/css/documentation.css", false);
+    this.SpinViewPage.AddStyle("/Spin/Module/Documentation/Resource/spin-sys/css/documentation-media.css", false);
+    this.SpinViewPage.AddStyle("/Spin/Module/Documentation/Resource/spin-sys/css/fonts/font-documentation/style.css");
+    this.SpinViewPage.AddJavaScript("/Spin/Module/Documentation/Resource/spin-sys/js/documentation.js", false);
+
+    //try override
+    this.SpinViewPage.AddTryStyle("/Spin/Module/Documentation/Resource/css/documentation.css", false);
+    this.SpinViewPage.AddTryStyle("/Spin/Module/Documentation/Resource/css/documentation-media.css", false);
+    this.SpinViewPage.AddTryJavaScript("/Spin/Module/Documentation/Resource/js/documentation.js", false);
+
+    //https://github.com/jonmiles/bootstrap-treeview
+}
+<input id="className" type="hidden" value="@Model.FullName" />
+
+<div class="row no-gutters">
+    <div class="col-3">
+        <div class="content-tree">
+            <div id="tree"></div>
+        </div>
+    </div>
+    <div class="col-9 content-render-page">
+        <div class="">
+            @await Html.SpinRenderActionAsync("Index", "Breadcrumbs", "Util")
+            <div id="page" class="page-documentation">
+                @switch (Model.TypeMember)
+                {
+                    default:
+                    case TypeMember.Class:
+                        <div class="class-detail">
+                            @await Html.SpinRenderActionAsync("ClassDetail", new { id = Model.FullName })
+                        </div>
+                        break;
+
+
+                    case TypeMember.Package:
+                        <div class="class-detail">
+                            @await Html.SpinRenderActionAsync("PackageDetail", new { id = Model.FullName })
+                        </div>
+                        break;
+
+
+                    case TypeMember.Method:
+                        <div class="class-detail">
+                            @await Html.SpinRenderActionAsync("MethodDetail", new { id = Model.FullName })
+                        </div>
+                        break;
+
+
+                    case TypeMember.Property:
+                        <div class="class-detail">
+                            @await Html.SpinRenderActionAsync("PropertyDetail", new { id = Model.FullName })
+                        </div>
+                        break;
+
+                    case TypeMember.Constructor:
+                        <div class="class-detail">
+                            @await Html.SpinRenderActionAsync("ConstructorDetail", new { id = Model.FullName })
+                        </div>
+                        break;
+
+
+                    case TypeMember.Field:
+                        <div class="class-detail">
+                            @await Html.SpinRenderActionAsync("FieldDetail", new { id = Model.FullName })
+                        </div>
+                        break;
+
+                    case TypeMember.Enum:
+                        <div class="class-detail">
+                            @await Html.SpinRenderActionAsync("EnumDetail", new { id = Model.FullName })
+                        </div>
+                        break;
+
+                    case TypeMember.Interface:
+                        <div class="class-detail">
+                            @await Html.SpinRenderActionAsync("InterfaceDetail", new { id = Model.FullName })
+                        </div>
+                        break;
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,35 +1,38 @@
 {
-  "author": "https://github.com/morgul/ui-bootstrap4/graphs/contributors",
-  "name": "ui-bootstrap4",
-  "version": "3.0.6",
-  "description": "Native AngularJS (Angular) directives for Bootstrap",
-  "homepage": "http://morgul.github.io/ui-bootstrap4/",
-  "keywords": [
-    "angularjs",
-    "angular",
-    "bootstrap",
-    "ui"
+  "_from": "ui-bootstrap4@3.0.6",
+  "_id": "ui-bootstrap4@3.0.6",
+  "_inBundle": false,
+  "_integrity": "sha512-Kh38WAu/S8EiyKRMaATkFjsbQplJHvP+g2lxitE5SbjQTDieua8T7d+mQNxbxTjfmJqGtVzsHQCHRmBVdKPeOg==",
+  "_location": "/ui-bootstrap4",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "ui-bootstrap4@3.0.6",
+    "name": "ui-bootstrap4",
+    "escapedName": "ui-bootstrap4",
+    "rawSpec": "3.0.6",
+    "saveSpec": null,
+    "fetchSpec": "3.0.6"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
   ],
+  "_resolved": "https://registry.npmjs.org/ui-bootstrap4/-/ui-bootstrap4-3.0.6.tgz",
+  "_shasum": "bec796879455569872a1575786ca643ab00172ea",
+  "_spec": "ui-bootstrap4@3.0.6",
+  "_where": "/Users/spin/Documents/Projects/SpinFramework/Spin.WebSite",
+  "author": {
+    "name": "https://github.com/morgul/ui-bootstrap4/graphs/contributors"
+  },
+  "bugs": {
+    "url": "https://github.com/morgul/ui-bootstrap4/issues"
+  },
+  "bundleDependencies": false,
   "dependencies": {},
-  "directories": {
-    "lib": "src/"
-  },
-  "files": [
-    "index.js",
-    "dist/",
-    "src/",
-    "template/"
-  ],
-  "main": "index.js",
-  "scripts": {
-    "serve": "static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
-    "demo": "grunt html2js after-test && static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
-    "test": "grunt"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/morgul/ui-bootstrap4.git"
-  },
+  "deprecated": false,
+  "description": "Native AngularJS (Angular) directives for Bootstrap",
   "devDependencies": {
     "angular": "1.6.1",
     "angular-mocks": "1.6.1",
@@ -58,5 +61,33 @@
     "semver": "^5.0.1",
     "shelljs": "^0.6.0"
   },
-  "license": "MIT"
+  "directories": {
+    "lib": "src/"
+  },
+  "files": [
+    "index.js",
+    "dist/",
+    "src/",
+    "template/"
+  ],
+  "homepage": "http://morgul.github.io/ui-bootstrap4/",
+  "keywords": [
+    "angularjs",
+    "angular",
+    "bootstrap",
+    "ui"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "ui-bootstrap4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morgul/ui-bootstrap4.git"
+  },
+  "scripts": {
+    "demo": "grunt html2js after-test && static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
+    "serve": "static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
+    "test": "grunt"
+  },
+  "version": "3.0.6"
 }

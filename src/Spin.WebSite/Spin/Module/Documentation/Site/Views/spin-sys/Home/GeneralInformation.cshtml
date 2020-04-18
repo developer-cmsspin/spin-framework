@@ -1,0 +1,31 @@
+﻿@model MemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+
+@{
+    string TypeClass = Model.TypeMember.ToString();
+
+    if (Model is ClassDocument)
+        TypeClass = (((ClassDocument)Model).IsAbstract) ? "Abstract Class" : "Class";
+
+
+    if (Model.IsStatic)
+        TypeClass = "Static";
+}
+
+<div class="namespace">
+    @DocumentationLanguage.Namespace: @Model.Namespace
+</div>
+<div class="namespace">
+    @DocumentationLanguage.Assemblies: @Model.TypeClass.Assembly.ManifestModule
+</div>
+<h1 class="title">
+    @Model.FullName.Replace(",", ", ") (@(TypeClass))
+</h1>
+<div class="content-page">
+    @Model.GetTranslate(a => a.Summary)
+</div>
+
+<div class="content-page">
+    @Model.GetTranslate(a => a.Description)
+</div>

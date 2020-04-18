@@ -2,12 +2,11 @@
 @using Spin.Security.Control
 @{
     this.SpinViewPage.AddStyle("/Spin/Module/Security/Resource/spin-sys/css/controls.css");
-    this.SpinViewPage.AddStyle("/Spin/Module/Security/Resource/spin-sys/css/controls-media.css");
 }
 
 <div class="">
-    <div class="row no-gutters align-items-center">
-        <div class="col-1 col-md-2">
+    <div class="row align-items-center">
+        <div class="col-2">
            <div class="btn-online" ng-Class="{'btn-offline': !itemList.isConnect}"></div>
         </div>
         <div class="col-7">

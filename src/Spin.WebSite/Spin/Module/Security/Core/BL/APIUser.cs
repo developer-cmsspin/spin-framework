@@ -2,6 +2,7 @@
 using Spin.Helper.ImageTool;
 using Spin.Helper.IO.Entity;
 using Spin.Security.Entity;
+using Spin.Security.Entity.Base;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,7 @@ namespace Spin.WebSite.Spin.Module.Security.Core.BL
 {
     public class APIUser
     {
-        public static string CreateAvatar(User Value)
+        public static string CreateAvatar(IUser Value)
         {
             //Information 
             var FileInfo = new SpinFile(Value.Image);
@@ -32,7 +33,7 @@ namespace Spin.WebSite.Spin.Module.Security.Core.BL
             return PathSaveAvailability;
         }
 
-        public static List<string> CreateAvatarStatus(User Value)
+        public static List<string> CreateAvatarStatus(IUser Value)
         {
             List<string> Result = new List<string>();
 

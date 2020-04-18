@@ -1,137 +1,55 @@
-﻿![alt text](http://dev.cmsspin.com/Spin/Themes/SpinWeb/Resource/img/logo-spin-color.png)
-# CMS SPIN V 0.1.24 (Release Candidate)
-### *Date: 30 JuL 2019 9:00*
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)  [![NuGet package](https://img.shields.io/badge/Nuget-0.1.24rc-blue.svg)](https://www.nuget.org/packages/Spin/0.1.24-rc)
+﻿![alt text](https://dev.cmsspin.com/Spin/Themes/SpinWeb/Resource/img/logo-spin-color.png)
 
-CMS BUILD TO .NET CORE. BY WEB DEVELOP.
+# CMS SPIN V 0.1.26-beta6 (Beta)
+
+### *Date: 14 Febrary 2020 9:00*
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)  [![NuGet package](https://img.shields.io/badge/Nuget-0.1.26(beta4)-blue.svg)](https://www.nuget.org/packages/Spin/0.1.26-beta6)
+
+CMS BUILD TO . NET CORE. BY WEB DEVELOP.
 
 ## New Features
 
-  - History for changes register
-  ```csharp
-  public class TestHistory : BaseHistory
+  + change User 
+
+``` csharp
+  public override void ConfigureServiceSpin(SpinServiceCollection Service)
   {
-        #region Constructor
-        public TestHistory()
-            :base("IdTestHistory")
-        {
-            this.TableName = "Test";
-        }
-        #endregion
-
-        #region GetName
-        public override string GetName()
-        {
-            return "";
-        }
-        #endregion
-
+    SpinWebSiteCollection.SpinService.AddSingleton<ISpinSecutiry, UserBLExtend>();
   }
   ```
 
-  ```csharp
-  public class TestItem : BaseEntity, IBaseEntityHistory<TestHistory>
-  {
-    public void AddHistory(IEntityHistory OldValue, string IdSession)
-    {
-      SecurityManager UserData = new SecurityManager(IdSession);
-      this.AddHistoryChanges(OldValue as LeadItem,UserData.User.UserNameUserData.User.FirstName +  " " + UserData.User.LastName);
-    }
-  }
-  ```
-  - Add Migration
-  ```bash
-  dotnet ef migrations add InitialCreate
-  ```
-  ```bash
-  dotnet ef migrations add [Name] -c SpinGlobalContext
-  ```
-- Diagnostic Log
-```csharp
-    public class Startup: SpinStartup
-    {
-        #region Startup
-        public Startup(IConfiguration configuration)
-            :base(configuration, new MillionAndUpInformation())
-        {
-            this.AddProviderDiagnosticLog(new MongoProviderDiagnostics());
-            this.AddProviderDiagnosticLog(new RaygunProviderDiagnostics());//
-        }
-        #endregion
-    }
-```
-
-- Custom Command for start Spin
-```csharp
-    public class Program: SpinProgram<Startup>
-    {
-        public static void Main(string[] args)
-        {
-            AddCommandCalls(new StartCall("Test","t","Test By data",
-                (command)=>{
-                    Console.WriteLine("Hello World");
-                }));
-
-            CallMain(args);
-        }
-
-    }
-```
-
-```bash
-dotnet Spin.Website.dll --test
-```
-OR
-```bash
-dotnet Spin.Website.dll --t
-```
-
-
-- Active log robots
-```csharp
-    public class Startup: SpinStartup
-    {
-        public Startup(IConfiguration configuration)
-            :base(configuration)
-        {
-            ScheduleTaskFactory.EnabledLogs = true;
-
-        }
-    }
-```
-
-- 4 Phones on leads
+  + Add CDN server for Image, Javascript And Styles
+  + Implment Complex SelectAllPerPageComplex
+  + Documentation Online
 
 ## Issuses Fixed
 
-
+ + Filter Expresion Complex Objects
   
 
 ## Deploy
 
-- Please execute this script for update fields 4phones Feature
-```sql
+* Change Structure User
 
-BEGIN TRANSACTION
-    ALTER TABLE [Lead_Lead]
-        ADD [Phone1] varchar(200) NULL,
-            [Phone2] varchar(200) NULL,
-            [Phone3] varchar(200) NULL;
+``` sql
+  ALTER TABLE [Security_User]
+  DROP COLUMN IdGroupManager;
 
-    ALTER TABLE [Lead_Message]
-        ADD [Number] NVARCHAR(100) NULL;
+GO
 
-    ALTER TABLE [Lead_Whatsapp]
-        ADD [Number] NVARCHAR(100) NULL;
+  ALTER TABLE [Security_User]
+  ADD PathStructure VARCHAR(200) NULL
 
-COMMIT;
+GO
+
+  ALTER TABLE [Security_User]
+  ADD  IdOwner int NULL
 
 ```
 
 > *Important:* <br>
 > Run script for production.
 
-
-
-
 ### *Development by CMS SPIN Delevoper Team*
+

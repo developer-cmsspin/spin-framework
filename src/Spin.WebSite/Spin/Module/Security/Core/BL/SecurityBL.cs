@@ -16,7 +16,17 @@ public class SecurityBL : BaseCustomerBL<User>
     {
         #region Constructor
         public SecurityBL(String IdSession)
-            : base("Security", IdSession)
+            : base("Security", IdSession, new Connection.Entity.ConfigurationSpinDataContext()
+            {
+                OnModelAdditional = (modelBuilder) =>
+                {
+                    
+                },
+                OnConfigurationAdditional = (optionsBuilder) =>
+                {
+                    //optionsBuilder.EnableDetailedErrors();
+                }
+            })
         {
 
         }

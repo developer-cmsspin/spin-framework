@@ -1,0 +1,41 @@
+﻿@model MethodMemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+    //https://highlightjs.org/usage/
+
+}
+
+
+@if (Model != null)
+{
+    <div>
+        <partial name="GeneralInformation" model="Model" />
+
+        <partial name="CodeGenerate" model="Model" />
+
+        <partial name="Parameter" model="Model" />
+
+        @if (Model.Return != null)
+        {
+            <div class="content-information">
+                <h2>@DocumentationLanguage.Return</h2>
+                <div>
+                    @Model.Return.TypeName
+                </div>
+                <div>
+                    @Model.Return.GetTranslate(a => a.Summary)
+                </div>
+            </div>
+        }
+
+
+        <partial name="Example" model="Model" />
+
+
+        <partial name="Remark" model="Model" />
+
+    </div>
+}
+
+

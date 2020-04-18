@@ -1,20 +1,9 @@
 {
   "iisSettings": {
     "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:62331",
-      "sslPort": 44343
-    }
+    "anonymousAuthentication": true
   },
   "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
     "Spin.WebSite": {
       "commandName": "Project",
       "launchBrowser": true,

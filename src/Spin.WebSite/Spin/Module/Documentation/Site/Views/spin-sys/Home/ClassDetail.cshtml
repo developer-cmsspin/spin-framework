@@ -1,0 +1,50 @@
+﻿@model ClassDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+    
+}
+
+
+@if (Model != null)
+{
+    <div>
+        <partial name="GeneralInformation" model="Model" />
+
+        <partial name="CodeGenerate" model="Model" />
+
+        <partial name="InheritanceInformation" model="Model" />
+
+        @if (Model.Members.Any(a => a.TypeMember == TypeMember.Constructor))
+        {
+            <div class="content-information">
+                <h2>@DocumentationLanguage.Constructors</h2>
+
+                @foreach (var ItemConstructor in Model.Members.Where(a => a.TypeMember == TypeMember.Constructor))
+                {
+                    <div class="row item-content-information">
+                        <div class="col-12">
+                            <a href="/Documentation/Home/Index/@(ItemConstructor.FullName)">
+                                @(Model.Name)(@(String.Join(", ", ItemConstructor.Parameters.Select(a=> a.TypeName + " " + a.Name))))
+                            </a>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        }
+
+        <partial name="Field" model="Model" />
+
+        <partial name="Property" model="Model" />
+
+        <partial name="Method" model="Model" />
+
+        <partial name="Example" model="Model" />
+
+        <partial name="Remark" model="Model" />
+
+    </div>
+}
+
+

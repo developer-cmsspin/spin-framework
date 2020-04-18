@@ -41,8 +41,8 @@ if ($("#URLServiceAll").val() == undefined || $("#URLServiceAll").val() == '') {
     URLServiceAll = $("#URLServiceAll").val();
 }
 
-
-
+var arr_filterBoolean = new Array();// { name: "undefined", value: true/false }; 
+  
 
 /*Plugin controls*/
 var PluginControlsSelect = [];
@@ -61,6 +61,7 @@ if (typeof directivesExtend !== 'undefined' && directivesExtend != null) {
 }
 
 
+
 /*Define module*/
 var spinAppModule = angular.module('SpinApp', directives);
 
@@ -68,6 +69,8 @@ var spinAppModule = angular.module('SpinApp', directives);
 if (typeof (addModuleFn) !== 'undefined') {
     addModuleFn(spinAppModule);
 }
+
+
 
 /*for loop*/
 spinAppModule.filter('range', function () {
@@ -79,6 +82,26 @@ spinAppModule.filter('range', function () {
         }
 
         return input;
+    };
+});
+
+
+spinAppModule.directive('filterBoolean', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModel) {
+            ngModel.$formatters.push(function (val) {
+                if (val != undefined) {
+                    var filterBoolean = arr_filterBoolean.filter(x => x.name === attrs.id);
+                    if (filterBoolean.length == 0) {
+                        arr_filterBoolean.push({ name: attrs.id, value: Boolean(JSON.parse(val)) });
+                    } else
+                    {
+                        filterBoolean[0].value = Boolean(JSON.parse(val));
+                    }
+                }
+            });
+        }
     };
 });
 
@@ -95,6 +118,7 @@ spinAppModule.directive('errSrc', function () {
         }
     }
 });
+
 
 /* Format Time */
 spinAppModule.filter('secondsToDateTime', function () {
@@ -308,9 +332,14 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
             $scope.itemListFilter[key] = value;
             $('#slFilterField').find('option').each(function () {
                 if ($(this).val().toLowerCase() == key.toLowerCase()) {
-                    $scope.itemTagFilter[key] = value;
+                    $scope.itemTagFilter[key] = (key != "reload" ? (value.toString() == "false" ? "No " + key : (value.toString() == "true" ? key : value)) : value);
                 }
             });
+            //Add deatecreate filter from icon
+            if (key.toLowerCase() == "datecreate") {
+                $scope.itemTagFilter[key] = value;
+            }
+
         });
     }
     $scope.loadFilter();
@@ -322,6 +351,8 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
         delete $scope.itemTagFilter[key];
         $scope.updateSearch();
 
+        arr_filterBoolean.splice(arr_filterBoolean.indexOf(key),1);
+
         if (!$scope.useSelectAll) {
             $scope.changeFilter();
             $location.update_path('/select', true, $scope.itemListFilter);
@@ -329,7 +360,7 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
     }
 
     $scope.formatFilterValue = function (key, value) {
-        if (value.length > 3 && value.split('#').length == 2) {
+        if (value != undefined && value.length > 3 && value.split('#').length == 2) {
             var range = value.split('#');
             var startDate = new Date(range[0].trim());
             var endDate = new Date(range[1].trim());
@@ -342,7 +373,7 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
                 }
             }
         }
-        else if (Date.parse(value) > 0 && value.indexOf('-') > 0) {
+        else if (value != undefined && Date.parse(value) > 0 && value.indexOf('-') > 0) {
             var startDate = new Date(value.trim());
             if (Date.parse(startDate) > 0) {
                 return moment(startDate).format('LL');
@@ -358,6 +389,9 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
 
         var filterSelected = $(".dd-selected-value").val();
         $(".filter-container input").each(function () {
+            $(this).hide();
+        });
+        $(".filter-container select").each(function () {
             $(this).hide();
         });
         $("#" + filterSelected).show();
@@ -383,7 +417,7 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
 
         if ($scope.itemListFilter.reload != undefined)
             useLoading = !$scope.itemListFilter.reload;
-
+        
         if (useLoading) {
             helperSpin.showLoading();
         }
@@ -428,7 +462,6 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
             helperSpin.hideLoading();
         }
 
-
         /*review object is same*/
         if ($scope.filterCopy === $scope.itemListFilter && $scope.itemListFilter != undefined) {
             return;
@@ -466,6 +499,11 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
             }
         });
 
+        if ($scope.itemListFilter.page != null && $scope.itemListFilter.page != undefined) {
+            pageNumber = $scope.itemListFilter.page;
+            $scope.currentPageNumber = parseInt($scope.itemListFilter.page);
+        }
+
         var jsonData = JSON.stringify({ page: pageNumber, filter: requestFilter, itemsPerPage: itemPerPage });
         $http.post("/" + segment + "/" + module + "/" + controller + "/SelectAllPerPage", jsonData).then(
             function (response) {
@@ -490,11 +528,11 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
                 }
 
                 $scope.filterCopy = JSON.parse(JSON.stringify($scope.itemListFilter));
-
-
+                                
                 if ($scope.loadSelectAfter != undefined) {
                     $scope.loadSelectAfter($scope, response, $location, $http);
                 }
+                
             },
             function (response) {
 
@@ -570,6 +608,9 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
     $scope.currentPage = 1;
     $scope.pageSize = itemPerPage;
     $scope.pageChangeHandler = function (num) {
+        if (globalCurrentPage != null && globalCurrentPage != undefined) {
+            globalCurrentPage = num;
+        }
     };
 
     /*PagingServer*/
@@ -633,12 +674,22 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
     }
 
 
-    $scope.changePage = function (page) {
+    $scope.changePage = function (page, addPage) {
+
+        page = parseInt(page);
+
+        if (addPage) {
+            page = parseInt(page) + addPage;
+        }
+
+        $scope.itemListFilter.page = page;
+
+        $location.update_path('/select', true, $scope.itemListFilter);
+
         if (!$scope.useSelectAll) {
             $scope.callSelectAllPerPage(page, false);
             $scope.currentPageNumber = page;
         }
-
     }
 
 
@@ -649,7 +700,12 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
         }
 
         $scope.itemListFilter.reload = true;
-
+        
+        for (var i = 0; i < arr_filterBoolean.length; i++) {
+            $scope.itemListFilter[arr_filterBoolean[i].name] = arr_filterBoolean[i].value;
+            $scope.itemTagFilter[arr_filterBoolean[i].name] = arr_filterBoolean[i].value ? arr_filterBoolean[i].name : "No " + arr_filterBoolean[i].name;
+        }
+        
         $location.update_path('/select', true, $scope.itemListFilter);
         $scope.callSelectAllPerPage($scope.currentPageNumber, false);
     };

@@ -1,0 +1,25 @@
+﻿@model UserInformation
+@using Spin.Security.Control
+@{
+    this.SpinViewPage.AddStyle("/Spin/Module/Security/Resource/spin-sys/css/controls.css");
+}
+
+<div class="content-user-information">
+    <div class="row">
+        <div class="col-1">
+            <img class="content-user-information-image" ng-src="{{@(Model.ModelName).image}}"  err-src="/img/noImage.png" />
+        </div>
+        <div class="col-8 user-information-data">
+            <div>
+                <strong>
+                    {{@(Model.ModelName).firstName}} {{@(Model.ModelName).lastName}}
+                </strong>
+                
+            </div>
+            <div>
+                {{@(Model.ModelName).userName}}
+            </div>
+        </div>
+    </div>
+    
+</div>

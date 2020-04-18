@@ -1,0 +1,23 @@
+﻿@model FieldMemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+@{
+    //https://highlightjs.org/usage/
+    string Instance = "";
+
+
+}
+
+
+@if (Model != null)
+{
+    <div>
+        <partial name="GeneralInformation" model="Model" />
+
+        <partial name="Example" model="Model" />
+
+
+        <partial name="Remark" model="Model" />
+
+    </div>
+}

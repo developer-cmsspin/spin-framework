@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Spin.Base.Core;
+using Spin.Base.Documentation.DAL;
 using Spin.Base.Helper.Base;
 using Spin.Connection.API;
 using Spin.Connection.DAL;

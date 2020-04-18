@@ -1,0 +1,26 @@
+﻿@model ConstructorMemberDocument
+@using Spin.Base.Documentation.Entity
+@using Spin.Base.Documentation.Language
+
+@{
+
+}
+
+
+@if (Model != null)
+{
+    <div>
+        <partial name="GeneralInformation" model="Model" />
+
+        <partial name="CodeGenerate" model="Model" />
+
+        <partial name="Parameter" model="Model" />
+
+        <partial name="Example" model="Model" />
+
+        <partial name="Remark" model="Model" />
+
+    </div>
+}
+
+
