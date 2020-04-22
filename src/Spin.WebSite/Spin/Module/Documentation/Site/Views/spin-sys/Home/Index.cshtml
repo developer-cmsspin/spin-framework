@@ -21,7 +21,7 @@
 
     //https://github.com/jonmiles/bootstrap-treeview
 }
-<input id="className" type="hidden" value="@Model.FullName" />
+
 
 <div class="row no-gutters">
     <div class="col-3">
@@ -31,64 +31,77 @@
     </div>
     <div class="col-9 content-render-page">
         <div class="">
-            @await Html.SpinRenderActionAsync("Index", "Breadcrumbs", "Util")
-            <div id="page" class="page-documentation">
-                @switch (Model.TypeMember)
-                {
-                    default:
-                    case TypeMember.Class:
-                        <div class="class-detail">
-                            @await Html.SpinRenderActionAsync("ClassDetail", new { id = Model.FullName })
-                        </div>
-                        break;
+            @if (Model == null)
+            {
+                <div class="class-detail">
+                    @await Html.SpinRenderActionAsync("Introduction")
+                </div>
+            }
+            else
+            {
+                <input id="className" type="hidden" value="@Model.FullName" />
+                <div>
+                    @await Html.SpinRenderActionAsync("Index", "Breadcrumbs", "Util")
+                </div>
+
+                <div id="page" class="page-documentation">
+                    @switch (Model.TypeMember)
+                    {
+                        default:
+                        case TypeMember.Class:
+                            <div class="class-detail">
+                                @await Html.SpinRenderActionAsync("ClassDetail", new { id = Model.FullName })
+                            </div>
+                            break;
 
 
-                    case TypeMember.Package:
-                        <div class="class-detail">
-                            @await Html.SpinRenderActionAsync("PackageDetail", new { id = Model.FullName })
-                        </div>
-                        break;
+                        case TypeMember.Package:
+                            <div class="class-detail">
+                                @await Html.SpinRenderActionAsync("PackageDetail", new { id = Model.FullName })
+                            </div>
+                            break;
 
 
-                    case TypeMember.Method:
-                        <div class="class-detail">
-                            @await Html.SpinRenderActionAsync("MethodDetail", new { id = Model.FullName })
-                        </div>
-                        break;
+                        case TypeMember.Method:
+                            <div class="class-detail">
+                                @await Html.SpinRenderActionAsync("MethodDetail", new { id = Model.FullName })
+                            </div>
+                            break;
 
 
-                    case TypeMember.Property:
-                        <div class="class-detail">
-                            @await Html.SpinRenderActionAsync("PropertyDetail", new { id = Model.FullName })
-                        </div>
-                        break;
+                        case TypeMember.Property:
+                            <div class="class-detail">
+                                @await Html.SpinRenderActionAsync("PropertyDetail", new { id = Model.FullName })
+                            </div>
+                            break;
 
-                    case TypeMember.Constructor:
-                        <div class="class-detail">
-                            @await Html.SpinRenderActionAsync("ConstructorDetail", new { id = Model.FullName })
-                        </div>
-                        break;
+                        case TypeMember.Constructor:
+                            <div class="class-detail">
+                                @await Html.SpinRenderActionAsync("ConstructorDetail", new { id = Model.FullName })
+                            </div>
+                            break;
 
 
-                    case TypeMember.Field:
-                        <div class="class-detail">
-                            @await Html.SpinRenderActionAsync("FieldDetail", new { id = Model.FullName })
-                        </div>
-                        break;
+                        case TypeMember.Field:
+                            <div class="class-detail">
+                                @await Html.SpinRenderActionAsync("FieldDetail", new { id = Model.FullName })
+                            </div>
+                            break;
 
-                    case TypeMember.Enum:
-                        <div class="class-detail">
-                            @await Html.SpinRenderActionAsync("EnumDetail", new { id = Model.FullName })
-                        </div>
-                        break;
+                        case TypeMember.Enum:
+                            <div class="class-detail">
+                                @await Html.SpinRenderActionAsync("EnumDetail", new { id = Model.FullName })
+                            </div>
+                            break;
 
-                    case TypeMember.Interface:
-                        <div class="class-detail">
-                            @await Html.SpinRenderActionAsync("InterfaceDetail", new { id = Model.FullName })
-                        </div>
-                        break;
-                }
-            </div>
+                        case TypeMember.Interface:
+                            <div class="class-detail">
+                                @await Html.SpinRenderActionAsync("InterfaceDetail", new { id = Model.FullName })
+                            </div>
+                            break;
+                    }
+                </div>
+            }
         </div>
     </div>
 </div>

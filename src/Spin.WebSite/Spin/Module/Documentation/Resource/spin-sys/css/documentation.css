@@ -1,9 +1,8 @@
 ﻿/*breadcrumbs*/
 .content-breadcrumbs{
   margin-left: 1em;
+  margin-top: 1em;
 }
-
-
 
 /*Tree*/
 .content-tree {
@@ -26,6 +25,38 @@
 .node-selected {
   color: #428bca !important;
   background-color: transparent !important;
+}
+
+/*Introduction*/
+.introduction-image{
+  width: 100%;
+}
+
+.introduction-content{
+  text-align: center;
+    width: 50%;
+    margin: auto;
+}
+
+.introduction-content h1{
+  margin-bottom: 0;
+  margin-top: 1em;
+}
+
+.text-welcome{
+  text-align: justify;
+  margin-bottom: 4em;
+}
+
+.introduction-version{
+  margin-bottom: 4em;
+  font-size: 0.9em;
+}
+
+.introduction-welcome{
+  margin-bottom: 1em;
+  font-size: 1.1em;
+  font-weight: bold;
 }
 
 /*Detail*/
@@ -76,7 +107,6 @@ h2 {
 }
 
 .content-render-page {
-  padding: 1em;
   border-left: 1px solid #1f76b4;
 }
 

@@ -1,0 +1,17 @@
+﻿@using Spin.WebSite.Spin.Themes.SpinTheme.Language
+@using Spin.Base.Documentation.Language
+
+<div>
+    <img class="introduction-image" src="/Spin/Module/Documentation/Resource/spin-sys/img/introImage.jpg" />
+</div>
+<div class="introduction-content">
+    <h1>
+        @DocumentationLanguage.WelcomeTechnicalDoc
+    </h1>
+    <div class="introduction-version">
+        @CompanyFactory.Information.Name  @CompanyFactory.Information.Version (@(CompanyFactory.Information.TypeVersion)) © @DateTime.Now.Year
+    </div>
+    <div class="text-welcome">
+        @SpinThemeLanguage.IntroText
+    </div>
+</div>
