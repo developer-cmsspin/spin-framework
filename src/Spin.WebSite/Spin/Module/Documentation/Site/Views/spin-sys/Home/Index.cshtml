@@ -54,6 +54,13 @@
                             </div>
                             break;
 
+                        case TypeMember.External:
+                            <div class="class-detail">
+                                @{ var ExternalData = (ExternalDocument)Model;}
+                                @await Html.SpinRenderActionAsync(ExternalData.Action, ExternalData.Controller, ExternalData.Module)
+                            </div>
+                            break;
+
 
                         case TypeMember.Package:
                             <div class="class-detail">

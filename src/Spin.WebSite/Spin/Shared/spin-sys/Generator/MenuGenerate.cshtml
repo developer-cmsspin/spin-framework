@@ -1,0 +1,44 @@
+﻿@model Dictionary<string, BackendContent>
+@using Spin.Modules.Entity.Backend
+
+@{
+    string SelectItem = ViewBag.SelectItem;
+}
+
+<div class="content-menu">
+    <div class="row no-gutters align-items-center items-menu">
+        <div class="col-3 content-menu-logo">
+            <div id="menuMobile" class="row menu-logo">
+
+                <div class="col-10 title-mobile-page">
+                    @((String.IsNullOrEmpty(SpinViewPage.Module.Alias)) ? SpinViewPage.Module.Name : SpinViewPage.Module.Alias)
+                </div>
+                <div class="d-xl-none d-lg-none d-md-none d-sm-block d-block col-2">
+                    <div class="menu-mobile">
+                        <i class="fas fa-angle-right fa-2x" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="contentMenu" class="col-9 content-items-menu">
+            <ul class="content-menu-back">
+
+                @foreach (var ItemMenu in Model.OrderBy(a => a.Value.Order))
+                {
+                    <li class="@((ItemMenu.Value.GetNameController() == SelectItem)?"color-select-menu":"")">
+                        <a href="/Admin/@(SpinViewPage.ModuleName)/@(ItemMenu.Value.GetNameController())/IndexGenerate">
+                            @if (!String.IsNullOrEmpty(ItemMenu.Value.Logo))
+                            {
+                                <i class="@(ItemMenu.Value.Logo)"></i>
+                            }
+                            @ItemMenu.Value.Name
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>
+

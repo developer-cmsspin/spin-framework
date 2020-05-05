@@ -1,0 +1,24 @@
+﻿@model AutocompleteSpinFieldSelect
+@using Spin.Modules.Entity.Backend.Generator.Select
+@{ 
+    //https://github.com/ghiden/angucomplete-alt
+    //this.SpinViewPage.AddJavaScript("/js/BaseSpinBackAutocomplete.js",false,true,1);
+    //this.SpinViewPage.AddStyle("/css/BaseSpinBackAutocomplete.css", false, true, 1);
+
+    string CallBack = (String.IsNullOrEmpty(Model.CallbackMethod)) ? "autocompleteAssign" : Model.CallbackMethod;
+}
+
+<!--@Model.ModelName-->
+<div class="content-autocomplete">
+    <angucomplete-alt id="@Model.Name"
+                      placeholder="@Model.RemarkFilter"
+                      pause="400"
+                      ata-selected-object-data="row"
+                      selected-object="@CallBack"
+                      remote-url="@Model.URL"
+                      remote-url-data-field="result"
+                      title-field="value"
+                      input-class="" 
+                      text-searching="Searching..."
+                      description-field="description"/>
+</div>

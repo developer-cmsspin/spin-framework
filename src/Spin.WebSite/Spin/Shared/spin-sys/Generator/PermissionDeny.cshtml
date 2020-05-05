@@ -1,0 +1,28 @@
+﻿
+@{
+    SpinViewPage.AddStyle("/spin-sys/dist/css/PermissionDeny.min.css");
+    //SpinViewPage.AddStyle("/spin-sys/src/css/PermissionDeny.css");
+}
+
+
+<div class="content-page">
+    <div class="row content-page align-items-center">
+        <div class="col-6 img-state">
+            <img class="" src="@(SpinViewPage.RelativePath("503.svg"))" />
+        </div>
+        <div class="col-6">
+            <div class="number-status">
+                301
+            </div>
+            <div class="text-status">
+                SORRY
+            </div>
+            <div class="title-status">
+                DENY PERMISSION
+            </div>
+            <div>
+                @ViewBag.MessageError
+            </div>
+        </div>
+    </div>
+</div>

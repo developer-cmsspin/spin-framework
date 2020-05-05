@@ -5,6 +5,11 @@
 }
 
 /*Tree*/
+.node-tree .node-icon.fas{
+  margin-right: 1em !important;
+}
+
+/*Tree*/
 .content-tree {
   overflow: auto;
 }

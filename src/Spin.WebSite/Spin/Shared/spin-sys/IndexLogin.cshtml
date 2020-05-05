@@ -1,0 +1,64 @@
+﻿@{
+    this.SpinViewPage.IsLayout = true;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Meta tags-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>@(CompanyFactory.Information.Name)  - @SpinViewPage.Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" async />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" async />
+    <link href="~/lib/animate.css/animate.css" rel="stylesheet" async />
+    @SpinViewPage.Styles.Render()
+    <link href="/Spin/Themes/SubSite/Resource/css/backend/general-backend.css" rel="stylesheet" async />
+    <link href="/Spin/Themes/SubSite/Resource/css/backend/general-backend-media.css" rel="stylesheet" async />
+</head>
+<body>
+    <div id="wrapper">
+        <main>
+            <div class="content-data-login" style="background-image: url('@SpinViewPage.RelativePath("/backend/background-login.jpg")');">
+                <div class="row no-gutters justify-content-md-center backgroud-opacity">
+                    <div class="col-12 col-md-6 col-md-6 col-lg-5 col-xl-4 align-self-center">
+                        <div class="content-login">
+                            <div class="content-logo">
+                                <a href="/Admin">
+                                    <img class="logo" src='@SpinViewPage.RelativePath("logo-login.png")' />
+                                    <img class="logo logo-line" src='@SpinViewPage.RelativePath("/backend/line-home.png")' />
+                                </a>
+                            </div>
+                            <div>
+                                @RenderBody()
+                            </div>
+                            <div class="content-error">
+                                @foreach (var MessageData in SpinViewPage.MessagesInformation.GetItems())
+                                {
+                                    <div class="error-item @(MessageData.TypeMessage.ToString().ToLower())">
+                                        @MessageData.MessageContent
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-login">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col-12">
+                            <img src='@SpinViewPage.RelativePath("/backend/logo-footer-information.png")' class="icon-logo-information" />
+                            @CompanyFactory.Information.Name VS @CompanyFactory.Information.Version (@(CompanyFactory.Information.TypeVersion)) | © @DateTime.Now.Year @CompanyFactory.Information.Copyright
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!--Scripts-->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    @SpinViewPage.JavaScripts.Render()
+</body>
+</html>

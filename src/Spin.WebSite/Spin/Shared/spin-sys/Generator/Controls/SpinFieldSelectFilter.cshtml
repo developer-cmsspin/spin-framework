@@ -1,0 +1,15 @@
+﻿@model SpinFieldSelect
+@using Spin.Modules.Entity.Backend.Generator.Select
+@using Spin.Modules.Entity
+@{
+
+}
+
+@if (Model.InputType == Spin.Modules.Entity.Backend.Generator.Select.InputType.Calendar)
+{
+    <input type='text' search-value id="@(Model.Name )" placeholder="@(!string.IsNullOrEmpty(Model.RemarkFilter)?Model.RemarkFilter:"Enter Keyword..." )" ui-date="dateOptions" ng-model='@(Model.Name.FirstCharacterToLower() )' ng-focus="selectedInput('#@(Model.Name.FirstCharacterToLower() )')" ng-blur="selectedInput('#@(Model.Name.FirstCharacterToLower() )')" />
+}
+else
+{
+    <input type='text' search-value id="@(Model.Name )" placeholder="@(!string.IsNullOrEmpty(Model.RemarkFilter)?Model.RemarkFilter:"Enter Keyword..." )" ng-model='@(Model.Name.FirstCharacterToLower())' ng-focus="selectedInput('#@(Model.Name.FirstCharacterToLower() )')" ng-blur="selectedInput('#@(Model.Name.FirstCharacterToLower() )')" />
+}

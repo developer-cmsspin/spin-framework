@@ -10,14 +10,9 @@
     <ItemGroup>
         <Content Include="Spin/**/*.js" CopyToOutputDirectory="Always" />
         <Content Include="Spin/**/*.css" CopyToOutputDirectory="Always" />
-        <Content Include="Spin/**/*.png" CopyToOutputDirectory="Always" />
         <Content Include="Spin/**/*.jpg" CopyToOutputDirectory="Always" />
         <Content Include="Spin/**/*.jpeg" CopyToOutputDirectory="Always" />
         <Content Include="Spin/**/*.gif" CopyToOutputDirectory="Always" />
-        <Content Include="Spin/**/*.svg" CopyToOutputDirectory="Always" />
-        <Content Include="Spin/**/*.ttf" CopyToOutputDirectory="Always" />
-        <Content Include="Spin/**/*.woff" CopyToOutputDirectory="Always" />
-        <Content Include="Spin/**/*.eot" CopyToOutputDirectory="Always" />
         <Content Include="Spin/**/*.cshtml" CopyToOutputDirectory="Always" />
         <Content Include="Spin/**/*.htm" CopyToOutputDirectory="Always" />
         <Content Include="wwwroot/extlib/**/*">
@@ -25,7 +20,46 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Spin" Version="0.1.26.11-alpha" />
+      <PackageReference Include="Spin" Version="0.1.26.12-alpha" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="Spin\Module\Documentation\Site\Views\spin-sys\.DS_Store" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\.DS_Store" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\.DS_Store" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\documentation-media.css" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\documentation.css" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\.DS_Store" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\style.css" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\Read Me.txt" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\demo.html" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\demo-files\demo.css" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\demo-files\demo.js" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\fonts\icomoon.ttf" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\fonts\icomoon.woff" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\fonts\icomoon.eot" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\fonts\icomoon.svg" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\js\documentation.js" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\img\.DS_Store" />
+      <None Remove="Spin\Module\Documentation\Resource\spin-sys\img\introImage.jpg" />
+      <None Remove="Spin\Module\Security\Resource\spin-sys\css\login-media.css" />
+      <None Remove="Spin\Module\Security\Resource\spin-sys\css\Login.css" />
+      <None Remove="Spin\Module\Security\Resource\spin-sys\css\Login.min.css" />
+      <None Remove="Spin\Module\Security\Resource\spin-sys\css\controls.css" />
+      <None Remove="Spin\Module\Security\Resource\spin-sys\css\GroupPermission.css" />
+      <None Remove="Spin\Module\Security\Resource\spin-sys\css\controls-media.css" />
+      <None Remove="Spin\Module\Security\Resource\spin-sys\js\ExtendGroup.js" />
+      <None Remove="Spin\Module\Security\Resource\spin-sys\js\Login.js" />
+      <None Remove="Spin\Module\Dashboard\Resource\spin-sys\css\Dashboard-home-media.css" />
+      <None Remove="Spin\Module\Dashboard\Resource\spin-sys\css\Dashboard-home.css" />
+      <None Remove="Spin\Module\Dashboard\Resource\spin-sys\img\division-dashboard.png" />
+      <None Remove="Spin\Module\Dashboard\Resource\spin-sys\img\background-back.png" />
+      <None Remove="Spin\Module\Dashboard\Resource\spin-sys\img\select-menu.png" />
+      <None Remove="Spin\Module\Util\Resource\spin-sys\css\Configuration.css" />
+      <None Remove="Spin\Module\Util\Resource\spin-sys\css\Configuration.min.css" />
+      <None Remove="Spin\Module\Util\Resource\spin-sys\css\Configuration-media.min.css" />
+      <None Remove="Spin\Module\Util\Resource\spin-sys\css\Configuration-media.css" />
+      <None Remove="Spin\Module\Util\Resource\spin-sys\js\Configuration.min.js" />
+      <None Remove="Spin\Module\Util\Resource\spin-sys\js\Configuration.js" />
     </ItemGroup>
     <ItemGroup>
       <None Include="appsettings.json" />
@@ -146,5 +180,57 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Spin\Update\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\demo-files\demo.js" />
+      <Content Remove="Spin\Module\Documentation\Resource\spin-sys\js\documentation.js" />
+      <Content Remove="Spin\Module\Security\Resource\spin-sys\js\ExtendGroup.js" />
+      <Content Remove="Spin\Module\Security\Resource\spin-sys\js\Login.js" />
+      <Content Remove="Spin\Module\Documentation\Resource\spin-sys\css\documentation-media.css" />
+      <Content Remove="Spin\Module\Documentation\Resource\spin-sys\css\documentation.css" />
+      <Content Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\style.css" />
+      <Content Remove="Spin\Module\Documentation\Resource\spin-sys\css\fonts\font-documentation\demo-files\demo.css" />
+      <Content Remove="Spin\Module\Security\Resource\spin-sys\css\login-media.css" />
+      <Content Remove="Spin\Module\Security\Resource\spin-sys\css\Login.css" />
+      <Content Remove="Spin\Module\Security\Resource\spin-sys\css\Login.min.css" />
+      <Content Remove="Spin\Module\Security\Resource\spin-sys\css\controls.css" />
+      <Content Remove="Spin\Module\Security\Resource\spin-sys\css\GroupPermission.css" />
+      <Content Remove="Spin\Module\Security\Resource\spin-sys\css\controls-media.css" />
+      <Content Remove="Spin\Module\Dashboard\Resource\spin-sys\css\Dashboard-home-media.css" />
+      <Content Remove="Spin\Module\Dashboard\Resource\spin-sys\css\Dashboard-home.css" />
+      <Content Remove="Spin\Module\Documentation\Resource\spin-sys\img\introImage.jpg" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\CodeGenerate.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\GeneralInformation.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\Property.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\InterfaceDetail.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\EnumDetail.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\PackageDetail.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\MethodDetail.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\ConstructorDetail.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\Introduction.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\Field.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\PropertyDetail.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\Parameter.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\Remark.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\Method.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\Example.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\Index.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\FieldDetail.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\ClassDetail.cshtml" />
+      <Content Remove="Spin\Module\Documentation\Site\Views\spin-sys\Home\InheritanceInformation.cshtml" />
+      <Content Remove="Spin\Module\Util\Admin\Views\spin-sys\Configuration\Index.cshtml" />
+      <Content Remove="Spin\Module\Util\Site\Views\spin-sys\Page\Error.cshtml" />
+      <Content Remove="Spin\Module\Security\Admin\Views\spin-sys\Control\UserInformation.cshtml" />
+      <Content Remove="Spin\Module\Security\Admin\Views\spin-sys\Control\ImageUserSelect.cshtml" />
+      <Content Remove="Spin\Module\Security\Email\Views\spin-sys\Home\ChangeStateSMS.cshtml" />
+      <Content Remove="Spin\Module\Security\Email\Views\spin-sys\Home\Index.cshtml" />
+      <Content Remove="Spin\Module\Dashboard\Admin\Views\spin-sys\Home\Index.cshtml" />
+      <Content Remove="Spin\Module\Util\Resource\spin-sys\js\Configuration.min.js" />
+      <Content Remove="Spin\Module\Util\Resource\spin-sys\js\Configuration.js" />
+      <Content Remove="Spin\Module\Util\Resource\spin-sys\css\Configuration.css" />
+      <Content Remove="Spin\Module\Util\Resource\spin-sys\css\Configuration.min.css" />
+      <Content Remove="Spin\Module\Util\Resource\spin-sys\css\Configuration-media.min.css" />
+      <Content Remove="Spin\Module\Util\Resource\spin-sys\css\Configuration-media.css" />
+      <Content Remove="Spin\Module\Util\Site\Views\spin-sys\Redirect\Index.cshtml" />
     </ItemGroup>
 </Project>

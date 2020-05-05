@@ -1,0 +1,121 @@
+﻿@model SpinWebGeneral
+@using Spin.Modules.Entity.Backend.Generator
+@using Spin.Modules.Entity.Backend.Generator.Detail
+@{
+    var Bottons = Model.GeneralAttribute.Where(a => a.TypeAttribute == "Button").Select(a => (SpinButton)a).OrderBy(a => a.Order);
+}
+<input type="file" id="uploadFile" name="uploadFile" value="" onchange="UtilLoadFile.ChangeFile()" accept=".png, .jpg, .jpeg" spin-typeload="IMG" spin-randomname="true" />
+
+<script type="text/ng-template" id="detail.htm">
+
+    <div class="row no-gutters content-header">
+        <div class="d-block d-md-none col-12">
+            @await Html.SpinRenderActionAsync("MenuMobileGenerate", new { NameController = SpinViewPage.ControllerName })
+        </div>
+    </div>
+
+
+    <form name="form" class="spin-form content-form-detail" novalidate>
+        <div id="detailChannel" class="">
+            <div id="contentWarning" class="alert-warning warning-message"></div>
+            <div class="alert-Channel alert-danger content-error-detail" role="alert" ng-show="form.$error.required != undefined && form.$error.required.length > 0">
+                <div class="error-detail-item">
+                    <strong>You have {{form.$error.required.length}} errors.</strong>
+                </div>
+                <div class="error-detail-item" ng-repeat="(key, errors) in form.$error track by $index">
+                    <div class="error-detail-item" ng-repeat="e in errors">{{errorName(e.$name)}}-{{ key }}.</div>
+                </div>
+
+
+            </div>
+            <div class="content-detail">
+
+                <div id="groups" class="group-scroll-horizontal" sticky>
+                    <div id="group-container" class="group-container">
+                        <i class="fas fa-angle-left scroll-to-left" ng-click="goToScrollStep('group-container','item-group-detail','left')"></i>
+                        <div class="group-content">
+                            @foreach (var ItemGroupData in Model.WebTypes.GroupBy(a => a.DetailField.Group).Where(a => !String.IsNullOrEmpty(a.Key)))
+                            {
+                                <div id="menuGroup@(ItemGroupData.Key.Replace(" ",""))" class="item-group-detail" ng-click="goToScroll('@(ItemGroupData.Key.Replace(" ",""))')">
+                                    @ItemGroupData.Key
+                                </div>
+                            }
+                        </div>
+                        <i class="fas fa-angle-right scroll-to-right" ng-click="goToScrollStep('group-container','item-group-detail','right')"></i>
+                    </div>
+                </div>
+
+                <div class="row no-gutters content-form-menu" sticky>
+                    <div class="col-3 col-md-6">
+                        <a ng-click="changeView('/select')" class="back-to-list">
+                            <i class="fas fa-angle-left"></i>
+                            <div class=go-to-list>
+                                Go to list
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-9 col-md-6">
+                        @foreach (var ItemButton in Model.GeneralAttribute.Where(a => a is SpinButtonDetail && a.TypeAttribute == "Button" && a.Enabled).Select(a => (SpinButton)a).OrderByDescending(a => a.Order))
+                        {
+                            @ItemButton.Render(this.Context)
+                        }
+                    </div>
+                </div>
+
+
+                <div class="row no-gutters content-form">
+                    <div class="col-12 title-generate-add">
+                        ADD  @((String.IsNullOrEmpty(SpinViewPage.Module.Alias)) ? SpinViewPage.Module.Name : SpinViewPage.Module.Alias)
+                    </div>
+                    @foreach (var ItemsGroup in Model.WebTypes.GroupBy(a => a.DetailField.Group))
+                    {
+                        if (!String.IsNullOrEmpty(ItemsGroup.Key))
+                        {
+                            var StyleGroup = (ItemsGroup.Where(a => a.DetailField.ShowFromAdd && a.DetailField.Show).Count() > 0) ? "" : "spin-text-detail-not-show";
+
+                            <div id="@(ItemsGroup.Key.Replace(" ",""))" class="col-12 spin-title-group-detail @(StyleGroup)">
+                                <i class="fas fa-clone"></i>
+                                @ItemsGroup.Key
+                            </div>
+                        }
+
+                        foreach (var ItemField in ItemsGroup.Where(a => a.DetailField.Show && a.Name != "Id").OrderBy(a => a.DetailField.Order))
+                        {
+                            <div class="col-sm-@(ItemField.DetailField.SizeColumn) col-md-@(ItemField.DetailField.SizeColumn) col-lg-@(ItemField.DetailField.SizeColumn) col-xl-@(ItemField.DetailField.SizeColumn)  col-12 @(ItemField.DetailField.Style) @((ItemField.DetailField.ShowFromAdd)?"":"spin-text-detail-not-show")" ng-show="@(ItemField.DetailField.IfShow)">
+                                <div class="spin-item-form @(ItemField.DetailField.Style)" @(String.Join(" ", ItemField.DetailField.Attributes.ToArray()))>
+                                    @if (ItemField.DetailField.ShowLabel)
+                                    {
+                                        <label>
+                                            @ItemField.DetailField.RenderLabel(this.Context)
+                                            @if (!String.IsNullOrEmpty(ItemField.DetailField.Description))
+                                            {
+                                                <span>
+                                                    (@(ItemField.DetailField.Description))
+                                                </span>
+                                            }
+                                        </label>
+                                    }
+
+                                    <div>
+                                        <div>
+                                            @ItemField.DetailField.Render(this.Context)
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    @if (Model.TypeEntity.GetInterface("IEntityHistory") != null)
+    {
+        <div>
+            @(new HistorySpinFieldDetail().Render(this.Context))
+        </div>
+    }
+</script>

@@ -1,0 +1,34 @@
+﻿@model FileSpinField
+@using Spin.Modules.Entity.Backend.Generator.Detail
+@{
+
+}
+<div id='contentImage@(Model.Id)' spin-upload-file ng-model="@(Model.ModelName)" class='row item-image-content load-files @(Model.Style)' spin-accept="@Model.Extension" spin-typeload="@Model.TypeName" spin-namefile="" spin-randomname="@(Model.RandonName.ToString().ToLower())" spin-outData="entity.@(Model.Name.FirstCharacterToLower())" spin-multipleFile="false">
+
+    <input id='inputImage@(Model.Id)' class="uploadInput" type="file" />
+
+    <div id='image@(Model.Id)' class='content-image content-image-file'>
+        <i ng-if='entity.@(Model.Name.FirstCharacterToLower()).trim() == "" || entity.@(Model.Name.FirstCharacterToLower()) == null || entity.@(Model.Name.FirstCharacterToLower()) == undefined' class="fas fa-minus-square fa-5x"></i>
+        <a ng-if='entity.@(Model.Name.FirstCharacterToLower()).trim() != "" && entity.@(Model.Name.FirstCharacterToLower()) != null && entity.@(Model.Name.FirstCharacterToLower()) != undefined' ng-href="{{entity.@(Model.Name.FirstCharacterToLower())}}" target="_blank">
+            <i class="@Model.IconLoad fa-5x"></i>
+        </a>
+    </div>
+
+    <div id='loading@(Model.Id)' class='content-image-loading'>
+        <img class="img-image-loading" src="~/img/loadingImage.gif" />
+        <div class="text-image-loading">
+            0%
+        </div>
+    </div>
+
+    <div class=' content-button'>
+        <button id='uploadImage@(Model.Id)'  class="uploadImage" type='button'>
+            <i class="fas fa-plus-circle"></i>
+            Upload Image
+        </button>
+        <button id='deleteImage@(Model.Id)' ng-if='@(Model.ModelName).trim() != "" && @(Model.ModelName) != null && @(Model.ModelName) != undefined' ng-click="deleteFile('@(Model.ModelName)')">
+            <i class='far fa-trash-alt' aria-hidden='true'></i>
+            Delete Image
+        </button>
+    </div>
+</div>

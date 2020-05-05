@@ -1,0 +1,242 @@
+﻿@using Spin.Base.Helper
+@using Spin.Modules.API
+@using Spin.Security.API
+@{
+    string ModuleCustom = (this.SpinViewPage.ModuleName == "Dashboard") ? "" : (string.IsNullOrEmpty(this.SpinViewPage.ModuleName)) ? "Error" : this.SpinViewPage.ModuleName;
+
+    this.SpinViewPage.AddStyle("/spin-sys/src/css/BaseSpinBack.css");
+    this.SpinViewPage.AddStyle("/spin-sys/src/css/BaseSpinBack-media.css");
+    //this.SpinViewPage.AddStyle("/spin-sys/dist/css/BaseSpin-back.min.css");
+
+
+    this.SpinViewPage.AddTryStyle("/css/BaseSpinBackExtend.css");
+    this.SpinViewPage.AddTryStyle("/css/BaseSpinBackExtend-media.css");
+
+    //Validate show configuration
+    bool ShowConfiguration = false;
+    if (ModuleCustom == "")
+    {
+        ShowConfiguration = this.SpinViewPage.Security.User.GroupUser.ShowConfigurationDashboard;
+    }
+    else
+    {
+        var InformationPermissionModule = this.SpinViewPage.Security.User.GroupUser.GroupPermissions.FirstOrDefault(a => a.Module == ModuleCustom && a.Show);
+        if (InformationPermissionModule != null)
+        {
+            ShowConfiguration = InformationPermissionModule.ShowConfiguration;
+        }
+    }
+
+    this.SpinViewPage.AddAngularScripts();
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Cache-->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <title>@(CompanyFactory.Information.Name) - @((String.IsNullOrEmpty(SpinViewPage.Title)) ? this.SpinViewPage.ModuleName : SpinViewPage.Title )</title>
+    <!--favicon-->
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" async />
+    <!--Styles-->
+    <link href="/lib/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="/lib/material-design-lite/material.min.css" rel="stylesheet" />
+    <!--<link href="/spin-sys/dist/css/BaseSpin-back.min.css" rel="stylesheet" />-->
+    
+
+
+    <link href="/Spin/Module/Util/Resource/spin-sys/css/Configuration.css" rel="stylesheet" async />
+    <link href="/Spin/Module/Util/Resource/spin-sys/css/Configuration-media.css" rel="stylesheet" async />
+    <link href="/lib/animate.css/animate.min.css" rel="stylesheet" async />
+    <link href="~/lib/tooltips-angular/dist/angular-tooltips.min.css" rel="stylesheet" />
+    <link href="~/lib/angucomplete-alt/angucomplete-alt.css" rel="stylesheet" />
+    <link href="~/extlib/daterangepicker/daterangepicker.css" rel="stylesheet" />
+
+
+    <!--Custom-->
+    @SpinViewPage.Styles.Render()
+    <!--configuration-->
+    <!--<link href="~/Modules/Util/asserts/css/admin/select.css" rel="stylesheet" />-->
+</head>
+
+<body>
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">    
+                <div class="row align-items-center no-gutters content-menu-top">
+                    <div class="col-9 col-sm-6 col-md-6 col-lg-2 col-xl-2 ">
+                    <!--Logo-->
+                    <a class="logo-top" href="/Admin/Dashboard/Home/Index">
+                        <img src='@SpinViewPage.RelativePath("/backend/white-icon.png")' class="logo-header-small" />
+                    </a>
+                    <!-- Title -->
+                    <span class="mdl-layout-title">@SpinViewPage.Title</span>
+                    <!-- Add spacer, to align navigation to the right -->
+                    <div class="mdl-layout-spacer"></div>
+                    <!-- Navigation. We hide it in small screens. -->
+                </div>
+                <div class="d-none d-lg-block col-sm-6 col-md-6 col-lg-5 col-xl-5 content-menu-generate">
+                    <!--menu-->
+                    @if (SpinViewPage.Module.Name != "" && SpinViewPage.Module.Name != "Dashboard")
+                    {
+                        @await Html.SpinRenderActionAsync("MenuGenerate", new { NameController = SpinViewPage.ControllerName })
+                    }
+                </div>
+
+                <!--Search box-->
+                <div class="d-none col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2 content-filter-header">
+                    <input type="text" id="slFilterValue" name="slFilterValue" placeholder="" class="search-filter top-search" />
+                    <button onclick="searchFilter()" class="btn-search-filter top-search">
+                        <i id="iconSearch" class="fa fa-search" aria-hidden="true"></i>
+                        <img id="btnImgLoadingSearch" class="btn-img-loading" src="~/img/Loading-btn.gif" alt="loading">
+                    </button>
+                </div>
+
+                <div class="col text-right">
+                    <!--login-->
+                    <div class="hello-header-content">
+                        <div class="hello-header-static">
+                            Hello
+                        </div>
+                        <div class="hello-header">
+                            @(SpinViewPage.Security.User.FirstName.Split(' ').FirstOrDefault())!
+                        </div>
+                        <div class="hello-header-image">
+                            <img class="img-header-user" src="@(SpinViewPage.Security.User.Image)" />
+                        </div>
+                    </div>
+
+                    <!--End Login-->
+                    <!--Configuration-->
+                    @if (ShowConfiguration)
+                    {
+                        <div id="setting" class="mdl-navigation__link setting-button setting-conf">
+                            <i class="material-icons">
+                                more_vert
+                            </i>
+                            <div class="mdl-tooltip icon-menu" for="configuration">
+                                Configuration
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                </div>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer drawer-left-configuration">
+            <div class="content-user content-user-drawer">
+                @if (String.IsNullOrEmpty(SpinViewPage.Security.User.Image))
+                {
+                    <img src="~/Modules/Security/Asserts/image/user-without-img.png" class="image-user" />
+                }
+                else
+                {
+                    <img src="@(SpinViewPage.Security.User.Image)" class="image-user" />
+                }
+
+                <span class="mdl-layout-title name-user">@(SpinViewPage.Security.User.FirstName) @(SpinViewPage.Security.User.LastName)</span>
+
+            </div>
+            <nav class="link-menu mdl-navigation">
+                <a class="mdl-navigation__link item-nav" href="/Admin/Dashboard/Home/Index">
+                    <i class="material-icons">home</i>Inicio
+                </a>
+                <!--
+                <a class="mdl-navigation__link  item-nav" href=""><i class="material-icons">help</i>Soporte</a>
+                <a class="mdl-navigation__link  item-nav" href=""><i class="material-icons">info_outline</i>Acerca de</a>
+                    -->
+                <a class="mdl-navigation__link  item-nav" href="/Admin/Security/User/Logout"><i class="material-icons">no_encryption</i>Cerrar Sesión</a>
+            </nav>
+        </div>
+
+        @if(ShowConfiguration)
+        {
+            <div class="mdl-layout__drawer-right drawer-rigth-configuration">
+                @await Html.SpinRenderActionAsync("Index", "Configuration", "Util", "Admin", new { ModuleName = ModuleCustom })
+
+            </div>
+        }
+        <main class="mdl-layout__content content-main">
+
+            <!--loading page-->
+            <div id="loadingSpin" class="loading-content">
+
+                <div class="content-logo">
+                    <img class="loadig-spin" src='@SpinViewPage.RelativePath("/backend/loading.gif")' />
+                    <div class="title-loading">
+                        Loading....
+                    </div>
+                </div>
+            </div>
+
+            <!--Message-->
+
+            <div id="MessageSpin" class="message alert alert-info" role="alert">
+                <button type="button" class="close" aria-label="Close" onclick="messagesSpin.hideMessage()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <i id="iconMessage" class="icon-message fa" aria-hidden="true"></i>
+                <span id="contentMessage" class="content-message">
+
+                </span>
+            </div>
+
+            <!--confirm-->
+            <div id="MessageconfirmSpin" class="message alert alert-warning message-confirm" role="alert">
+                <button type="button" class="close close-message" aria-label="Close" onclick="messagesSpin.hideMessageConfirm()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <i id="iconMessageConfirm" class="icon-message fa" aria-hidden="true"></i>
+                <span id="contentMessageConfirm" class="content-message">
+                    Are you delete this element?
+                </span>
+                <button id="btnYes" type="button" class="btn-message-answer">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button id="btnNo" type="button" class="btn-message-answer" aria-label="Close">
+                    <span aria-hidden="true">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </button>
+            </div>
+
+            <!--Render Content-->
+            @RenderBody()
+
+        </main>
+        <div class="mdl-layout__obfuscator-right"></div>
+    </div>
+
+
+    <!--JavaScripts-->
+    <script src="/lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="/lib/jquery.scrollTo/jquery.scrollTo.min.js" type="text/javascript"></script>
+    <script src="/lib/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+
+    <script src="/Spin/Module/Util/Resource/spin-sys/js/Configuration.js" async></script>
+    <script src="~/lib/moment/min/moment.min.js"></script>
+    <script src="~/extlib/daterangepicker/daterangepicker.js"></script>
+
+
+    <!--Custom-->
+    @SpinViewPage.JavaScripts.Render()
+
+</body>
+</html>

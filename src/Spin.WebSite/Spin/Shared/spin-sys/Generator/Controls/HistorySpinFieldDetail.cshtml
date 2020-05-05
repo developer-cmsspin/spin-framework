@@ -1,0 +1,86 @@
+﻿@{
+
+}
+
+<div class="mdl-layout__drawer-right-history content-history">
+    <div class="content-list-history">
+        <div class="row justify-content-end row-history">
+            <div class="col-12 list-history">
+                <h2>
+                    <i class="far fa-clock"></i>
+                    Activity
+                </h2>
+                <div class="day-item-history" ng-repeat="itemHistoryDate in entity.spinHistory | orderBy: '-dateOrder' | groupBy: 'dateOrder'">
+                    <h3>
+                        {{itemHistoryDate[0].dateCreated | date:'dd-MMM-yyyy'}}
+                    </h3>
+                    <div>
+                        <div class="item-history" ng-repeat="itemHistory in itemHistoryDate | orderBy: '-dateCreated' | groupBy: 'codeUpdate'">
+                            <div>
+
+                            </div>
+                            <div class="item-title-content-history">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col">
+                                        <div class="item-title-history">
+                                            <i class="{{itemHistory[0].icon}}"></i>
+                                            {{itemHistory[0].tableName}} - {{itemHistory[0].typeHistory}}
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="item-time-history">
+                                            {{itemHistory[0].dateCreated | date:'hh:mm a'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-detail-content-history">
+                                <div class="item-detail-history" ng-repeat="itemHistoryDetail in itemHistory">
+                                    <div ng-show="itemHistoryDetail.oldData == null">
+                                        <div ng-show="itemHistoryDetail.isObjectNewData == true">
+                                            <div class="name-item-detail-hsitory">
+                                               {{itemHistoryDetail.description}}
+                                            </div>
+
+                                            <js-tree id="tree{{$index}}" tree-data="scope" tree-model="itemHistoryDetail.treeStructure"></js-tree>
+                                        </div>
+                                        <div ng-show="itemHistoryDetail.isObjectNewData != true">
+                                            {{itemHistoryDetail.name}} - {{itemHistoryDetail.newData}}
+                                        </div>
+                                    </div>
+                                    <div class="item-detail-history" ng-show="itemHistoryDetail.oldData != null">
+                                        <div class="item-detail-change-history">
+                                            <div class="row no-gutters">
+                                                <div class="col-3">
+                                                    {{itemHistoryDetail.name}}
+                                                </div>
+                                                <div class="col">
+                                                    {{itemHistoryDetail.oldData}}
+                                                    <i class="fas fa-forward change-value-history"></i>
+                                                    {{itemHistoryDetail.newData}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="created-content-history" ng-show="itemHistory[0].user">
+                                    <div class="nane-created-history">
+                                        By {{itemHistory[0].userName }}
+                                    </div>
+                                    <div class="email-created-history">
+                                        {{itemHistory[0].user}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mdl-layout__obfuscator-right-history" ng-click="historyClose()"></div>
