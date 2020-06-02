@@ -17,7 +17,9 @@
 
                     if (Item != null && Item.ShowFilter)
                     {
-                        <option value="@ItemColumns.Name"> @ItemColumns.Name.SplitCamelCase() </option>
+                        <option value="@ItemColumns.Name">
+                            @((@Item.Title.SplitCamelCase() != null) ? @Item.Title.SplitCamelCase() : @ItemColumns.Name.SplitCamelCase())
+                        </option>
                     }
                 }
             </select>

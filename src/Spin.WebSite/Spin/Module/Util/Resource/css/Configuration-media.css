@@ -1,0 +1,21 @@
+﻿@media (max-width: 1200px) {
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 768px) {
+    .content-title-configuration {
+        margin-bottom: 1em;
+    }
+
+    .item-button-menu {
+        font-size: 2.1em;
+        margin-right: 0em;
+    }
+
+    .item-button {
+        margin-top: -0.2em;
+    }
+
+}

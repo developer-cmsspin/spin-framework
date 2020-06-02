@@ -65,6 +65,11 @@ if (typeof directivesExtend !== 'undefined' && directivesExtend != null) {
 /*Define module*/
 var spinAppModule = angular.module('SpinApp', directives);
 
+/* Alias lowercase for textangular lib */
+angular.module('SpinApp').config(function () {
+    angular.lowercase = angular.$$lowercase;
+});
+
 /* add functions module */
 if (typeof (addModuleFn) !== 'undefined') {
     addModuleFn(spinAppModule);
@@ -95,8 +100,7 @@ spinAppModule.directive('filterBoolean', function () {
                     var filterBoolean = arr_filterBoolean.filter(x => x.name === attrs.id);
                     if (filterBoolean.length == 0) {
                         arr_filterBoolean.push({ name: attrs.id, value: Boolean(JSON.parse(val)) });
-                    } else
-                    {
+                    } else {
                         filterBoolean[0].value = Boolean(JSON.parse(val));
                     }
                 }

@@ -4,14 +4,14 @@
             <a class="page-link" href="" ng-click="changePage(1)">&laquo;</a>
         </li>
         <li class="page-item" ng-class="{ disabled : currentPageNumber == 1 }">
-            <a class="page-link" href="" ng-click="changePage(currentPageNumber - 1)">&lsaquo;</a>
+            <a class="page-link" href="" ng-click="changePage(currentPageNumber, -1)">&lsaquo;</a>
         </li>
         <li class="page-item" ng-repeat="pageNumber in paginationPages track by $index" ng-class="{ active : currentPageNumber == pageNumber, disabled : pageNumber == '...' }">
             <a class="page-link" href="" ng-click="changePage(pageNumber)">{{ pageNumber }}</a>
         </li>
 
         <li class="page-item" ng-class="{ disabled : currentPageNumber == totalPageNumber }">
-            <a class="page-link" href="" ng-click="changePage(currentPageNumber + 1)">&rsaquo;</a>
+            <a class="page-link" href="" ng-click="changePage(currentPageNumber, 1)">&rsaquo;</a>
         </li>
         <li class="page-item" ng-class="{ disabled : currentPageNumber == totalPageNumber }">
             <a class="page-link" href="" ng-click="changePage(totalPageNumber)">&raquo;</a>

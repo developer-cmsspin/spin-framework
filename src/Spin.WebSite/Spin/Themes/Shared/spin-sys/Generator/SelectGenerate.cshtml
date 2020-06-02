@@ -64,7 +64,7 @@
                 <div class="row no-gutters row-height select-row-title">
 
                     <div class="col-md-12 col-lg-12 col-12 col-sm-12 col-height text-item-title">
-                        <div class="row">
+                        <div class="row no-gutters">
                             @foreach (var ItemColumns in Model.WebTypes.Where(a => a.SelectField != null && a.SelectField.Show).OrderBy(a => a.SelectField.Order))
                             {
                                 <div class="col-xl-@(ItemColumns.SelectField.SizeColumn) col-md-@(ItemColumns.SelectField.SizeColumn) col-lg-@(ItemColumns.SelectField.SizeColumn) col-12 title-select-generate">
