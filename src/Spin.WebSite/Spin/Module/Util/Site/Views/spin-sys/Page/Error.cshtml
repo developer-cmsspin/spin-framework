@@ -1,26 +1,85 @@
-﻿@{
+﻿@model Exception
+@using Spin.Base.SpinException.Helper
+@{
     Layout = "/Spin/Themes/Shared/spin-sys/IndexBlank.cshtml";
-    SpinViewPage.AddStyle("/css/StatusPage.css");
+
+    SpinViewPage.AddStyle("/Spin/Module/Util/Resource/spin-sys/css/Page.css");
+    SpinViewPage.AddStyle("/Spin/Module/Util/Resource/spin-sys/css/Page-media.css");
+
+    this.SpinViewPage.AddJavaScript("/lib/bootstrap/dist/js/bootstrap.min.js", false);
 }
 
 <div class="content-page">
-    <div class="row content-page align-items-center">
-        <div class="col-6 img-state">
-            <img class="" src='@SpinViewPage.RelativePath("503.svg")' />
-        </div>
-        <div class="col-6">
-            <div class="number-status">
-                503
+    <div class="row no-gutters content-page align-items-center">
+        <div class="col-12">
+            <div class="row no-gutters content-error-number" >
+                <div class="col-12 col-md-6 img-state">
+                    <img class="" src='@SpinViewPage.RelativePath("503.svg")' />
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="number-status">
+                        503
+                    </div>
+                    <div class="text-status">
+                        SORRY
+                    </div>
+                    <div class="title-status">
+                        INTERNAL ERROR
+                    </div>
+                </div>
             </div>
-            <div class="text-status">
-                SORRY
-            </div>
-            <div class="title-status">
-                INTERNAL ERROR
-            </div>
-            <div>
-                @ViewBag.MessageError
-            </div>
+            @if (Model != null)
+            {
+                <h1>
+                    DETAIL ERROR
+                </h1>
+                <div class="row no-gutters">
+                    <div class="col">
+                        <div id="accordion" class="errors-list">
+                            @{ int IndexError = 0; }
+                            @foreach (var ItemException in Model.GetListException())
+                            {
+                                <div class="card" style="margin-left:@(IndexError*0.5)em" >
+                                    <div class="card-header" id="heading@(IndexError)">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse@(IndexError)" aria-expanded="false" aria-controls="collapse@(IndexError)">
+                                                <i class="fas fa-bug"></i>
+                                                @ItemException.Message 
+                                            </button>
+                                        </h5>
+                                    </div>
+
+                                    <div id="collapse@(IndexError)" class="collapse collapsed" aria-labelledby="heading@(IndexError)" data-parent="#accordion">
+                                        <div class="card-body">
+                                            @if (ItemException.StackTrace != null)
+                                            {
+                                                <div>
+                                                    @foreach(var itemLine in ItemException.StackTrace.Split("\n"))
+                                                    {
+                                                    <div class="line-error">
+                                                        <i class="fas fa-share"></i>
+                                                        @itemLine
+                                                    </div>
+                                                    }
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div>
+                                                    NOT DETAIL
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                IndexError++;
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>

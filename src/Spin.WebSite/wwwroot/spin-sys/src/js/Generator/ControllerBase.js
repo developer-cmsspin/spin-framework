@@ -361,6 +361,12 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
             $scope.changeFilter();
             $location.update_path('/select', true, $scope.itemListFilter);
         }
+
+        // Clear filter-box and filter calendar
+        if (key.toLowerCase() == "datecreate") {
+            $("#DateCreateFilter").data("daterangepicker").setStartDate(moment(Date().now).format('MM/DD/YYYY'));
+            $("#DateCreateFilter").data("daterangepicker").setEndDate(moment(Date().now).format('MM/DD/YYYY'));
+        }
     }
 
     $scope.formatFilterValue = function (key, value) {

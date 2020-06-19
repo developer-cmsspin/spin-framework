@@ -1,0 +1,25 @@
+﻿h1{
+    text-align: center;
+    margin-top: 2em;
+}
+
+.errors-list{
+    padding: 1em 4em;
+}
+
+/*Detaiil Error*/
+.line-error{
+    margin-bottom: 0.5em;
+}
+
+.content-error-number{
+    margin-top: 2em;
+}
+
+.card-header .btn-link.collapsed {
+    color: black !important;
+}
+
+.card-body{
+    color: black;
+}

@@ -1,14 +1,16 @@
 ﻿@{
     Layout = "/Spin/Themes/Shared/spin-sys/IndexBlank.cshtml";
-    SpinViewPage.AddStyle("/css/StatusPage.css");
+
+    SpinViewPage.AddStyle("/Spin/Module/Util/Resource/spin-sys/css/Page.css");
+    SpinViewPage.AddStyle("/Spin/Module/Util/Resource/spin-sys/css/Page-media.css");
 }
 
 <div class="content-page">
     <div class="row content-page align-items-center">
-        <div class="col-6 img-state">
+        <div class="col-12 col-md-6 img-state">
             <img class="" src='@SpinViewPage.RelativePath("404.svg")' />
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <div class="number-status">
                 404
             </div>
