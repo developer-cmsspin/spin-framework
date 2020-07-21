@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {},
   "dependencies": {
-    "npm": "^6.11.1",
+    "npm": "^6.14.6",
     "ui-bootstrap4": "^3.0.3"
   }
 }
