@@ -200,7 +200,7 @@ a {
     height: 4em;
 }
 
-.spin-form input.ng-invalid, .spin-form textarea.ng-invalid, .spin-form div.ng-invalid {
+.spin-form input.ng-invalid, .spin-form textarea.ng-invalid, .spin-form div.ng-invalid, .spin-form select.ng-invalid  {
     background-color: #f1e3e3;
     border-bottom: 2px solid red;
 }
@@ -1658,6 +1658,7 @@ input.error, textarea.error {
 .mdl-layout__content {
     height: 100%;
     z-index: auto;
+    position:initial;
 }
 
 .mdl-layout__header {

@@ -29,23 +29,24 @@
 
             </div>
             <div class="content-detail">
-
-                <div id="groups" class="group-scroll-horizontal" sticky>
-                    <div id="group-container" class="group-container">
-                        <i class="fas fa-angle-left scroll-to-left" ng-click="goToScrollStep('group-container','item-group-detail','left')"></i>
-                        <div class="group-content">
-                            @foreach (var ItemGroupData in Model.WebTypes.GroupBy(a => a.DetailField.Group).Where(a => !String.IsNullOrEmpty(a.Key)))
-                            {
-                                <div id="menuGroup@(ItemGroupData.Key.Replace(" ",""))" class="item-group-detail" ng-click="goToScroll('@(ItemGroupData.Key.Replace(" ",""))')">
-                                    @ItemGroupData.Key
-                                </div>
-                            }
+                @if (Model.WebTypes != null && Model.WebTypes.Any(a => a.DetailField.Group != null))
+                {
+                    <div id="groups" class="group-scroll-horizontal" sticky>
+                        <div id="group-container" class="group-container">
+                            <i class="fas fa-angle-left scroll-to-left" ng-click="goToScrollStep('group-container','item-group-detail','left')"></i>
+                            <div class="group-content">
+                                @foreach (var ItemGroupData in Model.WebTypes.GroupBy(a => a.DetailField.Group).Where(a => !String.IsNullOrEmpty(a.Key)))
+                                {
+                                    <div id="menuGroup@(ItemGroupData.Key.Replace(" ",""))" class="item-group-detail" ng-click="goToScroll('@(ItemGroupData.Key.Replace(" ",""))')">
+                                        @ItemGroupData.Key
+                                    </div>
+                                }
+                            </div>
+                            <i class="fas fa-angle-right scroll-to-right" ng-click="goToScrollStep('group-container','item-group-detail','right')"></i>
                         </div>
-                        <i class="fas fa-angle-right scroll-to-right" ng-click="goToScrollStep('group-container','item-group-detail','right')"></i>
                     </div>
-                </div>
-
-                <div class="row content-form-menu" sticky>
+                }
+                <div class="row no-gutters content-form-menu" sticky>
                     <div class="col-3 col-md-6">
                         <a ng-click="changeView('/select')" class="back-to-list">
                             <i class="fas fa-angle-left"></i>
@@ -65,7 +66,7 @@
 
                 <div class="row no-gutters content-form">
                     <div class="col-12 title-generate-add">
-                        ADD  @((String.IsNullOrEmpty(SpinViewPage.Module.Alias)) ? SpinViewPage.Module.Name : SpinViewPage.Module.Alias)
+                        ADD  @( (SpinViewPage.Module.BackendContent != null) ? (SpinViewPage.Module.BackendContent.Where(x => x.Value.NameController == SpinViewPage.ControllerName).Select(x => x.Value.Name).FirstOrDefault())?? "" : "" )
                     </div>
                     @foreach (var ItemsGroup in Model.WebTypes.GroupBy(a => a.DetailField.Group))
                     {

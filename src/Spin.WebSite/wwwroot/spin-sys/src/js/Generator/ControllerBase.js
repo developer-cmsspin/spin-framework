@@ -140,6 +140,8 @@ spinAppModule.directive('angularDdslick', function ($parse) {
             var selectfn = attr.angularDdslickOnselect;
             var model = $parse(attr.angularDdslick);
 
+            $(elem).attr("id", attr.id);
+            $(elem).attr("name", attr.name);
             var nameSl = $(elem).attr("id");
             $(elem).attr("init", "true");
 
@@ -789,7 +791,7 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
 /* *********************************************   DETAIL   ************************************* */
 
 /*Define controller  detail*/
-spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($scope, $http, $routeParams, $log, $location, $filter) {
+spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($scope, $http, $routeParams, $log, $location, $filter , $interval) {
 
     /*Load*/
     /*eventLoad*/
@@ -1400,6 +1402,6 @@ spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($
 
     /*ExtendMethod*/
     if (typeof ExtendAdminDetail === "function") {
-        ExtendAdminDetail($scope, $http, $filter, $location);
+        ExtendAdminDetail($scope, $http, $filter, $location, $interval);
     }
 });

@@ -20,7 +20,7 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Spin" Version="0.1.26.14" />
+      <PackageReference Include="Spin" Version="0.1.27.4" />
     </ItemGroup>
     
     <ItemGroup>

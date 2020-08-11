@@ -105,6 +105,7 @@
             /*click*/
             element.find(".uploadImage").click(function () {
                 var uploadControl = $(info.content).find(info.uploadInputName);
+                uploadControl[0].value = "";
                 uploadControl.attr("accept", info.filesAccept);
                 uploadControl.trigger('click');
             });

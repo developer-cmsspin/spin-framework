@@ -1,5 +1,7 @@
 ﻿@{
     this.SpinViewPage.IsLayout = true;
+
+    this.SpinViewPage.AddStyle("/spin-sys/dist/css/BaseSpin.min.css");
 }
 <!DOCTYPE html>
 <html>
@@ -11,6 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link href='@(SpinViewPage.ValidateURL("/lib/font-awesome/css/all.min.css"))' rel="stylesheet" type="text/css" async />
     <link href='@(SpinViewPage.ValidateURL("/lib/bootstrap/dist/css/bootstrap.min.css"))' rel="stylesheet" type="text/css" async />
+    
     <link href='@(SpinViewPage.ValidateURL("/lib/animate.css/animate.css"))' rel="stylesheet" type="text/css" async />
     @SpinViewPage.Styles.Render()
     <link href='@(SpinViewPage.ValidateURL("/Spin/Themes/SubSite/Resource/css/backend/general-backend.css"))' rel="stylesheet" type="text/css" async />
