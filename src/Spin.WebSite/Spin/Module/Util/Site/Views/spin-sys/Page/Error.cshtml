@@ -3,8 +3,10 @@
 @{
     Layout = "/Spin/Themes/Shared/spin-sys/IndexBlank.cshtml";
 
-    SpinViewPage.AddStyle("/Spin/Module/Util/Resource/spin-sys/css/Page.css");
-    SpinViewPage.AddStyle("/Spin/Module/Util/Resource/spin-sys/css/Page-media.css");
+
+    this.SpinViewPage.AddStyle("/spin-sys/dist/css/BaseSpin.min.css");
+    this.SpinViewPage.AddStyle("/Spin/Module/Util/Resource/spin-sys/css/Page.css");
+    this.SpinViewPage.AddStyle("/Spin/Module/Util/Resource/spin-sys/css/Page-media.css");
 
     this.SpinViewPage.AddJavaScript("/lib/bootstrap/dist/js/bootstrap.min.js", false);
 }

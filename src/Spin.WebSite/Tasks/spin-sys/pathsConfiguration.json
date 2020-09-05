@@ -1,0 +1,23 @@
+{
+    "filesForTranspilar": [
+        "./Spin/**/tsc/**/*.ts"
+    ],
+    "filesJS": [
+        "./Spin/**/tsc/**/*.js",
+        "./Spin/**/tsc/**/*.map"
+    ],
+    "copyPathToJS": "./wwwroot/dist/generate/js",
+    "filesForLess": [
+        "./Spin/**/less/**/*.less"
+    ],
+    "filesCSS": [
+        "./Spin/**/less/**/*.css"
+    ],
+    "copyPathToCSS": "./wwwroot/dist/generate/css",
+    "requireConfig": {
+        "baseUrl": ""
+    },
+    "optionsAMD": {
+        "umd": false
+    }
+}
