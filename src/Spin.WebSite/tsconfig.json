@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "ES6",
+    "moduleResolution": "node",
+    "module": "AMD"
+  },
+  "rootDirs": [
+  ],
+  "compileOnSave": true,
+  "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+  ]
+}
