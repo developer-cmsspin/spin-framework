@@ -32,7 +32,9 @@ input:focus {
 
 .content-data-login {
     height: 100%;
-    background-size: 100% 100%
+    background-size: 100% 100%;
+    overflow: auto; 
+    position: relative;
 }
 
 .content-error {
@@ -881,4 +883,12 @@ nav.navigation {
 
 .icon-logo-information {
     width: 2em;
+}
+
+.index-login {
+    position: relative;
+}
+
+.index-login-margin {
+    margin-top: 5%;
 }

@@ -243,7 +243,7 @@
                                 modelInfo.push(objectClone);
                             });
                         } else {
-                            model.assign(scope, data[0]);
+                            model.assign(scope, data[0] + '?v=' + GenerateRandomRange(1, 1000));
                             //eval('scope.'+ info.nameVariable + "='"+ data[0] +"'");
                         }
                     });
@@ -267,6 +267,10 @@
             require: 'ngModel',
             link: link
         };
+
+        function GenerateRandomRange($min, $max) {
+            return Math.floor(Math.random() * (+$max - +$min)) + +$min;
+        }
     }
 
     function showVideoDirective($interval, $parse) {

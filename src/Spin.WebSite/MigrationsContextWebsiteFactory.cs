@@ -18,7 +18,7 @@ namespace Spin.WebSite
 			Startup StartSite = new Startup(null);
 			StartSite.BuildServiceSpin();
 			
-			return FactoryConnectionDataBase.GetConnectionDataBaseGlobal();
+			return FactoryConnectionDataBase.GetConnectionDataBaseGlobal() as SpinGlobalContext;
 		}
 	}
 

@@ -21,6 +21,10 @@ var ExtendAdminDetail = function ($scope, $http, $filter, $location) {
                 Control.find(".history-check").prop( "checked", valuePermission.showHistory );
             });
         }
+        else
+        {
+            $scope.entity.name = null;
+        }
     };
 
     /*SAVE INFORMATION GROUP*/

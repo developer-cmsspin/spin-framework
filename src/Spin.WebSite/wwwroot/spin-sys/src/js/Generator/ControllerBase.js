@@ -70,6 +70,16 @@ angular.module('SpinApp').config(function () {
     angular.lowercase = angular.$$lowercase;
 });
 
+/* Extend config with $provide */
+angular.module('SpinApp').config(function ($provide) {
+    try {
+        if (typeof configExtend === "function") {
+            configExtend($provide);
+        }
+    } catch (e) {
+    }
+});
+
 /* add functions module */
 if (typeof (addModuleFn) !== 'undefined') {
     addModuleFn(spinAppModule);
@@ -355,6 +365,7 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
         delete $scope.itemListFilter[key];
         delete $scope.itemListFilter[key + "Value"];
         delete $scope.itemTagFilter[key];
+        delete $scope[key];
         $scope.updateSearch();
 
         arr_filterBoolean.splice(arr_filterBoolean.indexOf(key),1);
@@ -1110,6 +1121,32 @@ spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($
                 validateForm = false;
             }
         });
+
+        /* =================== Validate Check Images if required =========================== */
+        if (validateForm) {
+            var existRequired = $("#subTableDetail" + name).find("div").hasClass("general-items-gallery-order required");
+            if (existRequired) {
+                var countImg = $("#subTableDetail" + name + " img").length;
+                if (countImg > 0) {
+                    for (var i = 0; i < countImg; i++) {
+                        if ($("#subTableDetail" + name).find('#checkItemGallery' + i).length) {
+                            var _checkItemGallery = $("#subTableDetail" + name).find('#checkItemGallery' + i);
+                            if (_checkItemGallery.hasClass("item-selected")) {
+                                validateForm = true;
+                                break;
+                            }
+                            else {
+                                    validateForm = false;
+                            }
+                        }
+                    }
+                } else {
+                    validateForm = false;
+                }
+            }
+        }
+        /* ================================================================================== */
+    
 
         if (validateForm) {
             $("#errorSubTableDetail" + name + "").hide();

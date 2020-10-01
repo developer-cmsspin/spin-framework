@@ -4,11 +4,11 @@
   "private": true,
   "devDependencies": {},
   "dependencies": {
-    "@babel/core": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
-    "@types/jquery": "^3.3.34",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@types/jquery": "^3.5.1",
     "@types/jqueryui": "^1.12.10",
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^4.5.2",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-amd-optimizer": "^0.6.0",
@@ -24,12 +24,12 @@
     "gulp-uglifycss": "^1.1.0",
     "gulp-watch": "^5.0.1",
     "less-plugin-autoprefix": "^2.0.0",
-    "npm": "^6.14.6",
+    "npm": "^6.14.8",
     "path": "^0.12.7",
     "require-dir": "^1.2.0",
     "requirejs": "^2.3.6",
     "through2": "^4.0.2",
-    "typescript": "^3.9.6",
+    "typescript": "^3.9.7",
     "ui-bootstrap4": "^3.0.3"
   }
 }
