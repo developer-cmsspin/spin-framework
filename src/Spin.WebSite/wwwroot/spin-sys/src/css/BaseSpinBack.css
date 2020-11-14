@@ -227,6 +227,10 @@ a {
 
 /*dd-option*/
 
+a.dd-selected{
+    color:white;
+}
+
 .dd-selected-text, .dd-option label {
     width: auto !important;
 }

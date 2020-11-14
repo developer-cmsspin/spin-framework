@@ -191,6 +191,9 @@
                     data.append("nameFile", info.files[0].name);
                 }
 
+                if (scope.$parent.imgError != undefined)
+                scope.$parent.imgError = false;
+
                 data.append("id", scope.entity.id);
                 data.append("typeFile", info.typeUpload);
                 data.append("random", info.random);
