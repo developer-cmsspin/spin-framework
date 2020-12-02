@@ -232,10 +232,18 @@ spinAppModule.directive('searchValue', function ($compile) {
                 scope.$apply(function () {
 
                     var filterSelected = $(".dd-selected-value").val();
+                    var elementVal = $(element).val();
 
-                    if ($(element).val() != "") {
-                        eval("scope.itemListFilter." + filterSelected.charAt(0).toLowerCase() + filterSelected.slice(1) + "='" + $(element).val() + "'");
-                        eval("scope.itemTagFilter." + filterSelected.charAt(0).toLowerCase() + filterSelected.slice(1) + "='" + $(element).val() + "'");
+                    if (elementVal != "") {
+                        //Replace escape char " for avoid break eval
+                        if (elementVal.indexOf("'") != -1) {
+                            eval("scope.itemListFilter." + filterSelected.charAt(0).toLowerCase() + filterSelected.slice(1) + '="' + elementVal + '"');
+                            eval("scope.itemTagFilter." + filterSelected.charAt(0).toLowerCase() + filterSelected.slice(1) + '="' + elementVal + '"');
+                        } else {
+                            eval("scope.itemListFilter." + filterSelected.charAt(0).toLowerCase() + filterSelected.slice(1) + "='" + elementVal + "'");
+                            eval("scope.itemTagFilter." + filterSelected.charAt(0).toLowerCase() + filterSelected.slice(1) + "='" + elementVal + "'");
+                        }
+
                     }
                     else {
                         scope.clearFilter(filterSelected.charAt(0).toLowerCase() + filterSelected.slice(1));
@@ -340,6 +348,7 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
 
     /*LoadFilter*/
     $scope.loadFilter = function () {
+
         var listParameter = $location.search();
         $scope.itemListFilter = {};
         $scope.itemTagFilter = {};
@@ -403,13 +412,13 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
             }
         }
         else {
-            return value;
+            console.log(unescape(value));
+            return unescape(value);
         }
 
     }
 
     $scope.updateSearch = function () {
-
         var filterSelected = $(".dd-selected-value").val();
         $(".filter-container input").each(function () {
             $(this).hide();
@@ -440,6 +449,7 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
 
         if ($scope.itemListFilter.reload != undefined)
             useLoading = !$scope.itemListFilter.reload;
+
         
         if (useLoading) {
             helperSpin.showLoading();
@@ -531,6 +541,7 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
         $http.post("/" + segment + "/" + module + "/" + controller + "/SelectAllPerPage", jsonData).then(
             function (response) {
                 $scope.entityList = response.data.result;
+
                 totalCount = response.data.totalItems;
                 $scope.buildPagination();
 
@@ -721,6 +732,8 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
         if (name != undefined) {
             $scope.currentPageNumber = 1;
         }
+
+        console.log("change");
 
         $scope.itemListFilter.reload = true;
         
