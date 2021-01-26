@@ -103,9 +103,11 @@
                             </div>
 
 
-                            <div class="col align-self-center col-height text-item-button icon-delete-item" ng-mouseover="hoverIn(itemList.id)" ng-mouseleave="hoverOut(itemList.id)">
-                                <div ng-click="delete(itemList)" class="d-none d-md-block">
-                                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+                            <div class="col align-self-center col-height text-item-button icon-delete-item">
+                                <div class="d-none d-md-block">
+                                    <a ng-click="delete(itemList)" ng-mouseover="hoverIn(itemList.id)" ng-mouseleave="hoverOut(itemList.id)">
+                                        <i class="far fa-trash-alt" aria-hidden="true"></i>
+                                    </a>
                                 </div>
 
                                 <div ng-click="delete(itemList)" class="d-block d-md-none btn-delete">

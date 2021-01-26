@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Spin.Base.Helper.Base;
 using Spin.Connection.API;
@@ -9,16 +10,16 @@ using Spin.Security.Entity.Base;
 
 namespace Spin.WebSite
 {
-	public class MigrationsContextWebsiteFactory : IDesignTimeDbContextFactory<SpinGlobalContext>
-	{
-		public SpinGlobalContext CreateDbContext(string[] args)
+	public class MigrationsContextWebsiteFactory : IDesignTimeDbContextFactory<DbContext>
+	{ 
+		public DbContext CreateDbContext(string[] args)
 		{
 			//Init Starup
 			SignSpin.Sign();
 			Startup StartSite = new Startup(null);
 			StartSite.BuildServiceSpin();
-			
-			return FactoryConnectionDataBase.GetConnectionDataBaseGlobal() as SpinGlobalContext;
+
+			return FactoryConnectionDataBase.GetConnectionDataBaseGlobal() as DbContext;
 		}
 	}
 
