@@ -1,0 +1,9 @@
+﻿@model SpinFieldSelect
+@using Spin.Modules.Entity.Backend.Generator.Select
+@using Spin.Modules.Entity
+@{ }
+
+<div class="row filter-control range-number-filter" id='@(Model.Name)' ng-model='@(Model.Name.FirstCharacterToLower())'>
+    <input class="col-6 control-part range-number-initial" ng-model="rangeValueInitial_@Model.Name.FirstCharacterToLower()" ng-change="changeRangeValues('@Model.Name.FirstCharacterToLower()','@Model.Title')" placeholder="@(!string.IsNullOrEmpty(Model.RemarkFilter)?Model.RemarkFilter + " from":"Number from")">
+    <input class="col-6 control-part range-number-final" ng-model="rangeValueFinal_@Model.Name.FirstCharacterToLower()" ng-change="changeRangeValues('@Model.Name.FirstCharacterToLower()','@Model.Title')" placeholder="@(!string.IsNullOrEmpty(Model.RemarkFilter)?Model.RemarkFilter + " to":"Number to")">
+</div>

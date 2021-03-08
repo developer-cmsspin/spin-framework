@@ -1938,3 +1938,66 @@ input.error, textarea.error {
 .page-item.active .page-link {
     color: #0198CD !important;
 }
+
+
+/*Filter Combo selection multiple*/
+.combo-selection-multiple {
+    height: auto;
+    position: absolute;
+    width: 95%;
+    display: block;
+    margin-right: 1em;
+}
+
+.section-input-combo {
+    padding-left: 1em;
+}
+
+.section-list-combo {
+    height: auto;
+    max-height: 5em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 3;
+    background-color: white;
+    width: 98%;
+}
+
+.row-option-combo {
+    border-bottom: solid .03em #ddd;
+}
+
+.content-caret-down {
+    padding-top: 1.2em;
+}
+
+.chk-combobox-filter {
+    margin-top: .3em !important;
+    margin-left: .3em !important;
+}
+
+.select-boolean-filter {
+    top: .5em;
+    width: 90% !important;
+    position: absolute;
+    border: none !important;
+    border-bottom: 1px solid #c2c1c1 !important;
+    outline: none;
+    scroll-behavior: smooth;
+}
+
+    .select-boolean-filter select {
+        border: none !important;
+        border-bottom: 1px solid #c2c1c1 !important;
+    }
+
+.range-number-final {
+    padding: 0;
+    margin-left: 50%;
+}
+
+.range-number-initial {
+    margin-left: 0;
+    padding: 0
+}

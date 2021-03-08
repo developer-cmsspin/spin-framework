@@ -74,8 +74,8 @@
             result.initObject.loading = false;
         }
 
-        if(!result.initObject){
-            result.initObject = { typeMedia: 1, path:''};
+        if (!result.initObject) {
+            result.initObject = { typeMedia: 1, path: '' };
         }
 
         /*URL*/
@@ -111,8 +111,8 @@
             });
             /*click delete*/
             scope.deleteFile = function (nameVariable) {
-                eval('scope.'+ nameVariable + "=null");
-                
+                eval('scope.' + nameVariable + "=null");
+
                 //model.assign(scope, null);
             };
             /*drag and drop*/
@@ -192,7 +192,7 @@
                 }
 
                 if (scope.$parent.imgError != undefined)
-                scope.$parent.imgError = false;
+                    scope.$parent.imgError = false;
 
                 data.append("id", scope.entity.id);
                 data.append("typeFile", info.typeUpload);
@@ -243,6 +243,17 @@
                             $.each(data, function (key, value) {
                                 var objectClone = JSON.parse(JSON.stringify(info.initObject));
                                 objectClone.path = value;
+
+                                if (info.initObject.hasOwnProperty("mediaPath"))
+                                    objectClone.mediaPath = value;
+                                if (info.initObject.hasOwnProperty("mediaPathComplete"))
+                                    objectClone.mediaPathComplete = objectClone.mediaPathComplete + value;
+                                if (info.initObject.hasOwnProperty("name"))
+                                    objectClone.name = value;
+                                if (info.initObject.hasOwnProperty("type"))
+                                    if (info.typeUpload == "IMG")
+                                        objectClone.type = info.files[0].type;
+
                                 modelInfo.push(objectClone);
                             });
                         } else {
@@ -352,7 +363,7 @@
     function geolocationDirective($compile, $parse) {
         var link = function (scope, element, attrs, ngModelCtrl) {
 
-            var model = $parse(attrs.spinGeolocation.replace(/'/g,''));
+            var model = $parse(attrs.spinGeolocation.replace(/'/g, ''));
             var nameModel = element.find("#modelName").val();
             //Show geolocation
             element.find(".open-geolocation").click(function () {
@@ -363,13 +374,13 @@
                 scope.showGeolocation(null, nameModel);
             });
 
-            element.find(".btn-add-location-geolocation").click(function(){
+            element.find(".btn-add-location-geolocation").click(function () {
                 element.find('.content-list-geolocation').hide();
                 element.find('.add-geolocation-control').show();
             });
 
 
-            element.find(".btn-add-geolocation").click(function(){
+            element.find(".btn-add-geolocation").click(function () {
                 scope.$broadcast('angucomplete-alt:clearInput');
 
                 if (scope.geolocationInformation != undefined) {
@@ -382,10 +393,9 @@
                         informationModel.spinGeolocation = [];
                     }
                     informationModel.spinGeolocation.push({ idPlace: objectGeolocation.id, idRelation: informationModel.id, place: objectGeolocation.place });
-                    
-                    scope.$apply(function()
-                    {
-                        model.assign(scope,informationModel); 
+
+                    scope.$apply(function () {
+                        model.assign(scope, informationModel);
                     });
                 }
 
@@ -393,7 +403,7 @@
                 element.find('.content-list-geolocation').show();
             });
 
-            element.find('.remove-geolocation').click(function(){
+            element.find('.remove-geolocation').click(function () {
                 var indexData = objectBase.spinGeolocation.indexOf(itemGeolocation);
                 objectBase.spinGeolocation.splice(indexData, 1);
             });
@@ -417,7 +427,7 @@
                 }
             }
 
-           
+
             scope.addGeolocation = function (selectAutocomplete, row) {
                 if (selectAutocomplete != undefined) {
                     scope.geolocationInformation = selectAutocomplete.originalObject;
@@ -497,7 +507,7 @@ angular.module("sticky", []).directive("sticky", function ($window) {
                                     .insertBefore(item.element);
                             }
                         }
-                        else if (item.isStuck && pos < item.start-headerHeight-item.element.outerHeight()) {
+                        else if (item.isStuck && pos < item.start - headerHeight - item.element.outerHeight()) {
                             item.element.removeClass("stuck");
                             item.isStuck = false;
 

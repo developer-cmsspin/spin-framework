@@ -42,7 +42,14 @@ if ($("#URLServiceAll").val() == undefined || $("#URLServiceAll").val() == '') {
 }
 
 var arr_filterBoolean = new Array();// { name: "undefined", value: true/false }; 
-  
+
+/*
+ * FilterControlList :  List of controls that behave differently than simple input.                       
+ * Body :   FilterControlList has two fields:
+ *          - Key : Control Type Name. For example: "ComboBoxMultiple", "RangeNumber"
+ *          - Value: The necessary structure for each control,for example a combo box selection multiple needs key, value, and check to select
+ * */
+var filterControlList = new Array();// [{ key: "ControlTypeName", value: [] }]
 
 /*Plugin controls*/
 var PluginControlsSelect = [];
@@ -52,7 +59,7 @@ var PluginControlsDetail = [];
 /*Define Directive*/
 var directives = ['ngRoute', 'angularUtils.directives.dirPagination', 'ngSanitize', 'ui.bootstrap',
     'ui.date', 'spin.validator', 'spin.uploadFile', 'spin.translate', 'spin.geolocation', 'sticky',
-    'angucomplete-alt', 'ngLocationUpdate', 'jsTree.directive','angular.filter'];
+    'angucomplete-alt', 'ngLocationUpdate', 'jsTree.directive', 'angular.filter'];
 
 if (typeof directivesExtend !== 'undefined' && directivesExtend != null) {
     $.each(directivesExtend, function (key, value) {
@@ -87,6 +94,7 @@ if (typeof (addModuleFn) !== 'undefined') {
 
 
 
+
 /*for loop*/
 spinAppModule.filter('range', function () {
     return function (input, total) {
@@ -105,15 +113,18 @@ spinAppModule.directive('filterBoolean', function () {
     return {
         require: 'ngModel',
         link: function (scope, element, attrs, ngModel) {
-            ngModel.$formatters.push(function (val) {
-                if (val != undefined) {
-                    var filterBoolean = arr_filterBoolean.filter(x => x.name === attrs.id);
-                    if (filterBoolean.length == 0) {
-                        arr_filterBoolean.push({ name: attrs.id, value: Boolean(JSON.parse(val)) });
-                    } else {
-                        filterBoolean[0].value = Boolean(JSON.parse(val));
+            $(element).bind("keyup change", function (e) {
+                scope.$apply(function () {
+                    if (ngModel.$modelValue != "") {
+                        var filterBoolean = arr_filterBoolean.filter(x => x.name === ngModel.$name);
+                        if (filterBoolean.length == 0)
+                            arr_filterBoolean.push({ name: ngModel.$name, value: Boolean(JSON.parse(ngModel.$modelValue)) });
+                        else
+                            arr_filterBoolean.filter(x => x.name === ngModel.$name)[0].value = Boolean(JSON.parse(ngModel.$modelValue));
                     }
-                }
+                    else
+                        scope.clearFilter(filterSelected.charAt(0).toLowerCase() + filterSelected.slice(1));
+                });
             });
         }
     };
@@ -302,15 +313,15 @@ spinAppModule.directive('convertToNumber', function () {
 });
 
 spinAppModule.directive('tintColor', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, element, attrs) {
-                if (typeof setColor !== 'undefined' && typeof setColor === 'function') {
-                    setColor(element, attrs.tintColor);
-                }
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            if (typeof setColor !== 'undefined' && typeof setColor === 'function') {
+                setColor(element, attrs.tintColor);
             }
         }
     }
+}
 );
 
 /*Add Routes*/
@@ -348,13 +359,29 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
 
     /*LoadFilter*/
     $scope.loadFilter = function () {
-
         var listParameter = $location.search();
-        $scope.itemListFilter = {};
-        $scope.itemTagFilter = {};
+
+        if ($scope.itemListFilter == undefined) {
+            $scope.itemListFilter = {};
+            $scope.itemTagFilter = {};
+            $scope.filterControlList = [];
+            $scope.filterControlList.push({ key: "range-number-filter", value: [] });
+            $scope.filterControlList.push({ key: "combo-selection-multiple-filter", value: [] });
+        }
 
         $.each(listParameter, function (key, value) {
             $scope.itemListFilter[key] = value;
+
+            if (value.toString().indexOf("range-number-filter", 0) > -1) {
+                var jsonData = JSON.parse(value);
+                value = jsonData.ngModel;
+
+                if (jsonData.initialValue == jsonData.finalValue)
+                    value = jsonData.titleFilter + ": " + jsonData.initialValue;
+                else
+                    value = jsonData.titleFilter + ": " + jsonData.initialValue + " to " + jsonData.finalValue;
+            }
+
             $('#slFilterField').find('option').each(function () {
                 if ($(this).val().toLowerCase() == key.toLowerCase()) {
                     $scope.itemTagFilter[key] = (key != "reload" ? (value.toString() == "false" ? "No " + key : (value.toString() == "true" ? key : value)) : value);
@@ -364,20 +391,31 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
             if (key.toLowerCase() == "datecreate") {
                 $scope.itemTagFilter[key] = value;
             }
-
         });
+
+        $(".filter-container .filter-control").each(function () {
+            $(this).hide();
+        });
+
+        $(".filter-container select").each(function () {
+            $(this).hide();
+        });
+
+        var filterByDefault = $('#slFilterField').val();
+        $('#' + filterByDefault).show();
     }
+
     $scope.loadFilter();
 
     $scope.clearFilter = function (key) {
-
         delete $scope.itemListFilter[key];
         delete $scope.itemListFilter[key + "Value"];
         delete $scope.itemTagFilter[key];
         delete $scope[key];
+
         $scope.updateSearch();
 
-        arr_filterBoolean.splice(arr_filterBoolean.indexOf(key),1);
+        arr_filterBoolean.splice(arr_filterBoolean.indexOf(key), 1);
 
         if (!$scope.useSelectAll) {
             $scope.changeFilter();
@@ -389,10 +427,33 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
             $("#DateCreateFilter").data("daterangepicker").setStartDate(moment(Date().now).format('MM/DD/YYYY'));
             $("#DateCreateFilter").data("daterangepicker").setEndDate(moment(Date().now).format('MM/DD/YYYY'));
         }
+
+        angular.forEach($scope.filterControlList, function (item) {
+            item.value.filter(x => x.ngModel == key).forEach(
+                f => item.value.splice(item.value.findIndex(e => e.ngModel === key), 1));
+
+            switch (item.key.toLowerCase()) {
+                case 'combo-selection-multiple-filter':
+                    if ($scope["listComboBoxFilter_" + key] != undefined) {
+                        $scope["searchFiltertxt_" + key] = ""; //clear input filter                       
+                        $scope["listComboBoxFilter_" + key].forEach(function (itemValue) {
+                            itemValue.checked = false; //clear checkbox combo 
+                        });
+                    }
+                    break;
+                case 'range-number-filter':
+                    $scope["rangeValueInitial_" + key] = "";
+                    $scope["rangeValueFinal_" + key] = "";
+                    break;
+                default:
+            }
+        });
     }
 
+
     $scope.formatFilterValue = function (key, value) {
-        if (value != undefined && value.length > 3 && value.split('#').length == 2) {
+        var isDate = value != undefined ? (new Date(value.split('#')[0].trim()).toString() == "Invalid Date" ? false : true) : false;
+        if (value != undefined && value.split('#').length == 2 && isDate) {
             var range = value.split('#');
             var startDate = new Date(range[0].trim());
             var endDate = new Date(range[1].trim());
@@ -412,20 +473,30 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
             }
         }
         else {
-            console.log(unescape(value));
             return unescape(value);
         }
-
     }
 
     $scope.updateSearch = function () {
         var filterSelected = $(".dd-selected-value").val();
+
         $(".filter-container input").each(function () {
             $(this).hide();
         });
+
         $(".filter-container select").each(function () {
             $(this).hide();
         });
+
+        /*filter-control: container with all parts of a control */
+        $(".filter-container .filter-control").each(function () {
+            $(this).hide();
+        });
+
+        $(".filter-container .filter-control .control-part").each(function () {
+            $(this).show();
+        });
+
         $("#" + filterSelected).show();
         $("#" + filterSelected + "_value").show();
         $("#" + filterSelected).val("");
@@ -440,6 +511,93 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
         }
     }
 
+    //#region filter range of values
+
+    $scope.changeRangeValues = function (ngModel, titleFilter) {
+        var control = $scope.filterControlList.filter(x => x.key == "range-number-filter")[0].value;
+        var item = control.filter(x => x.ngModel == ngModel);
+        if (item.length == 0) {
+            var item = {
+                filterType: "range-number-filter",
+                ngModel: ngModel,
+                titleFilter: titleFilter,
+                initialValue: ($scope["rangeValueInitial_" + ngModel] != undefined ? $scope["rangeValueInitial_" + ngModel] : $scope["rangeValueFinal_" + ngModel]),
+                finalValue: ($scope["rangeValueFinal_" + ngModel] != undefined ? $scope["rangeValueFinal_" + ngModel] : $scope["rangeValueInitial_" + ngModel])
+            };
+            control.push(item);
+        } else if (($scope["rangeValueFinal_" + ngModel] == undefined || $scope["rangeValueFinal_" + ngModel].length == 0) && ($scope["rangeValueInitial_" + ngModel] == undefined || $scope["rangeValueInitial_" + ngModel].length == 0)) {
+            var index = control.indexOf(item[0]);
+            control.splice(index, 1);
+        } else {
+            control.filter(x => x.ngModel == ngModel)[0].finalValue = $scope["rangeValueFinal_" + ngModel] != undefined && $scope["rangeValueFinal_" + ngModel] > 0 ? $scope["rangeValueFinal_" + ngModel] : $scope["rangeValueInitial_" + ngModel];
+            control.filter(x => x.ngModel == ngModel)[0].initialValue = $scope["rangeValueInitial_" + ngModel] != undefined && $scope["rangeValueInitial_" + ngModel].length > 0 ? $scope["rangeValueInitial_" + ngModel] : $scope["rangeValueFinal_" + ngModel];
+        }
+
+        var filter = control.filter(x => x.ngModel == ngModel)[0];
+        if (filter != undefined) {
+            $scope.itemListFilter[ngModel] = JSON.stringify(filter);
+            if (filter.initialValue == filter.finalValue)
+                $scope.itemTagFilter[ngModel] = titleFilter + ": " + filter.initialValue;
+            else
+                $scope.itemTagFilter[ngModel] = titleFilter + ": " + filter.initialValue + " to " + filter.finalValue;
+        } else
+            $scope.clearFilter(ngModel);
+    }
+
+
+    //#endregion filter range of values
+
+    //#region filter combo box selection multiple
+    $scope.initializeComboBoxMultipleFilter = function (url, callbackMethod, modelName) {
+
+        var control = $scope.filterControlList.filter(x => x.key == "combo-selection-multiple-filter")[0].value;
+        var urlcomplete = url + callbackMethod;
+        if ($scope.itemListFilter[modelName] != undefined)
+            $scope.itemTagFilter[modelName] = undefined;
+
+        $http.get(urlcomplete).then(
+            function (response) {
+                if (response.data != undefined) {
+                    $scope["listComboBoxFilter_" + modelName] = response.data.result;
+                    $scope["listComboBoxFilter_" + modelName].forEach(function (itemValue) {
+                        itemValue.value = itemValue.value.charAt(0).toUpperCase() + itemValue.value.substr(1).toLowerCase();
+                        if ($scope.itemListFilter["reload"] == true && $scope.itemListFilter[modelName] != undefined) {
+                            var array = $scope.itemListFilter[modelName].split(",");
+                            if (array.indexOf(itemValue.id) > -1) {
+                                itemValue.checked = true;
+                                var itemSelected = { ngModel: modelName, id: itemValue.id, value: itemValue.value };
+                                control.push(itemSelected);
+                                $scope.itemTagFilter[modelName] = $scope.itemTagFilter[modelName] == undefined ? itemValue.value : $scope.itemTagFilter[modelName] + "," + itemValue.value;
+                            }
+                        }
+                    });
+                }
+            });
+    };
+
+    $scope.comboBoxMultipleFilterSelected = function (value, checked, itemSelectedId, itemSelectedValue) {
+        var control = $scope.filterControlList.filter(x => x.key == "combo-selection-multiple-filter")[0].value;
+
+        if (checked === true) {
+            if (control.filter(x => x.id == itemSelectedId).length == 0) {
+                var itemSelected = { ngModel: value, id: itemSelectedId, value: itemSelectedValue };
+                control.push(itemSelected);
+            }
+        }
+        else {
+            var item = control.filter(x => x.id == itemSelectedId)[0];
+            var index = control.indexOf(item);
+            control.splice(index, 1);
+        }
+        control.filter(x => x.ngModel == value).forEach(function (itemValue, index) {
+            $scope.itemListFilter[value] = index == 0 ? itemValue.id : $scope.itemListFilter[value] + "," + itemValue.id;
+            $scope.itemTagFilter[value] = index == 0 ? itemValue.value : $scope.itemTagFilter[value] + "," + itemValue.value;
+        });
+        if (control.filter(x => x.ngModel == value).length == 0)
+            $scope.clearFilter(value);
+    }
+    //#endregion filter combo box selection multiple
+
     /*variable*/
     totalCount = $("#TotalCountRows").val();
     $scope.useSelectAll = (totalCount < quantityPerChangeSelectAll);
@@ -450,7 +608,6 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
         if ($scope.itemListFilter.reload != undefined)
             useLoading = !$scope.itemListFilter.reload;
 
-        
         if (useLoading) {
             helperSpin.showLoading();
         }
@@ -528,6 +685,7 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
         var requestFilter = [];
         $.each($scope.itemListFilter, function (key, value) {
             if (value != null) {
+                value = $scope.getValueFilter(key, value);
                 requestFilter.push({ Name: key, Value: value });
             }
         });
@@ -562,11 +720,11 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
                 }
 
                 $scope.filterCopy = JSON.parse(JSON.stringify($scope.itemListFilter));
-                                
+
                 if ($scope.loadSelectAfter != undefined) {
                     $scope.loadSelectAfter($scope, response, $location, $http);
                 }
-                
+
             },
             function (response) {
 
@@ -587,6 +745,15 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
 
             });
     }
+
+    $scope.getValueFilter = function (key, value) {
+
+        var control = $scope.filterControlList.filter(x => x.key == "range-number-filter")[0].value;
+        var filter = control.filter(x => x.ngModel == key);
+        if (filter.length > 0)
+            value = JSON.stringify(filter[0]);
+        return value;
+    };
 
 
     /*hover delete*/
@@ -733,15 +900,13 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
             $scope.currentPageNumber = 1;
         }
 
-        console.log("change");
-
         $scope.itemListFilter.reload = true;
-        
+
         for (var i = 0; i < arr_filterBoolean.length; i++) {
             $scope.itemListFilter[arr_filterBoolean[i].name] = arr_filterBoolean[i].value;
             $scope.itemTagFilter[arr_filterBoolean[i].name] = arr_filterBoolean[i].value ? arr_filterBoolean[i].name : "No " + arr_filterBoolean[i].name;
         }
-        
+
         $location.update_path('/select', true, $scope.itemListFilter);
         $scope.callSelectAllPerPage($scope.currentPageNumber, false);
     };
@@ -815,7 +980,7 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
 /* *********************************************   DETAIL   ************************************* */
 
 /*Define controller  detail*/
-spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($scope, $http, $routeParams, $log, $location, $filter , $interval) {
+spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($scope, $http, $routeParams, $log, $location, $filter, $interval) {
 
     /*Load*/
     /*eventLoad*/
@@ -932,7 +1097,7 @@ spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($
 
     /*ChangeView*/
     $scope.changeView = function (view) {
-        
+
         //not show banner
         messagesSpin.hideMessageConfirm();
         messagesSpin.hideMessage();
@@ -1149,7 +1314,7 @@ spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($
                                 break;
                             }
                             else {
-                                    validateForm = false;
+                                validateForm = false;
                             }
                         }
                     }
@@ -1159,7 +1324,7 @@ spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($
             }
         }
         /* ================================================================================== */
-    
+
 
         if (validateForm) {
             $("#errorSubTableDetail" + name + "").hide();
@@ -1259,7 +1424,7 @@ spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($
                 result.push({
                     id: name,
                     parent: parent,
-                    text: $scope.maxSizeString((typeof value === 'object') ? name : name + "=" + value,110),
+                    text: $scope.maxSizeString((typeof value === 'object') ? name : name + "=" + value, 110),
                     icon: "/spin-sys/dist/img/backend/icon-tree.png"
                 });
 
@@ -1283,7 +1448,7 @@ spinAppModule.controller('SpinControllerDetail', function SpinControllerDetail($
     /*HELPER*/
     $scope.maxSizeString = function (value, maxSize) {
         if (value.length > maxSize)
-            return value.substring(0,maxSize) + "...";
+            return value.substring(0, maxSize) + "...";
         else
             return value;
     };

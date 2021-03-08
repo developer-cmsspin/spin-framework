@@ -1,0 +1,26 @@
+﻿@model ComboBoxSelectionMultiple
+@using Spin.Modules.Entity.Backend.Generator.Select
+@{
+
+}
+
+<div id='@(Model.Name)' ng-model='@(Model.Name.FirstCharacterToLower())' class="row filter-control combo-selection-multiple" ng-init="initializeComboBoxMultipleFilter('@Model.URL','@Model.CallbackMethodFillData','@Model.Name.FirstCharacterToLower()')" ng-mouseleave="viewoptions=false">
+    <div class="row section-input-combo">
+        <div class="col-10">
+            <input class="control-part" ng-model="searchFiltertxt_@Model.Name.FirstCharacterToLower()" type="text" ng-click="viewoptions=true;" ng-keydown="viewoptions=true" placeholder="@Model.RemarkFilter" />
+        </div>
+        <div class="col-2 content-caret-down">
+            <i class="fas fa-angle-down control-part" ng-click="viewoptions?viewoptions=false:viewoptions=true;"></i>
+        </div>
+    </div>
+    <div class="section-list-combo" ng-show="viewoptions" ng-mouseleave="viewoptions=false">
+        <div class="row row-option-combo" ng-repeat="item in listComboBoxFilter_@Model.Name.FirstCharacterToLower() | orderBy:'value'  | filter:searchFiltertxt_@Model.Name.FirstCharacterToLower() " ng-if="item.value.length > 0">
+            <div class="col-2">
+                <input id="chk_@Model.Name.FirstCharacterToLower(){{item.id}}" ng-model="item.checked" class="chk-combobox-filter control-part" type="checkbox" ng-change="comboBoxMultipleFilterSelected('@Model.Name.FirstCharacterToLower()',item.checked,item.id, item.value)" />
+            </div>
+            <div class="col-10 pl-0">
+                <label class="w-100" for="chk_@Model.Name.FirstCharacterToLower(){{item.id}}">{{item.value}}</label>
+            </div>
+        </div>
+    </div>
+</div>
