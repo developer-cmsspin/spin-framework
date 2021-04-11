@@ -3,31 +3,29 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Spin.Connection.DAL.Provider.SQLServer;
+using Spin.Connection.DAL.Provider.SQLServer.Common;
 
 namespace Spin.WebSite.Migrations
 {
-    [DbContext(typeof(SQLServerGlobaContext))]
-    [Migration("20200417230712_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(SQLServerGlobaContextCommon<int>))]
+    partial class SQLServerGlobaContextCommonModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.2");
 
             modelBuilder.Entity("Spin.Alias.Entity.AliasItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdAlias")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdAlias")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Action")
                         .HasColumnType("nvarchar(max)");
@@ -64,9 +62,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdMemberTranslate")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdMemberTranslate")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -92,9 +90,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdRedirect")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdRedirect")
+                        .UseIdentityColumn();
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
@@ -114,9 +112,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdError")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdError")
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -145,9 +143,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdModule")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdModule")
+                        .UseIdentityColumn();
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
@@ -167,9 +165,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdModuleConfiguration")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdModuleConfiguration")
+                        .UseIdentityColumn();
 
                     b.Property<string>("GroupConfiguration")
                         .HasColumnType("nvarchar(max)");
@@ -197,9 +195,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdScheduleTask")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdScheduleTask")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -234,9 +232,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdLanguage")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdLanguage")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
@@ -253,9 +251,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdPlace")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdPlace")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
@@ -304,9 +302,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdPlaceTranslate")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdPlaceTranslate")
+                        .UseIdentityColumn();
 
                     b.Property<int>("IdRelation")
                         .HasColumnType("int");
@@ -328,9 +326,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdCustomer")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdCustomer")
+                        .UseIdentityColumn();
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -370,9 +368,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdCustomerModule")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdCustomerModule")
+                        .UseIdentityColumn();
 
                     b.Property<int>("IdCustomer")
                         .HasColumnType("int");
@@ -393,9 +391,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdGroup")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdGroup")
+                        .UseIdentityColumn();
 
                     b.Property<int>("IdCustomer")
                         .HasColumnType("int");
@@ -420,9 +418,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdGroupPermission")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdGroupPermission")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Controller")
                         .HasColumnType("nvarchar(max)");
@@ -459,9 +457,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdUserHistory")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdUserHistory")
+                        .UseIdentityColumn();
 
                     b.Property<string>("CodeUpdate")
                         .HasColumnType("nvarchar(max)");
@@ -504,9 +502,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdSession")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdSession")
+                        .UseIdentityColumn();
 
                     b.Property<string>("DeviceToken")
                         .HasColumnType("nvarchar(max)");
@@ -530,13 +528,90 @@ namespace Spin.WebSite.Migrations
                     b.ToTable("Security_Session");
                 });
 
+            modelBuilder.Entity("Spin.Security.Entity.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("IdUser")
+                        .UseIdentityColumn();
+
+                    b.Property<bool>("ChangePassword")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAlternative")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdCustomer")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdGroup")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdOwner")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAdministrator")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsConnect")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastConnect")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occupation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PathStructure")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("Token")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCustomer");
+
+                    b.HasIndex("IdGroup");
+
+                    b.ToTable("Security_User");
+                });
+
             modelBuilder.Entity("Spin.Themes.Entity.Theme", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdTheme")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdTheme")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -568,9 +643,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdComic")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdComic")
+                        .UseIdentityColumn();
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("bit");
@@ -593,9 +668,9 @@ namespace Spin.WebSite.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdComicGeolocation")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdComicGeolocation")
+                        .UseIdentityColumn();
 
                     b.Property<int>("IdPlace")
                         .HasColumnType("int");
@@ -615,96 +690,92 @@ namespace Spin.WebSite.Migrations
                     b.ToTable("Comics_ComicGeolocation");
                 });
 
-            modelBuilder.Entity("Spin.WebSite.Spin.Module.Comics.Core.Entity.UseCustom", b =>
+            modelBuilder.Entity("Spin.WebSite.Spin.Module.MyModule.Core.Entity.AdditionalData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("IdUser")
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("IdAdditionalData")
+                        .UseIdentityColumn();
 
-                    b.Property<bool>("ChangePassword")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeviceToken")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeviceType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmailAlternative")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmailPassword")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdCustomer")
+                    b.Property<int>("IdData")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdGroup")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdOwner")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAdministrator")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsConnect")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("LastConnect")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Occupation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PathStructure")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PixelAnalytics")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Signature")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("Token")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserName")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCustomer");
+                    b.HasIndex("IdData");
 
-                    b.HasIndex("IdGroup");
+                    b.ToTable("MyModule_AdditionalData");
+                });
 
-                    b.ToTable("Security_User");
+            modelBuilder.Entity("Spin.WebSite.Spin.Module.MyModule.Core.Entity.CommentsData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("IdCommentsData")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("IdData")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdData");
+
+                    b.ToTable("MyModule_CommentsData");
+                });
+
+            modelBuilder.Entity("Spin.WebSite.Spin.Module.MyModule.Core.Entity.Data", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("IdData")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MyModule_Data");
+                });
+
+            modelBuilder.Entity("Spin.WebSite.Spin.Module.MyModule.Core.Entity.ImagesCommentsData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("IdImagesCommentsData")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("IdCommentsData")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCommentsData");
+
+                    b.ToTable("MyModule_ImagesCommentsData");
                 });
 
             modelBuilder.Entity("Spin.Alias.Entity.AliasItem", b =>
@@ -712,6 +783,8 @@ namespace Spin.WebSite.Migrations
                     b.HasOne("Spin.Security.Entity.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("IdCustomer");
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Spin.Modules.Entity.ModuleConfiguration", b =>
@@ -719,6 +792,8 @@ namespace Spin.WebSite.Migrations
                     b.HasOne("Spin.Modules.Entity.Module", "Module")
                         .WithMany("Configuration")
                         .HasForeignKey("IdModule");
+
+                    b.Navigation("Module");
                 });
 
             modelBuilder.Entity("Spin.Place.Entity.PlaceItem", b =>
@@ -726,6 +801,8 @@ namespace Spin.WebSite.Migrations
                     b.HasOne("Spin.Place.Entity.PlaceItem", "ParentPlace")
                         .WithMany()
                         .HasForeignKey("IdParent");
+
+                    b.Navigation("ParentPlace");
                 });
 
             modelBuilder.Entity("Spin.Place.Entity.PlaceTranslate", b =>
@@ -742,6 +819,8 @@ namespace Spin.WebSite.Migrations
                     b.HasOne("Spin.Themes.Entity.Theme", "Theme")
                         .WithMany()
                         .HasForeignKey("IdTheme");
+
+                    b.Navigation("Theme");
                 });
 
             modelBuilder.Entity("Spin.Security.Entity.CustomerModule", b =>
@@ -757,6 +836,10 @@ namespace Spin.WebSite.Migrations
                         .HasForeignKey("IdModule")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Module");
                 });
 
             modelBuilder.Entity("Spin.Security.Entity.Group", b =>
@@ -766,6 +849,8 @@ namespace Spin.WebSite.Migrations
                         .HasForeignKey("IdCustomer")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Spin.Security.Entity.GroupPermission", b =>
@@ -779,7 +864,7 @@ namespace Spin.WebSite.Migrations
 
             modelBuilder.Entity("Spin.Security.Entity.History.UserHistory", b =>
                 {
-                    b.HasOne("Spin.WebSite.Spin.Module.Comics.Core.Entity.UseCustom", null)
+                    b.HasOne("Spin.Security.Entity.User", null)
                         .WithMany("SpinHistory")
                         .HasForeignKey("IdRelation")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -788,11 +873,28 @@ namespace Spin.WebSite.Migrations
 
             modelBuilder.Entity("Spin.Security.Entity.Session", b =>
                 {
-                    b.HasOne("Spin.WebSite.Spin.Module.Comics.Core.Entity.UseCustom", null)
+                    b.HasOne("Spin.Security.Entity.User", null)
                         .WithMany("Sessions")
                         .HasForeignKey("IdUser")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Spin.Security.Entity.User", b =>
+                {
+                    b.HasOne("Spin.Security.Entity.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("IdCustomer")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Spin.Security.Entity.Group", "GroupUser")
+                        .WithMany()
+                        .HasForeignKey("IdGroup");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("GroupUser");
                 });
 
             modelBuilder.Entity("Spin.WebSite.Spin.Module.Comics.Core.Entity.Geolocation.ComicGeolocation", b =>
@@ -808,19 +910,79 @@ namespace Spin.WebSite.Migrations
                         .HasForeignKey("IdRelation")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Place");
                 });
 
-            modelBuilder.Entity("Spin.WebSite.Spin.Module.Comics.Core.Entity.UseCustom", b =>
+            modelBuilder.Entity("Spin.WebSite.Spin.Module.MyModule.Core.Entity.AdditionalData", b =>
                 {
-                    b.HasOne("Spin.Security.Entity.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("IdCustomer")
+                    b.HasOne("Spin.WebSite.Spin.Module.MyModule.Core.Entity.Data", null)
+                        .WithMany("Additional")
+                        .HasForeignKey("IdData")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
 
-                    b.HasOne("Spin.Security.Entity.Group", "GroupUser")
-                        .WithMany()
-                        .HasForeignKey("IdGroup");
+            modelBuilder.Entity("Spin.WebSite.Spin.Module.MyModule.Core.Entity.CommentsData", b =>
+                {
+                    b.HasOne("Spin.WebSite.Spin.Module.MyModule.Core.Entity.Data", null)
+                        .WithMany("Commnets")
+                        .HasForeignKey("IdData")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Spin.WebSite.Spin.Module.MyModule.Core.Entity.ImagesCommentsData", b =>
+                {
+                    b.HasOne("Spin.WebSite.Spin.Module.MyModule.Core.Entity.CommentsData", null)
+                        .WithMany("Images")
+                        .HasForeignKey("IdCommentsData")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Spin.Modules.Entity.Module", b =>
+                {
+                    b.Navigation("Configuration");
+                });
+
+            modelBuilder.Entity("Spin.Place.Entity.PlaceItem", b =>
+                {
+                    b.Navigation("SpinTranslates");
+                });
+
+            modelBuilder.Entity("Spin.Security.Entity.Customer", b =>
+                {
+                    b.Navigation("CustomerModules");
+                });
+
+            modelBuilder.Entity("Spin.Security.Entity.Group", b =>
+                {
+                    b.Navigation("GroupPermissions");
+                });
+
+            modelBuilder.Entity("Spin.Security.Entity.User", b =>
+                {
+                    b.Navigation("Sessions");
+
+                    b.Navigation("SpinHistory");
+                });
+
+            modelBuilder.Entity("Spin.WebSite.Spin.Module.Comics.Core.Entity.Comic", b =>
+                {
+                    b.Navigation("SpinGeolocation");
+                });
+
+            modelBuilder.Entity("Spin.WebSite.Spin.Module.MyModule.Core.Entity.CommentsData", b =>
+                {
+                    b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("Spin.WebSite.Spin.Module.MyModule.Core.Entity.Data", b =>
+                {
+                    b.Navigation("Additional");
+
+                    b.Navigation("Commnets");
                 });
 #pragma warning restore 612, 618
         }
