@@ -1,26 +1,34 @@
+/**
+ * Base header
+ */
 export abstract class BaseHeader{
 
     /**
-     * constructor 
+     * Renders base header
      */
-    constructor() {
+    public abstract Render():void; 
 
+    /* #region  Constructor */
+    public constructor(e:JQuery<HTMLElement>) {
+        this.container = e;
     }
+    //==============CONTAINER==================
+    /**
+     * Control  of base component
+     */
+     private _container: JQuery<HTMLElement>;
 
-    
-    private _contact : contact;
-    public get contact() : contact {
-        return this._contact;
-    }
-    public set contact(v : contact) {
-        this._contact = v;
-    }
-    
-    
-}
-
-export class contact{
-    show(){
-
-    }
+     /**
+      * Gets control
+      */
+     public get container(): JQuery<HTMLElement> {
+         return this._container;
+     }
+     /**
+      * Sets control
+      */
+     public set container(v: JQuery<HTMLElement>) {
+         this._container = v;
+     }
+    //==============CONTAINER==================
 }

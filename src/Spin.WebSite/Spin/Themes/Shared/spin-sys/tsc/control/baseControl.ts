@@ -6,23 +6,26 @@ export abstract class BaseControl{
 
     /* #region  Constructor */
     public constructor(e:JQuery<HTMLElement>) {
-        this.control = e;
+        this.container = e;
     }
-    /* #endregion */
+    //==============CONTAINER==================
+    /**
+     * Control  of base component
+     */
+     private _container: JQuery<HTMLElement>;
 
-
-    /* #region  Property */
-
-    /* #region  Control */
-    private _control: JQuery<HTMLElement>;
-    public get control(): JQuery<HTMLElement> {
-        return this._control;
-    }
-    public set control(v: JQuery<HTMLElement>) {
-        this._control = v;
-    }
-    /* #endregion */
-
-    /* #endregion */
+     /**
+      * Gets control
+      */
+     public get container(): JQuery<HTMLElement> {
+         return this._container;
+     }
+     /**
+      * Sets control
+      */
+     public set container(v: JQuery<HTMLElement>) {
+         this._container = v;
+     }
+    //==============CONTAINER==================
 }
 

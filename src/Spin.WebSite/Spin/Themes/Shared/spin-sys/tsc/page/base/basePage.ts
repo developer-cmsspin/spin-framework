@@ -1,5 +1,4 @@
-import { BaseHeader } from "./baseHeder.js";
-import { BaseFooter } from "./baseFooter.js";
+import { BaseComponent } from "../../component/baseComponent";
 /**
  * Clase base para cada pagina 
  */
@@ -12,5 +11,9 @@ export abstract class BasePageController {
 
     }
 
+    /**
+     * Renders base page controller
+     */
+    public abstract Render():void; 
 
 }

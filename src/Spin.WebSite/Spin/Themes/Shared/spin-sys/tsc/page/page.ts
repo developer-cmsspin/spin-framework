@@ -1,11 +1,19 @@
-import { BasePageController } from "./base/basePage.js";
-import { BaseHeader } from "./base/baseHeder.js";
-import { BaseFooter } from "./base/baseFooter.js";
-import { Header } from "./header.js";
-import { Footer } from "./Footer.js";
+import { BasePageController } from "./base/basePage";
+import { BaseHeader } from "./base/baseHeder";
+import { BaseFooter } from "./base/baseFooter";
+import { Header } from "./header";
+import { Footer } from "./Footer";
 
+/**
+ * Page controller
+ */
 export abstract class PageController extends BasePageController {
     /* #region  Controller */
+    /**
+     * Creates an instance of page controller.
+     * @param [header] Object Header
+     * @param [footer] Object Footer
+     */
     constructor(header: BaseHeader = null, footer: BaseFooter = null) {
         super();
 

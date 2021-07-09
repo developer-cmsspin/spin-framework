@@ -20,9 +20,8 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Spin" Version="0.2.0" />
+      <None Remove="Spin" />
     </ItemGroup>
-    
     <ItemGroup>
       <None Include="appsettings.json" />
     </ItemGroup>
@@ -142,5 +141,8 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Spin\Update\" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Spin" Version="0.2.0.3-beta" />
     </ItemGroup>
 </Project>

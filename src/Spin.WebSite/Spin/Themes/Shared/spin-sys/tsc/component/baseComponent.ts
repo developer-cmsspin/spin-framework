@@ -1,25 +1,43 @@
+import { BaseControl } from "../control/baseControl";
+
+/**
+ * Base component
+ */
 export abstract class BaseComponent{
+
+    /**
+     * Renders base component
+     */
     public abstract Render():void; 
 
-    /* #region  Constructor */
+    /**
+     * Creates an instance of base component.
+     * @param e control base
+     */
     public constructor(e:JQuery<HTMLElement>) {
-        this.control = e;
+        this.container = e;
     }
-    /* #endregion */
 
 
-    /* #region  Property */
+    //==============CONTAINER==================
+    /**
+     * Control  of base component
+     */
+    private _container: JQuery<HTMLElement>;
 
-    /* #region  Control */
-    private _control: JQuery<HTMLElement>;
-    public get control(): JQuery<HTMLElement> {
-        return this._control;
+    /**
+     * Gets control
+     */
+    public get container(): JQuery<HTMLElement> {
+        return this._container;
     }
-    public set control(v: JQuery<HTMLElement>) {
-        this._control = v;
+    /**
+     * Sets control
+     */
+    public set container(v: JQuery<HTMLElement>) {
+        this._container = v;
     }
-    /* #endregion */
+   //==============CONTAINER==================
 
-    /* #endregion */
-
+   
 }

@@ -1,5 +1,22 @@
-import { BaseHeader } from "./base/baseHeder.js";
+import { BaseHeader } from "./base/baseHeder";
 
-export class Header extends BaseHeader{
+/**
+ * Header
+ */
+export  class Header extends BaseHeader{
+
+    /**
+     * Creates an instance of header.
+     */
+    public constructor() {
+        super($("header"));
+    }
+
+    /**
+     * Renders header
+     */
+    public Render(): void {
+        
+    }
     
 }

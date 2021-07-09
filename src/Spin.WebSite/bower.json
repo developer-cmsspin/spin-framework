@@ -40,6 +40,7 @@
     "leaflet": "latest",
     "malihu-custom-scrollbar-plugin": "latest",
     "bootstrap-treeview": "latest",
-    "requirejs": "latest"
+    "requirejs": "latest",
+    "moment-timezone": "^0.5.33"
   }
 }
