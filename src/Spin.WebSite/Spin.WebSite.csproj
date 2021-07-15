@@ -143,6 +143,6 @@
       <Folder Include="Spin\Update\" />
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Spin" Version="0.2.0.3-beta" />
+      <PackageReference Include="Spin" Version="0.2.0.4-beta" />
     </ItemGroup>
 </Project>
