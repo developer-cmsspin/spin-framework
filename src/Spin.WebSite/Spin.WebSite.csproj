@@ -7,6 +7,9 @@
         <EnableDefaultContentItems>false</EnableDefaultContentItems>
     </PropertyGroup>
     
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
     <ItemGroup>
         <Content Include="Spin/**/*.js" CopyToOutputDirectory="Always" />
         <Content Include="Spin/**/*.css" CopyToOutputDirectory="Always" />
@@ -143,6 +146,6 @@
       <Folder Include="Spin\Update\" />
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Spin" Version="0.2.0.4-beta" />
+      <PackageReference Include="Spin" Version="0.2.0.7-beta" />
     </ItemGroup>
 </Project>

@@ -17,10 +17,12 @@ namespace Spin.WebSite
             this.AddProviderDiagnosticLog(new ConsoleProviderDiagnostics(TypeMessage.Error));
 
 
-
+            this.SpinSwagger.Enabled = true;
             
         }
         #endregion
+
+        
 
 
         public override void ConfigureServiceSpin(SpinServiceCollection Service)
