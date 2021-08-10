@@ -364,10 +364,8 @@ a.dd-selected{
     width: 100%;
     display: none;
     background-color: whitesmoke;
-    padding: 8px 0;
+    padding: 4px 0;
     float: none;
-    min-height:4.5em;
-    margin-bottom: 1em;
 }
 
 .add-geolocation-control {
@@ -444,14 +442,14 @@ a.dd-selected{
 .item-geolocation-additional {
     display: inline-block;
     position: relative;
-    width: auto;
+    width: 10%;
     margin-right: 0.5em;
 }
 
 .remove-geolocation {
     position: absolute;
     top: -0.5em;
-    right: -0.8em;
+    right: -0.3em;
     background-color: #fff;
     width: 1.5em;
     height: 1.5em;

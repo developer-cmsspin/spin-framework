@@ -80,10 +80,6 @@ angular.module('SpinApp').config(function () {
 /* Extend config with $provide */
 angular.module('SpinApp').config(function ($provide) {
     try {
-
-        if (typeof globalConfigExtend === "function") {
-            globalConfigExtend($provide);
-        }
         if (typeof configExtend === "function") {
             configExtend($provide);
         }
@@ -156,11 +152,7 @@ spinAppModule.filter('secondsToDateTime', function () {
     };
 });
 
-/**
- * Use dd slick
- ** angularDdslickSelectdefaultvalue  => default by value selected
- ** angularDdslickSelecttext  => default selected text
- */
+/*use dd slick*/
 spinAppModule.directive('angularDdslick', function ($parse) {
     return {
         restrict: 'A',
@@ -168,100 +160,54 @@ spinAppModule.directive('angularDdslick', function ($parse) {
         link: function (scope, elem, attr, ctrl) {
             var selectfn = attr.angularDdslickOnselect;
             var model = $parse(attr.angularDdslick);
-            
+
             $(elem).attr("id", attr.id);
             $(elem).attr("name", attr.name);
             var nameSl = $(elem).attr("id");
             $(elem).attr("init", "true");
 
-            var newDdsLIk = function (item, data) {
-                /**
-                 * Element *angularDdslickSelectdefaultvalue* default by value
-                 */
-                var selectText = attr.angularDdslickSelecttext? attr.angularDdslickSelecttext: "Select your data";
+            elem.ddslick({
+                background: '#FFF',
+                width: '100%',
+                imagePosition: "left",
+                selectText: "Select your data",
+                onSelected: function (data) {
+                    if ($(elem).attr("init") != "true" && isLoadPage) {
+                        if (model.constant == false) {
+                            model.assign(scope, elem.val());
+                        }
 
-                if(attr.angularDdslickSelectdefaultvalue && attr.angularDdslickSelectdefaultvalue != '' && data){
-                    var dataByValue = [];
-                    for (let index = 0; index < data.length; index++) {
-                        var element = data[index];
-                        element['selected'] = (element.value == attr.angularDdslickSelectdefaultvalue);
-                        dataByValue.push(element);
+                        if (selectfn != undefined) {
+                            eval("scope." + selectfn + "(elem,data)");
+                        }
                     }
-                    data = dataByValue;
+
+                    $("#" + elem.attr("id")).attr("spin-name", $(elem).attr("spin-name"));
+
+                    if (typeof (attr.required) != "undefined" && $("#" + elem.attr("id")).is(':visible')) {
+                        if (scope.form != undefined) {
+                            if (elem.val() != "" && elem.val() != "-1" && elem.val() != "0") {
+                                $("#" + elem.attr("id")).addClass("ng-valid ng-valid-required");
+                                $("#" + elem.attr("id")).removeClass("ng-invalid ng-invalid-required");
+                                eval("scope.form." + elem.attr("id") + ".$setValidity('required', true);");
+                                eval("scope.form." + elem.attr("id") + ".$invalid = false");
+                                eval("scope.form." + elem.attr("id") + ".$setViewValue('" + elem.val() + "');");
+                            }
+                            else {
+                                $("#" + elem.attr("id")).removeClass("ng-valid ng-valid-required");
+                                $("#" + elem.attr("id")).addClass("ng-invalid ng-invalid-required");
+                                eval("scope.form." + elem.attr("id") + ".$setValidity('required', false);");
+                                eval("scope.form." + elem.attr("id") + ".$invalid = true");
+                                eval("scope.form." + elem.attr("id") + ".$setViewValue(null);");
+                            }
+                        }
+
+                    }
+
+                    $(elem).attr("init", "false");
+
                 }
-
-                /** settings ddslick */
-                var settings = {
-                    data:data,
-                    background: '#FFF',
-                    width: '100%',
-                    imagePosition: "left",
-                    selectText: selectText,
-                    onSelected: function (data) {
-                        /**
-                         * force the library with jquery to show the default text 
-                         * in case the selected one has the value undefine
-                         */
-                        if(data.selectedData.value == '? undefined:undefined ?'){
-                            var containerSelect = $(`#${data.original[0].id}`);
-                            containerSelect.find('.dd-select .dd-selected-value').removeAttr('value');
-                            containerSelect.find('.dd-select .dd-selected').text(selectText);
-                        }
-
-                        if ($(elem).attr("init") != "true" && isLoadPage) {
-                            if (model.constant == false) {
-                                model.assign(scope, elem.val());
-                            }
-
-                            if (selectfn != undefined) {
-                                eval("scope." + selectfn + "(elem,data)");
-
-                            }
-                        }
-
-                        $("#" + elem.attr("id")).attr("spin-name", $(elem).attr("spin-name"));
-
-                        if (typeof (attr.required) != "undefined" && $("#" + elem.attr("id")).is(':visible')) {
-                            if (scope.form != undefined) {
-                                if (elem.val() != "" && elem.val() != "-1" && elem.val() != "0") {
-                                    $("#" + elem.attr("id")).addClass("ng-valid ng-valid-required");
-                                    $("#" + elem.attr("id")).removeClass("ng-invalid ng-invalid-required");
-                                    eval("scope.form." + elem.attr("id") + ".$setValidity('required', true);");
-                                    eval("scope.form." + elem.attr("id") + ".$invalid = false");
-                                    eval("scope.form." + elem.attr("id") + ".$setViewValue('" + elem.val() + "');");
-                                }
-                                else {
-                                    $("#" + elem.attr("id")).removeClass("ng-valid ng-valid-required");
-                                    $("#" + elem.attr("id")).addClass("ng-invalid ng-invalid-required");
-                                    eval("scope.form." + elem.attr("id") + ".$setValidity('required', false);");
-                                    eval("scope.form." + elem.attr("id") + ".$invalid = true");
-                                    eval("scope.form." + elem.attr("id") + ".$setViewValue(null);");
-                                }
-                            }
-
-                        }
-
-                        $(elem).attr("init", "false");
-
-                    }
-                };
-
-                item.ddslick(settings);
-                /**
-                 * Li first element hidden when it does not contain label to show
-                 */
-                var ulDdOptions = document.querySelectorAll('.dd-options');
-
-                ulDdOptions.forEach(function(ul){
-                    var lis = ul.querySelectorAll('li').forEach( function(li){ 
-                        if(!li.querySelector('label') && !li.classList.contains('d-none'))
-                            li.classList.add('d-none');
-                    });
-                });
-            }
-            
-            newDdsLIk(elem, undefined);
-          
+            });
 
             scope.$watch(model, function (newNames, oldNames) {
                 if (newNames != undefined && newNames != elem.val()) {
@@ -283,23 +229,6 @@ spinAppModule.directive('angularDdslick', function ($parse) {
 
                 }
             });
-            if (attr.angularDdslickData != undefined) {
-                var dataField = $parse(attr.angularDdslickData);
-
-                
-                scope.$watchCollection(dataField, function (newNames, oldNames) {
-                    var ul = document.querySelector(`#${attr.id}`).querySelector('ul');
-
-                    if ((newNames != undefined && oldNames != newNames) || !ul.querySelector('li')) {
-                        var selectItem = $("#" + attr.id);
-                        selectItem.ddslick('destroy');
-                        newDdsLIk($("#" + attr.id), newNames);
-                        $(elem).attr("init", "false");
-
-                    }
-                });
-            }
-            
         }
     }
 });
@@ -486,7 +415,6 @@ spinAppModule.controller('SpinControllerSelect', function SpinControllerSelect($
 
         $scope.updateSearch();
 
-        $('#DropDown_' + key).ddslick('select', { index: 0 });
         arr_filterBoolean.splice(arr_filterBoolean.indexOf(key), 1);
 
         if (!$scope.useSelectAll) {
