@@ -2,7 +2,7 @@ import { BasePageController } from "./base/basePage";
 import { BaseHeader } from "./base/baseHeder";
 import { BaseFooter } from "./base/baseFooter";
 import { Header } from "./header";
-import { Footer } from "./Footer";
+import { Footer } from "./footer";
 
 /**
  * Page controller

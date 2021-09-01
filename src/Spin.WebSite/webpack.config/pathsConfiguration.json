@@ -1,0 +1,17 @@
+{
+    "filesTS": [
+        "./Spin/Themes/**/Resource/tsc/page/*.ts",
+        "./Spin/Module/**/Resource/tsc/page/*.ts"
+    ],
+    "filesTSX": [
+        "./Spin/Module/**/Resource/spa/react/*.tsx",
+        "./Spin/Themes/**/Resource/spa/react/*.tsx",
+        "./Spin/Themes/**/Resource/spa/react/Page/**/*.tsx"
+    ],
+    "filesSASS": [
+        "./Spin/Themes/**/Resource/sass/pages/*.scss",
+        "./Spin/Themes/**/Resource/sass/organisms/*.scss",
+        "./Spin/Themes/**/Resource/sass/vendors/*.scss"
+    ],
+    "output": "wwwroot/dist-front"
+}
