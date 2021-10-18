@@ -337,6 +337,88 @@ spinAppModule.directive('searchValue', function ($compile) {
     };
 });
 
+spinAppModule.directive('searchMultiValue', function ($compile) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs, ngModel) {
+
+            $(element).bind("keydown", function (e) {
+
+                // key Tab
+                if (e.keyCode == 9)
+                {
+                    $(element).val("");
+                    scope.sameFilter = !scope.sameFilter;
+                    return;
+                }
+            });
+
+            $(element).bind("keyup change", function (e) {
+
+                // Diferent key Enter or Tab
+                if (e.keyCode == 13)
+                {
+                    $(element).val("");
+                    scope.sameFilter = !scope.sameFilter;
+                    return;
+                }
+                
+                scope.$apply(function () {
+                    
+                    var filterSelected = $(".dd-selected-value").val();
+                    var elementVal = $(element).val();
+                    var elementValFilter = elementVal.replaceAll(/\W|_/g, '');
+                    var newFilterSelected = filterSelected.charAt(0).toLowerCase() + filterSelected.slice(1);
+                    var properties = Object.keys(scope.itemListFilter);
+                    properties = properties.filter(x => x.includes("__"));
+                    
+                    if (scope.sameFilter)
+                    {
+                        var lastKey = properties[properties.length - 1];
+
+                        delete scope.itemListFilter[lastKey];
+                        delete scope.itemTagFilter[lastKey];
+                        delete scope[lastKey];
+                    }
+                    else if (!scope.sameFilter)
+                        scope.sameFilter = !scope.sameFilter;
+                    
+                    if (e.keyCode == 8 && elementVal == "" && scope.sameFilter)
+                    {
+                        scope.sameFilter = !scope.sameFilter;
+                        return;
+                    }
+
+                    var filtersApply = []
+                    properties = Object.keys(scope.itemListFilter);
+                    properties = properties.filter(x => x.includes("__"));
+                    properties.forEach(item => {
+                        var numFilter = Number(item.split("_")[2]);
+                        filtersApply.push(numFilter);
+                    });
+                    
+                    filtersApply = filtersApply.sort();
+                    var countFilter = filtersApply.length > 0 ? filtersApply[filtersApply.length - 1] + 1 : 1;
+
+                    newFilterSelected += "__" + countFilter + "_" + elementValFilter;
+
+                    if (elementVal != "") {
+                        //Replace escape char " for avoid break eval
+                        if (elementVal.indexOf("'") != -1) {
+                            eval("scope.itemListFilter." + newFilterSelected + '="' + elementVal + '"');
+                            eval("scope.itemTagFilter." + newFilterSelected + '="' + elementVal + '"');
+                        } else {
+                            eval("scope.itemListFilter." + newFilterSelected + "='" + elementVal + "'");
+                            eval("scope.itemTagFilter." + newFilterSelected + "='" + elementVal + "'");
+                        }
+                        eval("scope." + newFilterSelected + '="' + elementVal + '"');
+                    }
+                });
+            });
+        }
+    };
+});
+
 /*use dd slick*/
 spinAppModule.directive('dateRangePicker', function ($parse) {
     return {

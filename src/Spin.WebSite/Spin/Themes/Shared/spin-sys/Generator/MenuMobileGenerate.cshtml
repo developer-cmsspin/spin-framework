@@ -35,7 +35,7 @@
             @foreach (var ItemMenu in Model.Where(a => a.Value.NameController != SelectItem).OrderBy(a => a.Value.Order))
             {
                 <li>
-                    <a href="/Admin/@(SpinViewPage.ModuleName)/@(ItemMenu.Value.GetNameController())/IndexGenerate">
+                    <a href="/@(Spin.Base.Core.SpinEngineConfiguration.AdministratorPath)/@(SpinViewPage.ModuleName)/@(ItemMenu.Value.GetNameController())/IndexGenerate">
                         @if (!String.IsNullOrEmpty(ItemMenu.Value.Logo))
                         {
                             <i class="@(ItemMenu.Value.Logo)"></i>

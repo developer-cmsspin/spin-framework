@@ -14,7 +14,7 @@
     <input type="hidden" name="module" id="module" value="@SpinViewPage.ModuleName" />
     <input type="hidden" name="controller" id="controller" value="@SpinViewPage.ControllerName" />
     <input type="hidden" name="action" id="action" value="@SpinViewPage.ActionName" />
-    <input type="hidden" name="segment" id="segment" value="@SpinViewPage.SegmentName" />
+    <input type="hidden" name="segment" id="segment" value="@Spin.Base.Core.SpinEngineConfiguration.AdministratorPath" />
     <input type="hidden" name="TotalCountRows" id="TotalCountRows" value="@ViewBag.TotalCountRows" />
     <input type="hidden" id="isAdmin" name="isAdmin" value="@(ViewBag.Security.User.IdGroup != 1 && ViewBag.Security.User.IdGroup != 5?"false":"true")" />
 

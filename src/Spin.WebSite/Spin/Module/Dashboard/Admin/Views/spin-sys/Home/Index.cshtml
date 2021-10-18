@@ -9,7 +9,7 @@
     <div class="col-12 content-dashboard">
         @foreach (var ModuleData in Model)
     {
-        string Path = (String.IsNullOrEmpty(ModuleData.InitPath)) ? $"/Admin/{ModuleData.Name}/Home/IndexGenerate" : ModuleData.InitPath;
+        string Path = (String.IsNullOrEmpty(ModuleData.InitPath)) ? $"/{Spin.Base.Core.SpinEngineConfiguration.AdministratorPath}/{ModuleData.Name}/Home/IndexGenerate" : ModuleData.InitPath;
 
         <div class="item-module">
 

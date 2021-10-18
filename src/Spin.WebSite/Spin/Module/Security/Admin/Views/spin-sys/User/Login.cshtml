@@ -12,7 +12,7 @@
 
 
 
-<form id="LoginData" name="LoginData" action="/Admin/Security/User/Login" method="post" class="frm-content-login">
+<form id="LoginData" name="LoginData" action="/@(Spin.Base.Core.SpinEngineConfiguration.AdministratorPath)/Security/User/Login" method="post" class="frm-content-login">
 
     <input type="hidden" id="UrlRedirect" name="UrlRedirect" value="@(ViewBag.UrlRedirect)" />
 
@@ -44,7 +44,7 @@
                 <div class="line-forgot"></div>
             </div>
             <div class="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                <a href="/Admin/Security/User/ForgotPassword">
+                <a href="/@(Spin.Base.Core.SpinEngineConfiguration.AdministratorPath)/Security/User/ForgotPassword">
                     Forgot Your Password?
                 </a>
             </div>

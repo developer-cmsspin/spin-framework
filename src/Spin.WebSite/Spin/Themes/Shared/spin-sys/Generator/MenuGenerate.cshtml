@@ -27,7 +27,7 @@
                 @foreach (var ItemMenu in Model.OrderBy(a => a.Value.Order))
                 {
                     <li class="@((ItemMenu.Value.GetNameController() == SelectItem)?"color-select-menu":"")">
-                        <a href="/Admin/@(SpinViewPage.ModuleName)/@(ItemMenu.Value.GetNameController())/IndexGenerate">
+                        <a href="/@(Spin.Base.Core.SpinEngineConfiguration.AdministratorPath)/@(SpinViewPage.ModuleName)/@(ItemMenu.Value.GetNameController())/IndexGenerate">
                             @if (!String.IsNullOrEmpty(ItemMenu.Value.Logo))
                             {
                                 <i class="@(ItemMenu.Value.Logo)"></i>
