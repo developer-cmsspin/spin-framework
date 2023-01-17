@@ -17,7 +17,7 @@ namespace Spin.WebSite
             this.AddProviderDiagnosticLog(new ConsoleProviderDiagnostics(TypeMessage.Error));
 
 
-            this.SpinSwagger.Enabled = true;
+            this.SpinSwagger.Enabled = false;
             
         }
         #endregion

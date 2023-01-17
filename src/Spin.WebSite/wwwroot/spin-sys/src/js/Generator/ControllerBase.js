@@ -264,7 +264,10 @@ spinAppModule.directive('angularDdslick', function ($parse) {
           
 
             scope.$watch(model, function (newNames, oldNames) {
-                if (newNames != undefined && newNames != elem.val()) {
+                var ddContainer = document.getElementById(nameSl);
+                var valueContainer = ddContainer.childNodes[0].childNodes[0].value;
+
+                if (newNames != undefined && newNames != elem.val() && newNames != valueContainer) {
                     elem.val(newNames);
                     /*Search Index */
                     var indexData = 0;
